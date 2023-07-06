@@ -64,3 +64,6 @@ typings/
 
 # docker stuff
 docker-compose.yml
+Dockerfile
+DB.Dockerfile
+DB-init.sql
