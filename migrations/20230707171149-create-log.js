@@ -1,31 +1,44 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Logs', {
+    await queryInterface.createTable('Log', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
       },
       action: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       ip: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       device: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       userPerformerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        references: {
+          model: 'User',
+          key: 'id'
+        }
       },
       userPerformerEmail: {
         type: Sequelize.STRING
       },
       userAffectedId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        references: {
+          model: 'User',
+          key: 'id'
+        }
       },
       userAffectedEmail: {
         type: Sequelize.STRING
@@ -41,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Logs');
+    await queryInterface.dropTable('Log');
   }
 };
