@@ -1,5 +1,5 @@
 let request = require('supertest');
-const app = require('./app');
+const app = require('../app');
 const { response } = require('express');
 
 request = request(app);
