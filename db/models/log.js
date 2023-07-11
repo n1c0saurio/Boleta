@@ -36,6 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     userAffectedEmail: {
       type: DataTypes.STRING
+    },
+    notes: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,
