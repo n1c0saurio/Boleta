@@ -1,20 +1,11 @@
 'use strict';
 
 const { Model } = require('sequelize');
+const { validPassword } = require('../../validators/validators');
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-
-    // Regular expression for validate password requirements.
-    validPassword =
-      '^' +
-      `(?=.*[a-zç])` + // contains at least one lowercase letter
-      `(?=.*[A-ZÇ])` + // contains at least one uppercase letter
-      `(?=.*\d)` + // contains at least one number
-      `(?=.*[¡!¿?'"@#$€%^&*()_[\]{},.·;:~<>|/\\+=-])` + // contains special character
-      `[A-Za-zçÇ\d¡!¿?'"@#$€%^&*()_[\]{},.·;:~<>|/\\+=-]{8,}` + // min 8 character
-      '$';
 
     static associate(models) {
 

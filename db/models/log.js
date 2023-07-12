@@ -1,62 +1,10 @@
 'use strict';
 
 const { Model } = require('sequelize');
-
-// List of actions that can be recorded
-const actions = {
-  signUp: {
-    key: 'signUp',
-    name: 'Registro'
-  },
-  loggin: {
-    key: 'loggin',
-    name: 'Inicio de sesión'
-  },
-  logout: {
-    key: 'logout',
-    name: 'Cierre de sesión'
-  },
-  failedLoggin: {
-    key: 'failedLoggin',
-    name: 'Acceso fallido'
-  },
-  failedSignUp: {
-    key: 'failedSignUp',
-    name: 'Registro fallido'
-  },
-  userBlocked: {
-    key: 'userBlocked',
-    name: 'Usuario bloqueado'
-  },
-  userUnblocked: {
-    key: 'userUnblocked',
-    name: 'Usuario desbloqueado'
-  },
-  roleUpdated: {
-    key: 'roleUpdated',
-    name: 'Rol actualizado'
-  },
-  accountDeleted: {
-    key: 'accountDeleted',
-    name: 'Cuenta eliminada'
-  },
-  error404: {
-    key: 'error404',
-    name: 'Error 404'
-  }
-};
+const { actions } = require('../../validators/validators');
 
 module.exports = (sequelize, DataTypes) => {
   class Log extends Model {
-
-    // Validate if the action is on the list
-    static isAValidAction(keyName) {
-      let noMatch = true;
-      for (const action in actions) {
-        if (action.key === keyName) noMatch = false;
-      }
-      if (noMatch) throw new Error('Invalid action name');
-    }
 
     static associate(models) {
 
@@ -84,7 +32,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isAlphanumeric: true,
-        isAValidAction: this.isAValidAction(value)
+        isAValidAction(value) {
+          let noMatch = true;
+          for (const action in actions) {
+            if (action.key === keyName) noMatch = false;
+          }
+          if (noMatch) throw new Error('Invalid action name');
+        }
       }
     },
     displayName: {
@@ -134,5 +88,3 @@ module.exports = (sequelize, DataTypes) => {
 
   return Log;
 };
-
-module.exports = actions;
