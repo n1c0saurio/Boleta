@@ -1,0 +1,14 @@
+h1 🛒 Lista de compras 💸
+h3 Registrese para crear sus listas
+form(action="/registro", method="post")
+  label(for="firstName") Nombre*
+  input(type="text", name="firstName", required)
+  label(for="lastName") Apellido
+  input(type="text", name="lastName")
+  label(for="email") Correo electrónico*
+  input(type="email", name="email", required)
+  label(for="password") Contraseña*
+  input(type="password", name="password", required)
+  label(for="passwordRepeat") Repita la contraseña*
+  input(type="password", name="passwordRepeat", required)
+  input(type="submit", value="Registrarse") 
