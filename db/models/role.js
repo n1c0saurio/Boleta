@@ -14,11 +14,35 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Role.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'ID no puede quedar vacío.'
+        }
+      }
+    },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: 'Nombre no puede quedar vacío.'
+        }
+      }
     },
-    description: DataTypes.STRING
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Descripción no puede quedar vacía.'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Role',

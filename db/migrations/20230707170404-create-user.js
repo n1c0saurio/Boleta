@@ -32,7 +32,7 @@ module.exports = {
         defaultValue: false
       },
       roleId: {
-        type: Sequelize.UUID,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
           model: 'Role',
