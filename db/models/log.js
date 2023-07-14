@@ -1,7 +1,51 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const { actions } = require('../../validators/validators');
+
+
+// List of actions that can be recorded in a log
+const actions = {
+  signUp: {
+    key: 'signUp',
+    name: 'Registro'
+  },
+  loggin: {
+    key: 'loggin',
+    name: 'Inicio de sesión'
+  },
+  logout: {
+    key: 'logout',
+    name: 'Cierre de sesión'
+  },
+  failedLoggin: {
+    key: 'failedLoggin',
+    name: 'Acceso fallido'
+  },
+  failedSignUp: {
+    key: 'failedSignUp',
+    name: 'Registro fallido'
+  },
+  userBlocked: {
+    key: 'userBlocked',
+    name: 'Usuario bloqueado'
+  },
+  userUnblocked: {
+    key: 'userUnblocked',
+    name: 'Usuario desbloqueado'
+  },
+  roleUpdated: {
+    key: 'roleUpdated',
+    name: 'Rol actualizado'
+  },
+  accountDeleted: {
+    key: 'accountDeleted',
+    name: 'Cuenta eliminada'
+  },
+  error404: {
+    key: 'error404',
+    name: 'Error 404'
+  }
+};
 
 module.exports = (sequelize, DataTypes) => {
   class Log extends Model {
@@ -22,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // And sometimes, both things can happen,
       // e.g.: an administrator blocked a certain user.
-      // Thats why this model have two optional FK.
+      // Thats why this model have that two optional FK.
     }
   }
 
@@ -31,7 +75,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlphanumeric: true,
         isAValidAction(value) {
           let noMatch = true;
           for (const action in actions) {
