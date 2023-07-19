@@ -78,7 +78,7 @@ module.exports = (sequelize, DataTypes) => {
         isAValidAction(value) {
           let noMatch = true;
           for (const action in actions) {
-            if (action.key === keyName) noMatch = false;
+            if (action === value) noMatch = false;
           }
           if (noMatch) throw new Error('Invalid action name');
         }
@@ -102,14 +102,15 @@ module.exports = (sequelize, DataTypes) => {
         isIP: true
       },
       set(value) {
-        this.setDataValue(value.trim());
+        this.setDataValue('ip', value.trim());
       }
     },
     device: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        this.setDataValue(value.trim());
+        console.log(value);
+        this.setDataValue('device', value.trim());
       }
     },
     userPerformerEmail: {
@@ -121,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
     notes: {
       type: DataTypes.STRING,
       set(value) {
-        this.setDataValue(value.trim());
+        this.setDataValue('notes', value.trim());
       }
     }
   }, {

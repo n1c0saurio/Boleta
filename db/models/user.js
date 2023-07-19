@@ -21,14 +21,22 @@ module.exports = (sequelize, DataTypes) => {
       // All users must have a role.
       User.belongsTo(models.Role, {
         foreignKey: {
-          allowNull: false
+          name: 'roleId',
+          allowNull: false,
+          onDelete: 'RESTRICT'
         }
       });
 
       // Sometimes, a user is the performer or is affected by an action,
       // so a log register its 'id' and 'email' (the latter for reference,
       // just in case the user would be deleted in the future).
-      User.hasMany(models.Log);
+      User.hasMany(models.Log, {
+        foreignKey: 'userPerformerId'
+      });
+
+      User.hasMany(models.Log, {
+        foreignKey: 'userAffectedId'
+      });
     }
   }
 
@@ -38,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "El nombre no puede quedar vacío."
+          msg: 'El nombre no puede quedar vacío.'
         }
       },
       set(value) {
@@ -69,13 +77,15 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        msg: 'Este correo ya está registrado.'
+      },
       validate: {
         notEmpty: {
-          msg: "El correo no puede quedar vacío."
+          msg: 'El correo no puede quedar vacío.'
         },
         isEmail: {
-          msg: "El correo ingresado no es válido."
+          msg: 'El correo ingresado no es válido.'
         }
       },
       set(value) {
@@ -88,8 +98,18 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         is: {
           args: [validPassword],
-          msg: "La contraseña debe tener entre 8 y 72 caracteres, y al menos "
-            + "una minúscula, una mayúscula, un dígito y un caracter especial."
+          msg: 'La contraseña debe tener entre 8 y 72 caracteres, y al menos '
+            + 'una minúscula, una mayúscula, un dígito y un caracter especial.'
+        }
+      }
+    },
+    passwordConfirmation: {
+      type: DataTypes.VIRTUAL,
+      validate: {
+        match(value) {
+          if (this.password !== value) {
+            throw new Error('Las contraseñas no coinciden.');
+          }
         }
       }
     },
