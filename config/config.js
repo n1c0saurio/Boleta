@@ -8,7 +8,9 @@ module.exports = {
     "host": process.env.DB_HOST,
     "dialect": "postgres",
     "port": process.env.DB_PORT,
-    "logging":true
+    "define": {
+      freezeTableName: true
+    }
   },
   "test": {
     "username": process.env.DB_USER,
@@ -16,7 +18,10 @@ module.exports = {
     "database": process.env.DB_TEST,
     "host": process.env.DB_HOST,
     "dialect": "postgres",
-    "port": process.env.DB_PORT
+    "port": process.env.DB_PORT,
+    "define": {
+      freezeTableName: true
+    }
   },
   "production": {
     "username": process.env.DB_USER,
@@ -24,6 +29,9 @@ module.exports = {
     "database": process.env.DB,
     "host": process.env.DB_HOST,
     "dialect": "postgres",
-    "port": process.env.DB_PORT
+    "port": process.env.DB_PORT,
+    "define": {
+      freezeTableName: true
+    }
   }
 };
