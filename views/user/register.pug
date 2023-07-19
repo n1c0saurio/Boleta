@@ -1,14 +1,29 @@
 h1 🛒 Lista de compras 💸
 h3 Registrese para crear sus listas
 form(action="/registro", method="post")
-  label(for="firstName") Nombre*
-  input(type="text", name="firstName", required)
-  label(for="lastName") Apellido
-  input(type="text", name="lastName")
-  label(for="email") Correo electrónico*
-  input(type="email", name="email", required)
-  label(for="password") Contraseña*
-  input(type="password", name="password", required)
-  label(for="passwordRepeat") Repita la contraseña*
-  input(type="password", name="passwordRepeat", required)
+  div
+    label(for="firstName") Nombre*
+    input(type="text", name="firstName", value=formData.firstName, required)
+    if (errors.firstName)
+      span #{errors.firstName}
+  div
+    label(for="lastName") Apellido
+    input(type="text", name="lastName", value=formData.lastName)
+    if (errors.lastName)
+      span #{errors.lastName}
+  div
+    label(for="email") Correo electrónico*
+    input(type="email", name="email", value=formData.email, required)
+    if (errors.email)
+      span #{errors.email}
+  div
+    label(for="password") Contraseña*
+    input(type="password", name="password", required)
+    if (errors.password)
+      span #{errors.password}
+  div
+    label(for="passwordConfirmation") Repita la contraseña*
+    input(type="password", name="passwordConfirmation", required)
+    if (errors.passwordConfirmation)
+      span #{errors.passwordConfirmation}
   input(type="submit", value="Registrarse") 
