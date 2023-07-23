@@ -16,6 +16,10 @@ const validPassword =
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
 
+    async matchPassword(password) {
+      return await bcrypt.compare(password, this.password);
+    }
+
     static associate(models) {
 
       // All users must have a role.

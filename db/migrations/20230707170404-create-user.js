@@ -34,6 +34,7 @@ module.exports = {
       roleId: {
         type: Sequelize.STRING,
         allowNull: false,
+        onDelete: 'RESTRICT',
         references: {
           model: 'Role',
           key: 'id'
