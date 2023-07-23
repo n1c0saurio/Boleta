@@ -4,4 +4,11 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+      nav
+        if user
+          span Hola #{user.displayName}! |
+          a(href="/mi-cuenta") Mi cuenta | 
+          form(action="/logout", method="post")
+            input(type="submit", value="Salir")
+block content

@@ -1,29 +1,54 @@
-// const model = require('../db/models');
 const userValidations = require('../validators/user');
+const passport = require('../passport');
 
-exports.show_register = (req, res, next) => {
+exports.showRegister = (req, res, next) => {
   res.render('user/register', { formData: {}, errors: {} });
 }
 
-exports.send_register = async (req, res, next) => {
-  errors = await userValidations.RegisterForm(req.body);
-  console.log(errors);
-  if (errors) res.render(
-    'user/register', { formData: req.body, errors: errors }
-  );
-  res.render('listas/dashboard', { firstTime: true });
+exports.sendRegister = async (req, res, next) => {
+  errors = await userValidations.registerForm(req.body);
+  if (errors) {
+    res.render('user/register', { formData: req.body, errors: errors });
+  } else {
+    passport.authenticate('local', {
+      successRedirect: '/listas',
+      failureRedirect: '/registro'
+    })(req, res, next);
+  }
 }
 
-exports.show_login = (req, res, next) => {
-  
-  // TODO: implement
-
-  res.render('user/login');
+exports.showLogin = (req, res, next) => {
+  if (req.user) {
+    res.redirect('/listas');
+  }
+  errors = req.query;
+  res.render('user/login', { errors: errors });
 }
 
-exports.send_login = (req, res, next) => {
+exports.sendLogin = (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/listas',
+    failureRedirect: '/?invalid_credentials=true'
+  })(req, res, next);
+}
 
-  // TODO: implement
+exports.logout = (req, res, next) => {
+  req.logout(error => {
+    if (error) return next(error);
+    res.redirect('/');
+  });
+}
 
-  res.redirect('/listas');
+exports.showMyAccount = (req, res, next) => {
+  res.render('user/my-account', { userData: req.user, errors: {} });
+}
+
+exports.updateMyAccount = async (req, res, next) => {
+  errors = await userValidations.updateMyAccount(req.user.id, req.body);
+  if (errors) {
+    console.log('where errors');
+    res.render('user/my-account', { userData: req.body, errors: errors });
+  } else {
+    res.render('user/my-account', { userData: req.user, errors: {} });
+  }
 }
