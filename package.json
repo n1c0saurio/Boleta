@@ -1,6 +1,7 @@
 {
-  "name": "app",
+  "name": "boleta",
   "version": "0.0.0",
+  "author": "Nicoñás Castañeda González (https://github.com/n1c0saurio/)",
   "private": true,
   "scripts": {
     "start": "export NODE_ENV=production && node ./bin/www",
