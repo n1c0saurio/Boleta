@@ -1,12 +1,12 @@
 const userValidations = require('../validators/user');
 const passport = require('../passport');
 
-exports.showRegister = (req, res, next) => {
+exports.getRegister = (req, res, next) => {
   res.render('user/register', { formData: {}, errors: {} });
 }
 
-exports.sendRegister = async (req, res, next) => {
-  errors = await userValidations.registerForm(req.body);
+exports.postRegister = async (req, res, next) => {
+  const errors = await userValidations.registerForm(req.body);
   if (errors) {
     res.render('user/register', { formData: req.body, errors: errors });
   } else {
@@ -17,7 +17,7 @@ exports.sendRegister = async (req, res, next) => {
   }
 }
 
-exports.showLogin = (req, res, next) => {
+exports.getLogin = (req, res, next) => {
   if (req.user) {
     res.redirect('/listas');
   }
@@ -25,7 +25,7 @@ exports.showLogin = (req, res, next) => {
   res.render('user/login', { errors: errors });
 }
 
-exports.sendLogin = (req, res, next) => {
+exports.postLogin = (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/listas',
     failureRedirect: '/?invalid_credentials=true'
@@ -39,16 +39,41 @@ exports.logout = (req, res, next) => {
   });
 }
 
-exports.showMyAccount = (req, res, next) => {
+exports.getMyAccount = (req, res, next) => {
   res.render('user/my-account', { userData: req.user, errors: {} });
 }
 
 exports.updateMyAccount = async (req, res, next) => {
-  errors = await userValidations.updateMyAccount(req.user.id, req.body);
+  const errors = await userValidations.updateMyAccount(req.user.id, req.body);
   if (errors) {
-    console.log('where errors');
     res.render('user/my-account', { userData: req.body, errors: errors });
   } else {
     res.render('user/my-account', { userData: req.user, errors: {} });
   }
+}
+
+exports.getUpdatePassword = (req, res, next) => {
+  res.render('user/password', { errors: {}, success: false });
+}
+
+exports.postUpdatePassword = async (req, res, next) => {
+  const errors = await userValidations.updatePassword(req.user.id, req.body);
+  if (errors) {
+    res.render('user/password', { errors: errors, success: false });
+  } else {
+    res.render('user/password', { errors: {}, success: true });
+  }
+}
+
+exports.getResetPasswordRequest = (req, res, next) => {
+  // TODO: ask for a email to send a reset password token
+}
+
+exports.getResetPassword = (req, res, next) => {
+  // TODO: if the token is valid, should display a form to reset the password
+}
+
+exports.postResetPassword = (req, res, next) => {
+  // TODO: should validate the password, update it
+  // and inform it was reseted successfully
 }

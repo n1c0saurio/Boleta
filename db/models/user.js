@@ -9,7 +9,7 @@ const validPassword =
   + `(?=.*[a-z])` // check if it has at least one lowercase letter
   + `(?=.*[A-Z])` // check if it has at least one uppercase letter
   + `(?=.*[0-9])` // check if it has at least one digit
-  + `(?=.*[^a-zA-Z0-9\\n\\r])` // check if it has at least one special character
+  + `(?=.*[^a-zA-Z0-9\\n\\r])` // it has at least one special character
   + `.*){8,72}` // check if it's between 8 and 72 characters long
   + `$`;
 
@@ -18,6 +18,15 @@ module.exports = (sequelize, DataTypes) => {
 
     async matchPassword(password) {
       return await bcrypt.compare(password, this.password);
+    }
+
+    ResetPasswordToken() {
+      // TODO: should create a unique token that would be send to user's email
+      // https://stackoverflow.com/a/27580553
+    }
+
+    static VerifyResetPasswordToken() {
+      // TODO: should verify the token for allow the user to reset its password
     }
 
     static associate(models) {

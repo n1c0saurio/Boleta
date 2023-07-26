@@ -1,28 +1,31 @@
 extends ../layout
 
 block content
-  h1 Mi cuenta
-  form(action="/mi-cuenta", method="post") 
-    div
+  include ../blocks.pug
+  +accountMenu()
+  section 
+    h1 Mi cuenta
+    form(action="/mi-cuenta", method="post") 
       div
-        label(for="firstName") Nombre*
+        div
+          label(for="firstName") Nombre*
+        div
+          input(type="text", name="firstName", value=userData.firstName)
+          if errors.firstName
+            span #{errors.firstName}
       div
-        input(type="text", name="firstName", value=userData.firstName)
-        if errors.firstName
-          span #{errors.firstName}
-    div
+        div 
+          label(for="lastName") Apellido 
+        div 
+          input(type="text", name="lastName", value=userData.lastName)
+          if errors.lastName 
+            span #{errors.lastName}
+      div
+        div 
+          label(for="email") Correo*
+        div 
+          input(type="text", name="email", value=userData.email, required)
+          if errors.email 
+            span  #{errors.email}
       div 
-        label(for="lastName") Apellido 
-      div 
-        input(type="text", name="lastName", value=userData.lastName)
-        if errors.lastName 
-          span #{errors.lastName}
-    div
-      div 
-        label(for="email") Correo*
-      div 
-        input(type="text", name="email", value=userData.email, required)
-        if errors.email 
-          span  #{errors.email}
-    div 
-      input(type="submit", value="Actualizar datos")
+        input(type="submit", value="Actualizar datos")

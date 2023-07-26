@@ -27,7 +27,7 @@ exports.registerForm = async (formData) => {
 
 exports.updateMyAccount = async (id, formData) => {
   try {
-    let user = await models.User.findOne({ where: { 'id': id} });
+    let user = await models.User.findOne({ where: { 'id': id } });
     await user.update({
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -35,6 +35,27 @@ exports.updateMyAccount = async (id, formData) => {
     });
   } catch (err) {
     let errors = {};
+    if (err.errors) {
+      err.errors.forEach(error => {
+        errors[error.path] = error.message;
+      });
+    } else {
+      // TODO: save on log
+      console.log(err);
+    }
+    return errors;
+  }
+}
+
+exports.updatePassword = async (id, formData) => {
+  try {
+    let user = await models.User.findOne({ where: { 'id': id } });
+    await user.update({
+      password: formData.password,
+      passwordConfirmation: formData.passwordConfirmation
+    });
+  } catch (err) {
+    let errors = {}
     if (err.errors) {
       err.errors.forEach(error => {
         errors[error.path] = error.message;
