@@ -4,31 +4,47 @@ block sublayout
   #dashboard__wrapper 
     header#dashboard__header.bg-primary 
       nav#dashboard__nav.nav.flex-column.justify-content-between
-        #dashboard__nav__menu.nav-item.accordion.accordion-flush
-          .accordion-item
+        .nav-item.ps-3.py-2.border-bottom.border-primary-subtle
+          .navbar-text
+            img.d-inline-block.align-text-center(src="/images/boleta.svg", alt="Boleta", width="32", height="32")
+            span.text-light.fw-bold.text-shadow-emphasis.ms-2 Hola, 
+              span.fst-italic #{user.firstName}
+        #dashboard__nav__menu.nav-item.accordion.accordion-flush.flex-grow-1
+          .accordion-item.bg-transparent
             .accordion-header
-              button.accordion-button(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__lists", aria-expanded="true", aria-controls="dashboard__nav__menu__lists") Tablero
+              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__lists", aria-expanded="true", aria-controls="dashboard__nav__menu__lists") Tablero
             #dashboard__nav__menu__lists.accordion-collapse.collapse.show(data-bs-parent="#dashboard__nav__menu")
-              .accordion-body
+              .accordion-body.bg-primary-dark
                 ul.nav.flex-column
                   li.nav-item 
-                    a.nav-link(href="/listas") Mis listas
+                    a.nav-link.text-light(href="/listas") 
+                      span.bi.bi-list-check
+                      span.ms-2 Mis listas
                   li.nav-item 
-                    a.nav-link(href="http://") Ítems eliminados
+                    a.nav-link.text-light(href="http://") 
+                      span.bi.bi-trash3
+                      span.ms-2 Ítems eliminados
                   li.nav-item 
-                    a.nav-link(href="http://") Listas archivadas
-            .accordion-item 
-              .accordion-header 
-                button.accordion-button(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__account", aria-expanded="false", aria-controls="dashboard__nav__menu__account") Mi cuenta 
-              #dashboard__nav__menu__account.accordion-collapse.collapse(data-bs-parent="#dashboard__nav__menu")
-                .accordion-body 
-                  ul.nav.flex-column
-                    li.nav-item 
-                      a.nav-link(href="/mi-cuenta") Actualizar datos
-                    li.nav-item 
-                      a.nav-link(href="/mi-cuenta/contrasena") Cambiar contraseña
-        form.nav-item(action="/logout", method="post")
-          input.nav-link.link-light.fw-bold.d-inline(type="submit", value="Salir") 
+                    a.nav-link.text-light(href="http://") 
+                      span.bi.bi-archive
+                      span.ms-2 Listas archivadas
+          .accordion-item.bg-transparent 
+            .accordion-header 
+              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__account", aria-expanded="false", aria-controls="dashboard__nav__menu__account") Mi cuenta 
+            #dashboard__nav__menu__account.accordion-collapse.collapse(data-bs-parent="#dashboard__nav__menu")
+              .accordion-body.bg-primary-dark 
+                ul.nav.flex-column
+                  li.nav-item 
+                    a.nav-link.text-light(href="/mi-cuenta") 
+                      span.bi.bi-person-circle
+                      span.ms-2 Mis datos
+                  li.nav-item 
+                    a.nav-link.text-light(href="/mi-cuenta/contrasena") 
+                      span.bi.bi-asterisk
+                      span.ms-2 Cambiar contraseña
+        form.nav-item.border-top.border-primary-subtle.ps-4.py-2(action="/logout", method="post")
+          span.d-inline.bi.bi-box-arrow-left.text-light.text-shadow-emphasis
+          input.nav-link.link-light.fw-bold.text-shadow-emphasis.d-inline(type="submit", value="Salir") 
     .container#main-content
       block content
           

@@ -1,0 +1,33 @@
+/* bitter-bold */
+@font-face {
+	font-family: Bitter;
+	font-style: normal;
+	font-weight: 700;
+	src: local("Bitter Bold"), local("Bitter-Bold"), url(bitter-bold.woff2) format("woff2"), url(bitter-bold.woff) format("woff");
+	font-display: swap;
+}
+/* bitter-bold-italic */
+@font-face {
+	font-family: Bitter;
+	font-style: italic;
+	font-weight: 700;
+	src: local("Bitter Bold Italic"), local("Bitter-BoldItalic"), url(bitter-bold-italic.woff2) format("woff2"), url(bitter-bold-italic.woff) format("woff");
+	font-display: swap;
+}
+/* bitter-italic */
+@font-face {
+	font-family: Bitter;
+	font-style: italic;
+	font-weight: 400;
+	src: local("Bitter Italic"), local("Bitter-Italic"), url(bitter-italic.woff2) format("woff2"), url(bitter-italic.woff) format("woff");
+	font-display: swap;
+}
+/* bitter */
+@font-face {
+	font-family: Bitter;
+	font-style: normal;
+	font-weight: 400;
+	src: local("Bitter"), local("Bitter-Regular"), url(bitter.woff2) format("woff2"), url(bitter.woff) format("woff");
+	font-display: swap;
+}
+

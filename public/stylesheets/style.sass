@@ -1,31 +1,26 @@
 // Bootstrap customizations
+$font-family-sans-serif: Bitter, system-ui, -apple-system, "Noto Serif", "Liberation Serif", "Georgia", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 $primary: #61E294
+$primary-dark: #4e8d67
 $secondary: #E88873
 
 @import '../../node_modules/bootstrap/scss/bootstrap'
+@import 'fonts/bitter.css'
 
+
+// GLOBAL STYLES
+
+// Allow element use the full height of the viewport
 html,
 body
   height: 100%
 
-// Home styles
+.bg-primary-dark
+  background-color: $primary-dark
 
-#home__wrapper
-  display: flex
-  flex-direction: column
-  min-height: 100%
+// Custom shadow to pop text
+.text-shadow-emphasis
+  text-shadow: -1px 1px $primary-dark
 
-#main-content
-  flex-grow: 1
-
-// Dashboard styles
-#dashboard__wrapper,
-#dashboard__header,
-#dashboard__nav
-    height: 100%
-
-#dashboard__wrapper
-  display: flex
-
-#dashboard__header
-  flex-basis: 320px
+@import 'home'
+@import 'dashboard'
