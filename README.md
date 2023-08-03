@@ -1,4 +1,4 @@
-# 📜 Boleta
+# <img src="public/images/boleta.svg" width="36" style="vertical-align:bottom">&ensp;Boleta
 ## _Una webapp para guardar listas de compra_
 
 Este proyecto se comenzo con la finalidad de practicar desarrollo web en **Express.js**. Las funcionalidades que se planean desarrollar son:
@@ -7,6 +7,7 @@ Este proyecto se comenzo con la finalidad de practicar desarrollo web en **Expre
 - [ ] Recuperación de contraseña
 - [x] Inicio/cierre de sesión
 - [x] Actualizar datos de usuario
+- [ ] Eliminar cuenta
 - [ ] Administrar listas
 - [ ] Administrar ítems de las listas
 - [ ] Sumar el precio de los ítems de una lista
