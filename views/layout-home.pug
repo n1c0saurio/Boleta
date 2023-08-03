@@ -1,0 +1,38 @@
+extends layout
+
+block sublayout
+  #home__wrapper
+    header#home__header.bg-primary
+      nav.navbar.navbar-expand-sm 
+        .container-fluid
+          .navbar-brand
+            a.link-light.link-underline-opacity-0(href="/") 
+              img.d-inline-block.align-text-center(src="/images/boleta.svg", alt="Boleta", width="32", height="32")
+              span.fw-bold.ms-2 Boleta
+          button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#home__header__nav__user", aria-controls="home__header__nav__user", aria-expanded="false", aria-label="Toggle navigation") 
+            span.navbar-toggler-icon
+          ul#home__header__nav__user.navbar-nav.justify-content-end.collapse.navbar-collapse
+            if user
+              li.nav-item.dropdown 
+                a.nav-link.link-light.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown") Hola, #{user.firstName}
+                ul.dropdown-menu 
+                  li 
+                    a.dropdown-item(href="/listas") Mis listas
+                  li
+                    a.dropdown-item(href="/mi-cuenta") Mi cuenta
+                  li
+                    hr.dropdown-divider
+                  li
+                    form(action="/logout", method="post")
+                      input.dropdown-item(type="submit", value="Salir")
+            else
+              a.nav-link.link-light(href="/registro") Registrarse
+    .container#main-content 
+      .row.justify-content-center
+        block content
+    footer#home__footer.mt-4.bg-dark-subtle
+      .container 
+        .row 
+          .col.my-3.text-center 
+            span &copy; 2023 @n1c0saurio 
+

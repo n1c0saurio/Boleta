@@ -2,13 +2,15 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/stylesheets/style.min.css")
+    link(rel="stylesheet", href="/stylesheets/icons/bootstrap-icons.min.css")
   body
-    header
-      nav
-        if user
-          span Hola #{user.displayName}! |
-          a(href="/mi-cuenta") Mi cuenta | 
-          form(action="/logout", method="post")
-            input(type="submit", value="Salir")
-block content
+    //- header
+    //-   nav
+    //-     if user
+    //-       span Hola #{user.displayName}! |
+    //-       a(href="/mi-cuenta") Mi cuenta | 
+    //-       form(action="/logout", method="post")
+    //-         input(type="submit", value="Salir")
+    block sublayout
+    script(src="/javascripts/bootstrap/bootstrap.bundle.min.js") 

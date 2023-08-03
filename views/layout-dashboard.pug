@@ -1,0 +1,34 @@
+extends layout
+
+block sublayout 
+  #dashboard__wrapper 
+    header#dashboard__header.bg-primary 
+      nav#dashboard__nav.nav.flex-column.justify-content-between
+        #dashboard__nav__menu.nav-item.accordion.accordion-flush
+          .accordion-item
+            .accordion-header
+              button.accordion-button(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__lists", aria-expanded="true", aria-controls="dashboard__nav__menu__lists") Tablero
+            #dashboard__nav__menu__lists.accordion-collapse.collapse.show(data-bs-parent="#dashboard__nav__menu")
+              .accordion-body
+                ul.nav.flex-column
+                  li.nav-item 
+                    a.nav-link(href="/listas") Mis listas
+                  li.nav-item 
+                    a.nav-link(href="http://") Ítems eliminados
+                  li.nav-item 
+                    a.nav-link(href="http://") Listas archivadas
+            .accordion-item 
+              .accordion-header 
+                button.accordion-button(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__account", aria-expanded="false", aria-controls="dashboard__nav__menu__account") Mi cuenta 
+              #dashboard__nav__menu__account.accordion-collapse.collapse(data-bs-parent="#dashboard__nav__menu")
+                .accordion-body 
+                  ul.nav.flex-column
+                    li.nav-item 
+                      a.nav-link(href="/mi-cuenta") Actualizar datos
+                    li.nav-item 
+                      a.nav-link(href="/mi-cuenta/contrasena") Cambiar contraseña
+        form.nav-item(action="/logout", method="post")
+          input.nav-link.link-light.fw-bold.d-inline(type="submit", value="Salir") 
+    .container#main-content
+      block content
+          
