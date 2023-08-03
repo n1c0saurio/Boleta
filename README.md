@@ -48,7 +48,7 @@ This proyect was started to practice web development with **Node.js** using **Ex
 - [ ] Log events
 - [ ] Automatic detection of user languaje (spanish or english)
 
-<!-- ## Installation
+## Installation
 
 You can get this app pulling the docker image...
 
@@ -58,4 +58,4 @@ The default administrator credentials are the following:
 * email: correo@example.com
 * password: secret -->
 
-Deleveloped in [Codium](https://github.com/VSCodium/vscodium/) under Fedora Linux. -->
+<!-- Deleveloped in [Codium](https://github.com/VSCodium/vscodium/) under Fedora Linux. -->
