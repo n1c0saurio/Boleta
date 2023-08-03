@@ -21,6 +21,14 @@ app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/stylesheets/icons", express.static(path.join(
+  __dirname,
+  "node_modules/bootstrap-icons/font"
+)));
+app.use("/javascripts/bootstrap", express.static(path.join(
+  __dirname,
+  "node_modules/bootstrap/dist/js"
+)));
 
 // user session
 app.use(session({
