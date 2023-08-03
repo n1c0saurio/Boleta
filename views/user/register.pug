@@ -1,43 +1,47 @@
-extends ../layout
+extends ../layout-home
 
 block content
-  h1 🛒 Lista de compras 💸
-  h3 Registrese para crear sus listas
-  form(action="/registro", method="post")
-    div
-      div
-        label(for="firstName") Nombre*
-      div
-        input(type="text", name="firstName", value=formData.firstName, required)
-        if (errors.firstName)
-          span #{errors.firstName}
-    div
-      div
-        label(for="lastName") Apellido
-      div
-        input(type="text", name="lastName", value=formData.lastName)
-        if (errors.lastName)
-          span #{errors.lastName}
-    div
-      div
-        label(for="email") Correo electrónico*
-      div
-        input(type="email", name="email", value=formData.email, required)
-        if (errors.email)
-          span #{errors.email}
-    div
-      div
-        label(for="password") Contraseña*
-      div
-        input(type="password", name="password", required)
-        if (errors.password)
-          span #{errors.password}
-    div
-      div
-        label(for="passwordConfirmation") Repita la contraseña*
-      div
-        input(type="password", name="passwordConfirmation", required)
-        if (errors.passwordConfirmation)
-          span #{errors.passwordConfirmation}
-    div
-      input(type="submit", value="Registrarse")
+  .col-sm-8.col-xl-6 
+    a(href="/" class="btn btn-outline-primary mt-4")
+      span.bi.bi-arrow-left 
+      | Volver 
+    section.card.my-5.shadow-lg
+      .card-body.p-4
+        h2.card-title.mt-2.mb-3 Registro
+        p Cree una cuenta para guardar sus propias listas.
+        form(action="/registro", method="post")
+          .form-floating.mb-3
+            input.form-control(type="text", name="firstName", value=formData.firstName, required)
+            label(for="firstName") Nombre&thinsp;*
+            if (errors.firstName)
+              .text-danger.mt-2
+                small #{errors.firstName}
+          .form-floating.mb-3
+            input.form-control(type="text", name="lastName", value=formData.lastName)
+            label(for="lastName") Apellido
+            if (errors.lastName)
+              .text-danger.mt-2
+                small #{errors.lastName}
+          .form-floating.mb-3
+            input.form-control(type="email", name="email", value=formData.email, required)
+            label(for="email") Correo electrónico&thinsp;*
+            if (errors.email)
+              .text-danger.mt-2
+                small #{errors.email}
+          .form-floating.mb-3
+            input.form-control(type="password", name="password", required)
+            label(for="password") Contraseña&thinsp;*
+            if (errors.password)
+              .text-danger.mt-2
+                small #{errors.password}
+          .form-floating.mb-3
+            input.form-control(type="password", name="passwordConfirmation", required)
+            label(for="passwordConfirmation") Repita la contraseña&thinsp;*
+            if (errors.passwordConfirmation)
+              .text-danger.mt-2
+                small #{errors.passwordConfirmation}
+          .mb-3 
+            p 
+              small Los campos marcados con * son obligatorios.
+          div
+            input.btn.btn-primary(type="submit", value="Registrarse")
