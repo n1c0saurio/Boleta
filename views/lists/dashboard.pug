@@ -1,4 +1,8 @@
 extends ../layout-dashboard
 
 block content
-  h1 Aquí se mostrarán las listas
+  h1 Aquí se mostrarán las listas de #{user.displayName}
+  if user.isAdmin 
+    h3 Es admin 
+  else 
+    h3 pos no
