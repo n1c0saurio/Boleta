@@ -16,6 +16,7 @@ Este proyecto se comenzo con la finalidad de practicar desarrollo web en **Expre
 - [ ] Gestión de usuarios para los administradores
 - [ ] Registrar eventos
 - [ ] Detectar automáticamente el idioma del usuario (español o inglés)
+- [ ] Cambiar tipo de moneda por lista
 
 <!-- ## Installation
 
@@ -48,6 +49,7 @@ This proyect was started to practice web development with **Node.js** using **Ex
 - [ ] User management by administrators
 - [ ] Log events
 - [ ] Automatic detection of user languaje (spanish or english)
+- [ ] Set currencies per list
 
 ## Installation
 
