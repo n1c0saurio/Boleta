@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
 
+      User.hasMany(models.Workspace, {
+        foreignKey: 'userId'
+      });
+
       // Sometimes, a user is the performer or is affected by an action,
       // so a log register its 'id' and 'email' (the latter for reference,
       // just in case the user would be deleted in the future).
@@ -158,6 +162,14 @@ module.exports = (sequelize, DataTypes) => {
   // Hashing the password
   User.afterValidate(async user => {
     user.password = await bcrypt.hash(user.password, 10);
+  });
+
+  // Create a default Workspace
+  User.afterCreate(async user => {
+    await user.createWorkspace({
+      name: 'Área de trabajo por defecto',
+      isDefault: true
+    });
   });
 
   return User;
