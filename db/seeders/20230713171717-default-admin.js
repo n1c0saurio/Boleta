@@ -13,6 +13,7 @@ module.exports = {
         firstName: 'Administrador',
         email: 'correo@example.com',
         password: await bcrypt.hash('secret', 10),
+        defaultCurrency: 'CLP',
         roleId: 'admin',
         createdAt: new Date(),
         updatedAt: new Date()
