@@ -9,6 +9,7 @@ exports.registerForm = async (formData) => {
       email: formData.email,
       password: formData.password,
       passwordConfirmation: formData.passwordConfirmation,
+      defaultCurrency: formData.defaultCurrency,
       roleId: 'enduser'
     });
   } catch (err) {

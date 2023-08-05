@@ -1,14 +1,23 @@
 const userValidations = require('../validators/user');
+const currencies = require('@dinero.js/currencies');
 const passport = require('../passport');
 
 exports.getRegister = (req, res, next) => {
-  res.render('user/register', { formData: {}, errors: {} });
+  res.render('user/register', {
+    formData: {},
+    currencies: currencies,
+    errors: {}
+  });
 }
 
 exports.postRegister = async (req, res, next) => {
   const errors = await userValidations.registerForm(req.body);
   if (errors) {
-    res.render('user/register', { formData: req.body, errors: errors });
+    res.render('user/register', {
+      formData: req.body,
+      currencies: currencies,
+      errors: errors
+    });
   } else {
     passport.authenticate('local', {
       successRedirect: '/listas',

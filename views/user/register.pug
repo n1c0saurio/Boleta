@@ -13,31 +13,39 @@ block content
           .form-floating.mb-3
             input.form-control(type="text", name="firstName", value=formData.firstName, required)
             label(for="firstName") Nombre&thinsp;*
-            if (errors.firstName)
+            if errors.firstName
               .text-danger.mt-2
                 small #{errors.firstName}
           .form-floating.mb-3
             input.form-control(type="text", name="lastName", value=formData.lastName)
             label(for="lastName") Apellido
-            if (errors.lastName)
+            if errors.lastName
               .text-danger.mt-2
                 small #{errors.lastName}
           .form-floating.mb-3
             input.form-control(type="email", name="email", value=formData.email, required)
             label(for="email") Correo electrónico&thinsp;*
-            if (errors.email)
+            if errors.email
               .text-danger.mt-2
                 small #{errors.email}
+          .form-floating.mb-3 
+            select.form-select(name="defaultCurrency", value=formData.defaultCurrency, required)
+              each currency in currencies
+                option(value=currency.code) #{currency.code} 
+            label(for="defaultCurrency") Moneda&thinsp;*  
+            if errors.defaultCurrency
+              .text-danger.mt-2 
+                small #{errors.defaultCurrency}
           .form-floating.mb-3
             input.form-control(type="password", name="password", required)
             label(for="password") Contraseña&thinsp;*
-            if (errors.password)
+            if errors.password
               .text-danger.mt-2
                 small #{errors.password}
           .form-floating.mb-3
             input.form-control(type="password", name="passwordConfirmation", required)
             label(for="passwordConfirmation") Repita la contraseña&thinsp;*
-            if (errors.passwordConfirmation)
+            if errors.passwordConfirmation
               .text-danger.mt-2
                 small #{errors.passwordConfirmation}
           .mb-3 
