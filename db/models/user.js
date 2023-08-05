@@ -2,6 +2,7 @@
 
 const { Model } = require('sequelize');
 const bcrypt = require('bcrypt');
+const currencies = require('@dinero.js/currencies');
 
 // Regular expression for validate password requirements.
 const validPassword =
@@ -124,6 +125,25 @@ module.exports = (sequelize, DataTypes) => {
             throw new Error('Las contraseñas no coinciden.');
           }
         }
+      }
+    },
+    defaultCurrency: {
+      type: DataTypes.STRING(3),
+      allowNull: false,
+      validate: {
+        validCode(value) {
+          let noMatch = true;
+          for (const currency in currencies) {
+            if (currency.code === value) noMatch = false;
+          }
+          if (noMatch) throw new Error('Invalid currency code');
+        }
+      }
+    },
+    isAdmin: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return this.getRole.id === 'admin';
       }
     },
     isBlocked: {
