@@ -134,7 +134,7 @@ module.exports = (sequelize, DataTypes) => {
         validCode(value) {
           let noMatch = true;
           for (const currency in currencies) {
-            if (currency.code === value) noMatch = false;
+            if (currency === value) noMatch = false;
           }
           if (noMatch) throw new Error('Invalid currency code');
         }
