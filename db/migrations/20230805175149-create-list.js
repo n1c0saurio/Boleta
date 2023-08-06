@@ -30,6 +30,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+      workspaceId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Workspace',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
