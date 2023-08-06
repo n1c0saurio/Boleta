@@ -4,6 +4,7 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Workspace extends Model {
+    
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -23,15 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       // make easier to develop future fuctionalities, like having diferent
       // groups of lists or have a special workspace with shared list from
       // other users.
-      // Workspace.hasMany(models.List, {
-      //   foreignKey: {
-      //     name: 'workspaceId',
-      //     onDelete: 'RESTRICT'
-      //   }
-      // });
+      Workspace.hasMany(models.List, {
+        foreignKey: 'workspaceId',
+        onDelete: 'CASCADE'
+      });
     }
   }
-  
+
   Workspace.init({
     name: {
       type: DataTypes.STRING,
