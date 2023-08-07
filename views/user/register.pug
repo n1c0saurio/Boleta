@@ -30,8 +30,12 @@ block content
                 small #{errors.email}
           .form-floating.mb-3 
             select.form-select(name="defaultCurrency", value=formData.defaultCurrency, required)
+              option 
               each currency in currencies
-                option(value=currency.code) #{currency.code} 
+                if currency.code === formData.defaultCurrency
+                  option(value=currency.code, selected) #{currency.code}
+                else 
+                  option(value=currency.code) #{currency.code} 
             label(for="defaultCurrency") Moneda&thinsp;*  
             if errors.defaultCurrency
               .text-danger.mt-2 
