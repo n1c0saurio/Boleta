@@ -1,8 +1,27 @@
 extends ../layout-dashboard
 
 block content
-  h1 Aquí se mostrarán las listas de #{user.displayName}
-  if user.isAdmin 
-    h3 Es admin 
-  else 
-    h3 pos no
+  #dashboard__lists__wrapper.d-flex.flex-nowrap
+    if lists 
+      each list in lists
+        .dashboard__lists__list.card.mx-2.my-3.shadow
+          .card-header.p-3
+            h4 #{list.name}
+          .card-body.p-3
+          .card-footer.p-3
+            span + agregar item 
+    .dashboard__lists__add-new.card.mx-2.my-3.shadow
+      .card-body.p-4
+        form(action="/listas", method="post")
+          .form-floating
+            //- TODO: add value attribute
+            input.form-control(type="text", name="listName", value="", required) 
+            label(for="listName") Escriba el nombre de la lista:
+            if errors.name 
+              .text-danger.mt2 
+                span #{errors.name}
+          //- Utility hidden inputs
+          .d-none(aria-hidden="true")
+            input(type="text", name="listWorkspace", value=workspace)
+          .d-grid.mt-2
+            button.btn.btn-primary(type="submit", name="fromForm", value="newList") Crear lista nueva
