@@ -24,12 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       // Cannot exist Items without a List
-      // List.hasMany(models.Item, {
-      //   foreignKey: {
-      //     name: 'listId',
-      //     allowNull: false
-      //   }
-      // });
+      List.hasMany(models.Item, {
+        foreignKey: 'listId'
+      });
     }
   }
 
@@ -58,15 +55,19 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         // Validate if it's a dinero.js object or a stringified version of it
         validAmount(value) {
-          if (!value instanceof dinero || !dinero(value)) {
-            throw new Error('El monto es invalido.');
+          try {
+            (typeof value === 'string') ?
+              dinero(JSON.parse(value)) :
+              dinero(value);
+          } catch (error) {
+            // TODO: Log possible errors
           }
           // TODO: validate currency
         }
       },
       // Always save a stringified version of a dinero.js object
       set(value) {
-        if (value instanceof dinero) {
+        if (typeof value === 'object') {
           this.setDataValue('total', toSnapshot(value));
         } else {
           this.setDataValue('total', value);
