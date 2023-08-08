@@ -8,8 +8,42 @@ block content
           .card-header.p-3
             h4 #{list.name}
           .card-body.p-3
+            if list.Items
+              each item in list.Items
+                dashboard__lists__list__item.card
+                  .card-header 
+                    h5 #{item.name}
+                  .card-body 
+                    h6 #{item.price} × #{item.quantity}
+            else 
+              h5 :/
           .card-footer.p-3
-            span + agregar item 
+            form(action="/listas", method="post")
+              .form-floating 
+                //- TODO: add value attribute
+                input.form-control(type="text", name="itemName", value="", required)
+                label(for="itemName") Nombre: 
+                //- TODO: check with new list form
+                if errors.name
+                  .text-danger.mt-2
+                    span #{errors.name}
+              //- Utility hidden inputs
+              .form-floating 
+                input.form-control(type="text", name="itemPrice", value="")
+                label(for="itemPrice") Precio:
+                //- TODO: check with new list form
+                if errors.name
+                  .text-danger.mt-2
+                    span #{errors.name}
+              .form-floating 
+                //- TODO: add value attribute
+                input.form-control(type="number", name="itemQuantity", min="1", value="")
+                label(for="itemQuantity") Cantidad:
+              .d-none(aria-hidden="true")
+                input(type="text", name="listCurrency", value=user.defaultCurrency)
+                input(type="text", name="listId", value=list.id)
+              .d-grid.mt-2 
+                button.btn.btn-primary(type="submit", name="fromForm", value="newItem") Agregar ítem
     .dashboard__lists__add-new.card.mx-2.my-3.shadow
       .card-body.p-4
         form(action="/listas", method="post")
@@ -17,8 +51,9 @@ block content
             //- TODO: add value attribute
             input.form-control(type="text", name="listName", value="", required) 
             label(for="listName") Escriba el nombre de la lista:
+            //- TODO: check with new list form
             if errors.name 
-              .text-danger.mt2 
+              .text-danger.mt-2 
                 span #{errors.name}
           //- Utility hidden inputs
           .d-none(aria-hidden="true")
