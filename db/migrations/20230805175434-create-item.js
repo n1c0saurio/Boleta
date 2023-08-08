@@ -1,28 +1,42 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('items', {
+    await queryInterface.createTable('Item', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.literal('gen_random_uuid()')
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      order: {
-        type: Sequelize.INTEGER
+      position: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       price: {
         type: Sequelize.STRING
       },
       quantity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       inTrash: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      listId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'List',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +49,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('items');
+    await queryInterface.dropTable('Item');
   }
 };
