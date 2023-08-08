@@ -1,7 +1,7 @@
 const models = require('../db/models');
 const listValidations = require('../validators/lists');
 
-exports.getList = async (req, res, next) => {
+exports.getListsAndItems = async (req, res, next) => {
   // TODO:
   const defaultWorkspace = await models.Workspace.findOne({
     where: {
@@ -18,12 +18,27 @@ exports.getList = async (req, res, next) => {
   });
 }
 
-exports.postList = async (req, res, next) => {
-  let errors = {}
+exports.postListOrItem = async (req, res, next) => {
+  let errors = {};
   if (req.body.fromForm === 'newList') {
     errors = await listValidations.newList(req.body);
   } else if (req.body.fromForm === 'newItem') {
     errors = await listValidations.newItem(req.body);
   }
+  // TODO: use render to send error (or successful) message
+  res.redirect('/listas');
+}
+
+exports.deleteList = async (req, res, next) => {
+  let errors = {};
+  errors = await listValidations.deleteList(req.params.list_id);
+  // TODO: use render to send error (or successful) message
+  res.redirect('/listas');
+}
+
+exports.deleteItem = async (req, res, next) => {
+  let errors = {};
+  errors = await listValidations.deleteItem(req.params.item_id);
+  // TODO: use render to send error (or successful) message
   res.redirect('/listas');
 }

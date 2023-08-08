@@ -29,6 +29,29 @@ exports.newList = async (formData) => {
   }
 }
 
+exports.deleteList = async (listId) => {
+  try {
+    let listToDelete = await models.List.findOne({
+      where: {
+        'id': listId
+      }
+    });
+    await listToDelete.destroy();
+  } catch (err) {
+    let errors = {}
+    if (err.errors) {
+      err.errors.forEach(error => {
+        console.log(`${error.path}: ${error.message}`);
+        errors[error.path] = error.message;
+      });
+    } else {
+      // TODO: log this
+      console.log(err);
+    }
+    return errors;
+  }
+}
+
 exports.newItem = async (formData) => {
   try {
     let { count } = await models.Item.findAndCountAll({
@@ -48,6 +71,29 @@ exports.newItem = async (formData) => {
     })
   } catch (err) {
     // TODO: modularize
+    let errors = {}
+    if (err.errors) {
+      err.errors.forEach(error => {
+        console.log(`${error.path}: ${error.message}`);
+        errors[error.path] = error.message;
+      });
+    } else {
+      // TODO: log this
+      console.log(err);
+    }
+    return errors;
+  }
+}
+
+exports.deleteItem = async (itemId) => {
+  try {
+    let itemToDelete = await models.Item.findOne({
+      where: {
+        'id': itemId
+      }
+    });
+    await itemToDelete.destroy();
+  } catch (err) {
     let errors = {}
     if (err.errors) {
       err.errors.forEach(error => {
