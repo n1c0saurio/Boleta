@@ -8,7 +8,7 @@ exports.getList = async (req, res, next) => {
       'userId': req.user.id,
       'isDefault': true
     },
-    include: models.List
+    include: { all: true, nested: true }
   });
   res.render('lists/dashboard', {
     user: req.user,
@@ -22,8 +22,8 @@ exports.postList = async (req, res, next) => {
   let errors = {}
   if (req.body.fromForm === 'newList') {
     errors = await listValidations.newList(req.body);
-  } else {
-    
+  } else if (req.body.fromForm === 'newItem') {
+    errors = await listValidations.newItem(req.body);
   }
   res.redirect('/listas');
 }
