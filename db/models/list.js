@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     total: {
       type: DataTypes.STRING,
       validate: {
-        // Validate if it's a dinero.js object or a stringified version of it
+        // Validate if it's a dinero.js snapshot or a stringified version of it
         validAmount(value) {
           try {
             (typeof value === 'string') ?
@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
           // TODO: validate currency
         }
       },
-      // Always save a stringified version of a dinero.js object
+      // Always save a stringified version of a dinero.js snapshot
       set(value) {
         if (typeof value === 'object') {
           this.setDataValue('total', toSnapshot(value));
