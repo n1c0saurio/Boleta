@@ -37,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           name: 'roleId',
           allowNull: false,
-          onDelete: 'RESTRICT'
-        }
+        },
+        onDelete: 'RESTRICT'
       });
 
       User.hasMany(models.Workspace, {

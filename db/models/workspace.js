@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           name: 'userId',
           allowNull: false,
-          onDelete: 'CASCADE'
-        }
+        },
+        onDelete: 'CASCADE'
       });
 
       // All list will belong to a default created workspace, this will
