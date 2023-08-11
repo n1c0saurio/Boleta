@@ -1,0 +1,191 @@
+//
+// Bootstrap imports and customizations
+//
+
+$custom-font-family: Bitter, system-ui, -apple-system, "Noto Serif",
+    "Liberation Serif", "Georgia", serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+
+@use "../../node_modules/bootstrap/scss/bootstrap.scss" as b with (
+    $font-family-sans-serif: $custom-font-family,
+    $primary: #3dcc77,
+    $secondary: #e88873,
+    $light: #ebf5ef,
+    $enable-negative-margins: true
+);
+
+//
+// GLOBAL STYLES
+//
+
+// Allow element use the full height of the viewport
+html,
+body {
+    height: 100%;
+}
+
+// Extra colors
+
+$primary-darker: #478f64;
+$primary-shadow: #405c4b;
+
+.bg-primary-darker {
+    background-color: $primary-darker;
+}
+
+// Links adjustment
+
+a.text-light-hover:hover {
+    color: b.$primary !important;
+}
+
+a.text-dark-hover:hover {
+    color: $primary-darker !important;
+}
+
+a.text-light-hover:active,
+a.text-dark-hover:active {
+    color: b.$secondary !important;
+}
+
+// Custom shadow to pop text
+.text-shadow-emphasis {
+    text-shadow: -1px 1px $primary-shadow;
+}
+
+.text-bas-relief {
+    text-shadow: -2px 2px white;
+}
+
+// Hide icon on dropdows with custom ones
+.bi.dropdown-toggle::after {
+    display: none;
+}
+
+//
+// HOME / LOGIN STYLES
+//
+
+// Make content use at least the full height available of the
+// viewport automatically, minus Header and Footer
+#home__wrapper {
+    background-color: b.$light;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+#main-content {
+    flex-grow: 1;
+}
+
+// Footer
+
+#home__footer {
+    box-shadow: inset 0 12px 16px -16px $primary-shadow;
+}
+
+// Home
+
+#home__brand {
+    margin-bottom: -4.7rem;
+}
+
+#home__brand img {
+    filter: drop-shadow(0 8px 16px b.$gray-500);
+}
+
+//
+// DASHBOARD STYLES
+//
+
+// Make all content use the full height of the viewport
+#dashboard__wrapper,
+#dashboard__header,
+#dashboard__nav,
+#dashboard__content,
+#dashboard__lists__wrapper {
+    height: 100%;
+    min-height: 480px;
+}
+
+#dashboard__wrapper {
+    display: flex;
+}
+
+// Menu
+
+#dashboard__header {
+    box-shadow: 0 0 12px 2px $primary-shadow;
+    flex-basis: 270px;
+    flex-shrink: 0;
+    order: 1;
+    z-index: 4;
+}
+
+.dashboard__nav__menu__link {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.dashboard__nav__menu__link:hover,
+.dashboard__nav__menu__link:active {
+    color: white !important;
+    background-color: b.$secondary !important;
+}
+
+#dashboard__nav__logout:hover,
+#dashboard__nav__logout:active {
+    background-color: b.$secondary !important;
+}
+
+// Lists
+
+#dashboard-content {
+    background-color: b.$light;
+    order: 2;
+    overflow-x: scroll;
+}
+
+#dashboard__lists__wrapper {
+    align-items: flex-start;
+}
+
+// List
+
+.dashboard__lists__list .card-header,
+.dashboard__lists__list .card-footer {
+    background-color: white;
+}
+
+// List: Fixed height
+
+.dashboard__lists__list,
+.dashboard__lists__add-new {
+    flex-basis: 290px;
+    flex-shrink: 0;
+    max-height: 95%;
+}
+.dashboard__lists__list .card-body {
+    overflow-y: scroll;
+}
+
+// List: item form
+
+.dashboard__add-item .accordion-button.collapsed::after {
+    content: "\F64D";
+    font-family: bootstrap-icons !important;
+    font-size: 1.25rem;
+    line-height: 0.9;
+    background-image: none;
+}
+
+.dashboard__add-item-name {
+    flex-grow: 2 !important;
+}
+
+// Item
+
+dashboard__lists__list__item.card:last-child { 
+    border-bottom: none;
+}

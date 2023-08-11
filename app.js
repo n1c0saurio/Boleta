@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
+// User session managment
 var session = require('express-session');
 var passport = require('./passport');
+// Custom routers
 var listsRouter = require('./routes/lists');
 var userRouter = require('./routes/user');
 
@@ -22,13 +24,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/stylesheets/icons", express.static(path.join(
-  __dirname,
-  "node_modules/bootstrap-icons/font"
-)));
+  __dirname, "node_modules/bootstrap-icons/font")));
 app.use("/javascripts/bootstrap", express.static(path.join(
-  __dirname,
-  "node_modules/bootstrap/dist/js"
-)));
+  __dirname, "node_modules/bootstrap/dist/js")));
 
 // user session
 app.use(session({
