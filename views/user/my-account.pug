@@ -1,35 +1,83 @@
 extends ../layout-dashboard
 
 block content
-  .container
-    section.card.mx-3.my-4.shadow-lg
-      .card-body.p-4
-        h2.mb-4 Datos de mi cuenta
-        form(action="/mi-cuenta", method="post") 
-          .container
-            .row.mb-3
-              .col-sm-4.mb-1
-                label(for="firstName") Nombre&thinsp;*
-              .col-sm-8
-                input.form-control(type="text", name="firstName", value=user.firstName, required)
-                if errors.firstName
-                  .text-danger.mt-2 
-                    small #{errors.firstName}
-            .row.mb-3
-              .col-sm-4.mb-1 
-                label(for="lastName") Apellido 
-              .col-sm-8
-                input.form-control(type="text", name="lastName", value=user.lastName)
-                if errors.lastName 
-                  .text-danger.mt-2 
-                    small #{errors.lastName}
-            .row.mb-3
-              .col-sm-4.mb-1 
-                label(for="email") Correo&thinsp;*
-              .col-sm-8
-                input.form-control(type="text", name="email", value=user.email, required)
-                if errors.email 
-                  .text-danger.mt-2 
-                    small #{errors.email}
-          div 
-            input.btn.btn-primary(type="submit", value="Actualizar datos")
+  #dashboard__panel__wrapper.container.px-5.py-4.overflow-y-scroll
+    .row
+
+      //- Update user profile
+      section.dashboard__panel.col-xl-6
+        .card.mb-4.border-0.shadow-lg
+          .card-header.p-4.pb-0
+            h2.mb-4 Datos de mi cuenta
+    
+          .card-body.p-4
+            form(action="/mi-cuenta", method="post") 
+
+              .row.mb-3
+                .col-sm-4.mb-1
+                  label(for="firstName") Nombre&thinsp;*
+                .col-sm-8
+                  input.form-control(type="text", name="firstName", value=user.firstName, required)
+                  if errors.firstName
+                    .text-danger.mt-2 
+                      small #{errors.firstName}
+
+              .row.mb-3
+                .col-sm-4.mb-1 
+                  label(for="lastName") Apellido 
+                .col-sm-8
+                  input.form-control(type="text", name="lastName", value=user.lastName)
+                  if errors.lastName 
+                    .text-danger.mt-2 
+                      small #{errors.lastName}
+            
+              .row.mb-3
+                .col-sm-4.mb-1 
+                  label(for="email") Correo&thinsp;*
+                .col-sm-8
+                  input.form-control(type="text", name="email", value=user.email, required)
+                  if errors.email 
+                    .text-danger.mt-2 
+                      small #{errors.email}
+              div 
+                button.btn.btn-primary(type="submit", name="fromForm", value="updateUser") Actualizar datos
+
+      //- Update password
+      //- section.dashboard__panel.col-xl-6
+      //-   .card.mb-4.border-0.shadow-lg
+      //-     .card-header.p-4.pb-0
+      //-       h2.mb-4 Cambiar contraseña
+        
+      //-     .card-body.p-4
+      //-       if success 
+      //-         p ¡Contraseña actualizada!
+      //-       form(action="/mi-cuenta/contrasena", method="post")
+
+      //-         .row.mb-3 
+      //-           .col-sm-6.mb-1
+      //-             label(for="currentPassword") Contraseña actual&thinsp;*
+      //-           .col-sm-6
+      //-             input(type="password", name="currentPassword", required=true, class="form-control")
+      //-             if errors.currentPassword 
+      //-               .text-danger.mt-2
+      //-                 small #{errors.currentPassword}
+              
+      //-         .row.mb-3 
+      //-           .col-sm-6.mb-1
+      //-             label(for="newPassword") Nueva contraseña&thinsp;*
+      //-           .col-sm-6
+      //-             input(type="password", name="newPassword", required=true, class="form-control")
+      //-             if errors.newPassword 
+      //-               .text-danger.mt-2
+      //-                 small #{errors.newPassword}
+
+      //-         .row.mb-3
+      //-           .col-sm-6.mb-1
+      //-             label(for="passwordConfirmation") Repita la contraseña&thinsp;*
+      //-           .col-sm-6 
+      //-             input(type="password", name="passwordConfirmation", required=true, class="form-control")
+      //-             if errors.passwordConfirmation 
+      //-               .text-danger.mt-2
+      //-                 small #{errors.passwordConfirmation}
+      //-         div 
+      //-           button(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary") Actualizar contraseña

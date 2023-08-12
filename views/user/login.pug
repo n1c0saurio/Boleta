@@ -10,17 +10,17 @@ block content
         h1.fw-bold.fst-italic.text-bas-relief Haga listas de compra y sepa cuánto gastará de antemano
       .col-sm-8.mt-4 
         p.lead Con Boleta podrá crear listas de compra y llevar fácilmente la cuenta de cuanto gastará en sus compras.
-      #home__brand.col-12.text-bas-relief.text-center.mt-3.z-3
+      #home__brand.col-12.text-bas-relief.text-center.pb-2.mt-3.z-3
         img(src="/images/boleta_no-shadow.svg", alt="Boleta logo", width="124px")
 
   //- 
   //- Login form
   section#home__login.col-sm-8.col-xl-6 
-    section.card.mb-5.shadow-lg
+    section.card.mb-5.border-0.shadow-lg
       .card-body.p-5
         h2.card-title.mt-5.mb-3 Inicie sesión
         p.mb-4 Para crear y guardar listas de compra necesita tener una cuenta. Si no tiene una puede 
-          a.link-dark.text-dark-hover(href="/registro") crear una aquí
+          a.link-dark.link-alt-hover(href="/registro") crear una aquí
           |.
         form(action="/", method="post")
 
@@ -37,8 +37,8 @@ block content
             label(for="password") Contraseña:
 
           .mb-4
-            button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
+            button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
 
           .mb-3
             small
-              a.link-dark.text-dark-hover(href="http://") ¿Olvidaste tu contraseña?
+              a.link-dark.link-alt-hover(href="http://") ¿Olvidaste tu contraseña?
