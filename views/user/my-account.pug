@@ -1,34 +1,35 @@
 extends ../layout-dashboard
 
 block content
-  section.card.mx-3.my-4.shadow-lg
-    .card-body.p-4
-      h2.mb-4 Datos de mi cuenta
-      form(action="/mi-cuenta", method="post") 
-        .container
-          .row.mb-3
-            .col-sm-4.mb-1
-              label(for="firstName") Nombre&thinsp;*
-            .col-sm-8
-              input.form-control(type="text", name="firstName", value=user.firstName, required)
-              if errors.firstName
-                .text-danger.mt-2 
-                  small #{errors.firstName}
-          .row.mb-3
-            .col-sm-4.mb-1 
-              label(for="lastName") Apellido 
-            .col-sm-8
-              input.form-control(type="text", name="lastName", value=user.lastName)
-              if errors.lastName 
-                .text-danger.mt-2 
-                  small #{errors.lastName}
-          .row.mb-3
-            .col-sm-4.mb-1 
-              label(for="email") Correo&thinsp;*
-            .col-sm-8
-              input.form-control(type="text", name="email", value=user.email, required)
-              if errors.email 
-                .text-danger.mt-2 
-                  small #{errors.email}
-        div 
-          input.btn.btn-primary(type="submit", value="Actualizar datos")
+  .container
+    section.card.mx-3.my-4.shadow-lg
+      .card-body.p-4
+        h2.mb-4 Datos de mi cuenta
+        form(action="/mi-cuenta", method="post") 
+          .container
+            .row.mb-3
+              .col-sm-4.mb-1
+                label(for="firstName") Nombre&thinsp;*
+              .col-sm-8
+                input.form-control(type="text", name="firstName", value=user.firstName, required)
+                if errors.firstName
+                  .text-danger.mt-2 
+                    small #{errors.firstName}
+            .row.mb-3
+              .col-sm-4.mb-1 
+                label(for="lastName") Apellido 
+              .col-sm-8
+                input.form-control(type="text", name="lastName", value=user.lastName)
+                if errors.lastName 
+                  .text-danger.mt-2 
+                    small #{errors.lastName}
+            .row.mb-3
+              .col-sm-4.mb-1 
+                label(for="email") Correo&thinsp;*
+              .col-sm-8
+                input.form-control(type="text", name="email", value=user.email, required)
+                if errors.email 
+                  .text-danger.mt-2 
+                    small #{errors.email}
+          div 
+            input.btn.btn-primary(type="submit", value="Actualizar datos")

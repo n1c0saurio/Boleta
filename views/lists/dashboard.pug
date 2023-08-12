@@ -1,73 +1,131 @@
 extends ../layout-dashboard
 
 block content
+
   #dashboard__lists__wrapper.d-flex.flex-nowrap
     if lists 
       each list in lists
-        .dashboard__lists__list.card.mx-2.my-3.shadow
-          .card-header.p-3
-            .d-flex
-              h4 #{list.name}
+
+        //- 
+        //- List element
+        .dashboard__lists__list
+          .card.mx-2.my-3.shadow
+
+            //- List menu
+            .card-header.d-flex.align-items-center
               .dropdown
-                  button.bi.bi-three-dots-vertical.dropdown-toggle(type="button", data-bs-toggle="dropdown", aria-expanded="false")
+                  button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
                   ul.dropdown-menu
                     li
                       a.dropdown-item(href="/listas/" + list.id) Eliminar
-          .card-body.p-3
-            if list.Items
-              each item in list.Items
-                dashboard__lists__list__item.card
-                  .card-header.d-flex 
-                    h5 #{item.name}
-                    .dropdown
-                      button.bi.bi-three-dots-vertical.dropdown-toggle(type="button", data-bs-toggle="dropdown", aria-expanded="false")
-                      ul.dropdown-menu
-                        li
-                          a.dropdown-item(href="/listas/item/" + item.id) Eliminar
-                  .card-body 
-                    h6 #{item.price} × #{item.quantity}
-            else 
-              h5 :/
-          .card-footer.p-3
-            form(action="/listas", method="post")
-              .form-floating 
-                //- TODO: add value attribute
-                input.form-control(type="text", name="itemName", value="", required)
-                label(for="itemName") Nombre: 
-                //- TODO: check with new list form
-                if errors.name
-                  .text-danger.mt-2
-                    span #{errors.name}
-              //- Utility hidden inputs
-              .form-floating 
-                input.form-control(type="text", name="itemPrice", value="")
-                label(for="itemPrice") Precio:
-                //- TODO: check with new list form
-                if errors.name
-                  .text-danger.mt-2
-                    span #{errors.name}
-              .form-floating 
-                //- TODO: add value attribute
-                input.form-control(type="number", name="itemQuantity", min="1", value="")
-                label(for="itemQuantity") Cantidad:
-              .d-none(aria-hidden="true")
-                input(type="text", name="listCurrency", value=user.defaultCurrency)
-                input(type="text", name="listId", value=list.id)
-              .d-grid.mt-2 
-                button.btn.btn-primary(type="submit", name="fromForm", value="newItem") Agregar ítem
-    .dashboard__lists__add-new.card.mx-2.my-3.shadow
-      .card-body.p-4
-        form(action="/listas", method="post")
-          .form-floating
-            //- TODO: add value attribute
-            input.form-control(type="text", name="listName", value="", required) 
-            label(for="listName") Escriba el nombre de la lista:
-            //- TODO: check with new list form
-            if errors.name 
-              .text-danger.mt-2 
-                span #{errors.name}
-          //- Utility hidden inputs
-          .d-none(aria-hidden="true")
-            input(type="text", name="listWorkspace", value=workspace)
-          .d-grid.mt-2
-            button.btn.btn-primary(type="submit", name="fromForm", value="newList") Crear lista nueva
+              //- List name
+              h2.fs-5.flex-grow-1.m-0 #{list.name}
+
+            .card-body.p-0
+              if list.Items.length > 0
+                each item in list.Items
+
+                  //- 
+                  //- Item element
+                  dashboard__lists__list__item.card.border-top-0.border-start-0.border-end-0.rounded-0.mx-3
+
+                    .card-header.d-flex.px-0.pb-0.border-bottom-0
+                      .dropdown
+                        button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
+                        ul.dropdown-menu
+                          li
+                            a.dropdown-item(href="/listas/item/" + item.id) Eliminar
+                      h4.fs-6.flex-grow-1.fs-6.my-2 #{item.name}
+
+                    .card-body.d-flex.flex-wrap.justify-content-end.px-0.column-gap-3.pt-0.pb-2
+                      if item.displayUnitPrice
+                        .text-body-tertiary #{item.displayUnitPrice.amount}&nbsp;#{item.displayUnitPrice.currency}&nbsp;×&nbsp;#{item.quantity}  
+
+                      if item.displayTotalPrice
+                        .fw-bold #{item.displayTotalPrice.amount}&nbsp;#{item.displayTotalPrice.currency}
+                      else 
+                        div.text-bg-warning
+                          span.fst-italic.px-2.py-1 Sin precio
+
+              //- Empty list message
+              else
+                .text-body-tertiary.text-center.my-4
+                  h4.fs-5(aria-hidden="true") (・_・;)
+                  h4.fs-6.fst-italic Esta lista está vacía&hellip;
+
+            .card-footer
+
+              //- Add ttem form
+              form.dashboard__add-item.accordion.accordion-flush(id=list.id + "_form", action="/listas", method="post")
+                .accordion-item
+                  h5.accordion-header(id=list.id + "_form-toggle")
+                    button.accordion-button.collapsed.px-2.py-1.rounded-pill.mt-2.mb-3(type="button", data-bs-toggle="collapse", data-bs-target="#" + list.id + "_form-content", aria-expanded="false", aria-controls=list.id + "_form-content") Agregar item
+                  .accordion-collapse.collapse(id=list.id + "_form-content" aria-labelledby=list.id + "_form-toggle" data-bs-parent="#" + list.id +  + "_form")
+                    .accordion-body.p-0
+
+                      .input-group.mt-2
+                        //- TODO: add value attribute
+                        label.visually-hidden(for="itemName") Nombre
+                        input.dashboard__add-item-name.form-control(type="text", name="itemName", placeholder="Nombre", value="", required=true)
+
+                        span.input-group-text ×
+
+                        //- TODO: add value attribute
+                        label.visually-hidden(for="itemQuantity") Cantidad
+                        input.dashboard__add-item-quantity.form-control(type="number", name="itemQuantity", min="1", value="1", required=true)
+                        //- TODO: check with new list form
+                        //- if errors.name
+                        //-   .text-danger.mt-2
+                        //-     span #{errors.name}
+
+                      .input-group.mt-2
+                        label.visually-hidden(for="itemPrice") Precio
+                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", placeholder="Precio", value="")
+                        span.input-group-text #{user.defaultCurrency}
+                        //- TODO: check with new list form
+                        //- if errors.price
+                        //-   .text-danger.mt-2
+                        //-     span #{errors.price}
+
+                      //- Utility hidden inputs
+                      .d-none(aria-hidden="true")
+                        input(type="text", name="listCurrency", value=user.defaultCurrency, readonly=true)
+                        input(type="text", name="listId", value=list.id, readonly=true)
+
+                      .d-grid.mt-2 
+                        button.btn.btn-primary(type="submit", name="fromForm", value="newItem") Agregar ítem
+
+              //- Total of the list
+              .dashboard__list-total.mt-3
+                h3.fs-6.fw-bold.text-end.p-2.mb-2 Total:&emsp;EXAMPLE #{user.defaultCurrency}
+
+    .dashboard__lists__add-new
+
+      //- 
+      //- Empty board message
+      if ! lists
+        h2.text-center.fs-4.fw-bold.mt-4 ¡Aquí no hay listas!
+        h3.text-center.fs-6.fst-italic ¿Qué tal si creas la primera&hellip;&thinsp;?
+        p.text-center.fs-4.my-4(aria-hidden="true") (╯°ヮ°)╯ $ $ $
+      
+      //- 
+      //- Add list form
+      .card.mx-2.my-3.shadow
+        .card-body.p-4
+          form(action="/listas", method="post")
+
+            .form-floating
+              //- TODO: add value attribute
+              input.form-control(type="text", name="listName", value="", required=true) 
+              label(for="listName") Escriba el nombre de la lista:
+              //- TODO: check with new list form
+              //- if errors.name 
+              //-   .text-danger.mt-2 
+              //-     span #{errors.name}
+
+            //- Utility hidden inputs
+            .d-none(aria-hidden="true")
+              input(type="text", name="listWorkspace", value=workspace, readonly=true)
+
+            .d-grid.mt-2
+              button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newList") Crear nueva lista

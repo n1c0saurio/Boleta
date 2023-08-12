@@ -1,25 +1,44 @@
 extends ../layout-home
 
 block content
-  .col-sm-8.col-xl-6 
-    section.card.my-5.shadow-lg
+
+  //- 
+  //- Welcome message
+  section#home__welcome.col-sm-10.col-xl-7.mt-5
+    .row.justify-content-center.text-center
+      .col-12
+        h1.fw-bold.fst-italic.text-bas-relief Haga listas de compra y sepa cuánto gastará de antemano
+      .col-sm-8.mt-4 
+        p.lead Con Boleta podrá crear listas de compra y llevar fácilmente la cuenta de cuanto gastará en sus compras.
+      #home__brand.col-12.text-bas-relief.text-center.mt-3.z-3
+        img(src="/images/boleta_no-shadow.svg", alt="Boleta logo", width="124px")
+
+  //- 
+  //- Login form
+  section#home__login.col-sm-8.col-xl-6 
+    section.card.mb-5.shadow-lg
       .card-body.p-5
-        h2.card-title.mt-2.mb-3 Inicie sesión
+        h2.card-title.mt-5.mb-3 Inicie sesión
         p.mb-4 Para crear y guardar listas de compra necesita tener una cuenta. Si no tiene una puede 
-          a.link-dark(href="/registro") crear una aquí
-          |. 
+          a.link-dark.text-dark-hover(href="/registro") crear una aquí
+          |.
         form(action="/", method="post")
+
           if errors.invalid_credentials
             .alert.alert-warning
               span Correo o contraseña incorrectos.
+
           .form-floating.mb-3
-            input.form-control(type="email", name="email", required)
+            input.form-control(type="email", name="email", required=true)
             label(for="email") Email:
+
           .form-floating.mb-3
-            input.form-control(type="password", name="password", required)
+            input.form-control(type="password", name="password", required=true)
             label(for="password") Contraseña:
+
           .mb-4
-            input.btn.btn-primary(type="submit", value="Iniciar sesión")
+            button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
+
           .mb-3
             small
-              a.link-dark(href="http://") ¿Olvidaste tu contraseña?
+              a.link-dark.text-dark-hover(href="http://") ¿Olvidaste tu contraseña?

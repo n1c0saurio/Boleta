@@ -1,59 +1,72 @@
 extends ../layout-home
 
 block content
-  .col-sm-8.col-xl-6 
-    a(href="/" class="btn btn-outline-primary mt-4")
+
+  //- Back to home
+  .col-sm-8.col-xl-6.mt-5 
+    a.btn.btn-outline-primary(href="/")
       span.bi.bi-arrow-left 
       | Volver 
+
+    //- 
+    //- Register form
     section.card.my-5.shadow-lg
       .card-body.p-5
         h2.card-title.mt-2.mb-3 Registro
         p Cree una cuenta para guardar sus propias listas.
         form(action="/registro", method="post")
+
           .form-floating.mb-3
-            input.form-control(type="text", name="firstName", value=formData.firstName, required)
+            input.form-control(type="text", name="firstName", value=formData.firstName, required=true)
             label(for="firstName") Nombre&thinsp;*
             if errors.firstName
               .text-danger.mt-2
                 small #{errors.firstName}
+
           .form-floating.mb-3
             input.form-control(type="text", name="lastName", value=formData.lastName)
             label(for="lastName") Apellido
             if errors.lastName
               .text-danger.mt-2
                 small #{errors.lastName}
+
           .form-floating.mb-3
-            input.form-control(type="email", name="email", value=formData.email, required)
+            input.form-control(type="email", name="email", value=formData.email, required=true)
             label(for="email") Correo electrónico&thinsp;*
             if errors.email
               .text-danger.mt-2
                 small #{errors.email}
+
           .form-floating.mb-3 
-            select.form-select(name="defaultCurrency", value=formData.defaultCurrency, required)
+            select.form-select(name="defaultCurrency", value=formData.defaultCurrency, required=true)
               option 
               each currency in currencies
                 if currency.code === formData.defaultCurrency
                   option(value=currency.code, selected) #{currency.code}
                 else 
-                  option(value=currency.code) #{currency.code} 
+                  option(value=currency.code) #{currency.code}
             label(for="defaultCurrency") Moneda&thinsp;*  
             if errors.defaultCurrency
               .text-danger.mt-2 
                 small #{errors.defaultCurrency}
+
           .form-floating.mb-3
-            input.form-control(type="password", name="password", required)
+            input.form-control(type="password", name="password", required=true)
             label(for="password") Contraseña&thinsp;*
             if errors.password
               .text-danger.mt-2
                 small #{errors.password}
+
           .form-floating.mb-3
-            input.form-control(type="password", name="passwordConfirmation", required)
+            input.form-control(type="password", name="passwordConfirmation", required=true)
             label(for="passwordConfirmation") Repita la contraseña&thinsp;*
             if errors.passwordConfirmation
               .text-danger.mt-2
                 small #{errors.passwordConfirmation}
+
           .mb-3 
             p 
-              small Los campos marcados con * son obligatorios.
+              small.fst-italic Los campos marcados con * son obligatorios.
+
           div
-            input.btn.btn-primary(type="submit", value="Registrarse")
+            button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit") Registrarse

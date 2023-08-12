@@ -1,16 +1,24 @@
 extends layout
 
 block sublayout
+
   #home__wrapper
+
+    //- 
+    //- Header
     header#home__header.bg-primary
       nav.navbar.navbar-expand-sm.text-shadow-emphasis
         .container-fluid
+
+          //- Brand
           .navbar-brand
-            a.link-light.text-decoration-none(href="/") 
-              img.d-inline-block.align-text-center(src="/images/boleta.svg", alt="Boleta", width="32", height="32")
-              span.fw-bold.ms-2 Boleta
+            a.d-flex.align-items-center.link-light.text-decoration-none(href="/") 
+              img(src="/images/boleta.svg", alt="Boleta", width="48", height="48")
+              span.fw-bold.fs-3.ms-3 Boleta
           button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#home__header__nav__user", aria-controls="home__header__nav__user", aria-expanded="false", aria-label="Toggle navigation") 
             span.navbar-toggler-icon
+
+          //- Menu
           ul#home__header__nav__user.navbar-nav.justify-content-end.collapse.navbar-collapse
             if user
               li.nav-item.dropdown 
@@ -28,12 +36,23 @@ block sublayout
             else
               li
                 a.nav-link.link-light(href="/registro") Registrarse
+
+    //- 
+    //- Content
     .container#main-content 
       .row.justify-content-center
         block content
+
+    //- 
+    //- Footer
     footer#home__footer.mt-4.bg-dark-subtle
       .container 
         .row 
           .col.my-3.text-center 
-            span &copy; 2023 @n1c0saurio 
-
+            small &copy; 2023&ensp;
+              a.text-dark.text-dark-hover(href="https://github.com/n1c0saurio/boleta") Boleta 
+              | &ensp;|&ensp; Hecho con&ensp;
+              span.bi.bi-heart-fill
+              | &ensp;por 
+              span.fst-italic @n1c0saurio
+              | .

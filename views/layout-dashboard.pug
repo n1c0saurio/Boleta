@@ -1,50 +1,73 @@
 extends layout
 
-block sublayout 
+block sublayout
+
   #dashboard__wrapper 
+    #dashboard-content
+      block content
+
+    //- 
+    //- Navigation sidebar
     header#dashboard__header.bg-primary 
       nav#dashboard__nav.nav.flex-column.justify-content-between
-        .nav-item.ps-3.py-2.border-bottom.border-primary-subtle
-          .navbar-text
-            img.d-inline-block.align-text-center(src="/images/boleta.svg", alt="Boleta", width="32", height="32")
-            span.text-light.fw-bold.text-shadow-emphasis.ms-2 Hola, 
-              span.fst-italic #{user.firstName}
-        #dashboard__nav__menu.nav-item.accordion.accordion-flush.flex-grow-1
+
+        //- 
+        //- Nav header
+        #dashboard__welcome.nav-item.d-flex.ps-2.pt-4.pb-3.border-bottom.border-primary-subtle
+          img(src="/images/boleta.svg", alt="Boleta", width="36", height="36")
+          .ms-3
+            h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis ¡Hola,
+              br
+              | #{user.displayName}!
+
+        //- 
+        //- Menu
+        #dashboard__menu.nav-item.accordion.accordion-flush.flex-grow-1
+
+          //- Lists submenu
           .accordion-item.bg-transparent
-            .accordion-header
-              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__lists", aria-expanded="true", aria-controls="dashboard__nav__menu__lists") Tablero
-            #dashboard__nav__menu__lists.accordion-collapse.collapse.show(data-bs-parent="#dashboard__nav__menu")
-              .accordion-body.bg-primary-dark
+            #dashboard__menu-lists-btn.accordion-header
+              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-lists", aria-expanded="true", aria-controls="dashboard__menu-lists")
+                span.bi.bi-kanban-fill
+                span.ms-2 Tablero
+            #dashboard__menu-lists.accordion-collapse.collapse.show(aria-labelledby="dashboard__menu-lists-btn", data-bs-parent="#dashboard__menu")
+              .accordion-body.bg-primary-darker.px-0
                 ul.nav.flex-column
                   li.nav-item 
-                    a.nav-link.text-light(href="/listas") 
+                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/listas") 
                       span.bi.bi-list-check
                       span.ms-2 Mis listas
                   li.nav-item 
-                    a.nav-link.text-light(href="http://") 
+                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
                       span.bi.bi-trash3
                       span.ms-2 Ítems eliminados
                   li.nav-item 
-                    a.nav-link.text-light(href="http://") 
+                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
                       span.bi.bi-archive
                       span.ms-2 Listas archivadas
+
+          //- Account submenu
           .accordion-item.bg-transparent 
-            .accordion-header 
-              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__nav__menu__account", aria-expanded="false", aria-controls="dashboard__nav__menu__account") Mi cuenta 
-            #dashboard__nav__menu__account.accordion-collapse.collapse(data-bs-parent="#dashboard__nav__menu")
-              .accordion-body.bg-primary-dark 
+            #dashboard__menu-account-btn.accordion-header 
+              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-account", aria-expanded="false", aria-controls="dashboard__menu-account")
+                span.bi.bi-person-circle
+                span.ms-2 Mi cuenta 
+            #dashboard__menu-account.accordion-collapse.collapse(aria-labelledby="dashboard__menu-account-btn", data-bs-parent="#dashboard__menu")
+              .accordion-body.bg-primary-darker.px-0 
                 ul.nav.flex-column
                   li.nav-item 
-                    a.nav-link.text-light(href="/mi-cuenta") 
-                      span.bi.bi-person-circle
+                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta") 
+                      span.bi.bi-person-vcard
                       span.ms-2 Mis datos
                   li.nav-item 
-                    a.nav-link.text-light(href="/mi-cuenta/contrasena") 
+                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta/contrasena") 
                       span.bi.bi-asterisk
                       span.ms-2 Cambiar contraseña
-        form.nav-item.border-top.border-primary-subtle.ps-4.py-2(action="/logout", method="post")
-          span.d-inline.bi.bi-box-arrow-left.text-light.text-shadow-emphasis
-          input.nav-link.link-light.fw-bold.text-shadow-emphasis.d-inline(type="submit", value="Salir") 
-    .container#main-content
-      block content
+
+        //- 
+        //- Logout
+        form#dashboard__nav__logout.nav-item.d-grid.border-top.border-primary-subtle(action="/logout", method="post")
+          button.nav-link.link-light.text-shadow-emphasis.text-start(type="submit")
+            span.bi.bi-box-arrow-left
+            span.ms-2 Salir
           

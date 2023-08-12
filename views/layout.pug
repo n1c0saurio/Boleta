@@ -1,16 +1,20 @@
 doctype html
 html
   head
+
+    //- Meta
     title= title
+
+    //- Appearance
+    link(rel="shortcut icon", href="/images/boleta.svg", type="image/x-icon")
+    link(rel="stylesheet", href="/stylesheets/fonts/bitter.css")
     link(rel="stylesheet", href="/stylesheets/style.min.css")
     link(rel="stylesheet", href="/stylesheets/icons/bootstrap-icons.min.css")
+
   body
-    //- header
-    //-   nav
-    //-     if user
-    //-       span Hola #{user.displayName}! |
-    //-       a(href="/mi-cuenta") Mi cuenta | 
-    //-       form(action="/logout", method="post")
-    //-         input(type="submit", value="Salir")
+
+    //- Content
     block sublayout
+
+    //- Scripts
     script(src="/javascripts/bootstrap/bootstrap.bundle.min.js") 
