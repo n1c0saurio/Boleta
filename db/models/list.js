@@ -83,6 +83,29 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    // Return an object with two properties: unit price and currency code
+    displayTotal: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        if (this.total) {
+          return toDecimal(dinero(JSON.parse(this.total)),
+            ({ value, currency }) => {
+              return {
+                amount: value,
+                currency: currency.code
+              };
+            }
+          );
+        } else {
+          return null;
+        }
+      },
+      set(value) {
+        throw new Error(
+          'This property is created dynamically, and cannot be set manually.'
+        );
+      }
+    },
     isArchived: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

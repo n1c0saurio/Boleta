@@ -1,7 +1,7 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const { dinero, toSnapshot } = require('dinero.js');
+const { dinero, toSnapshot, multiply, toDecimal } = require('dinero.js');
 const currencies = require('@dinero.js/currencies');
 
 module.exports = (sequelize, DataTypes) => {
@@ -60,6 +60,56 @@ module.exports = (sequelize, DataTypes) => {
         } else {
           this.setDataValue('price', value);
         }
+      }
+    },
+    // Return an object with two properties: unit price and currency code
+    displayUnitPrice: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        if (this.price && this.quantity > 1) {
+          return toDecimal(dinero(JSON.parse(this.price)),
+            ({ value, currency }) => {
+              return {
+                amount: value,
+                currency: currency.code
+              };
+            }
+          );
+        } else {
+          return null;
+        }
+      },
+      set(value) {
+        throw new Error(
+          'This property is created dynamically, and cannot be set manually.'
+        );
+      }
+    },
+    // Return an object with two properties: total price and currency code
+    displayTotalPrice: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        if (this.price) {
+          const subtotal = multiply(
+            dinero(JSON.parse(this.price)),
+            this.quantity
+          );
+          return toDecimal(subtotal,
+            ({ value, currency }) => {
+              return {
+                amount: value,
+                currency: currency.code
+              };
+            }
+          );
+        } else {
+          return null;
+        }
+      },
+      set(value) {
+        throw new Error(
+          'This property is created dynamically, and cannot be set manually.'
+        );
       }
     },
     quantity: {
