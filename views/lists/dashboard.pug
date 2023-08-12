@@ -2,14 +2,14 @@ extends ../layout-dashboard
 
 block content
 
-  #dashboard__lists__wrapper.d-flex.flex-nowrap
+  #dashboard__lists__wrapper.d-flex.flex-nowrap.overflow-x-scroll.p-3
     if lists 
       each list in lists
 
         //- 
         //- List element
         .dashboard__lists__list
-          .card.mx-2.my-3.shadow
+          .card.mx-2.border-0.shadow
 
             //- List menu
             .card-header.d-flex.align-items-center
@@ -65,8 +65,8 @@ block content
 
                       .input-group.mt-2
                         //- TODO: add value attribute
-                        label.visually-hidden(for="itemName") Nombre
                         input.dashboard__add-item-name.form-control(type="text", name="itemName", placeholder="Nombre", value="", required=true)
+                        label.visually-hidden(for="itemName") Nombre
 
                         span.input-group-text ×
 
@@ -79,8 +79,8 @@ block content
                         //-     span #{errors.name}
 
                       .input-group.mt-2
-                        label.visually-hidden(for="itemPrice") Precio
                         input.dashboard__add-item-price.form-control(type="text", name="itemPrice", placeholder="Precio", value="")
+                        label.visually-hidden(for="itemPrice") Precio
                         span.input-group-text #{user.defaultCurrency}
                         //- TODO: check with new list form
                         //- if errors.price
@@ -93,7 +93,7 @@ block content
                         input(type="text", name="listId", value=list.id, readonly=true)
 
                       .d-grid.mt-2 
-                        button.btn.btn-primary(type="submit", name="fromForm", value="newItem") Agregar ítem
+                        button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newItem") Agregar
 
               //- Total of the list
               .dashboard__list-total.mt-3
@@ -110,7 +110,7 @@ block content
       
       //- 
       //- Add list form
-      .card.mx-2.my-3.shadow
+      .card.mx-2.border-0.shadow
         .card-body.p-4
           form(action="/listas", method="post")
 

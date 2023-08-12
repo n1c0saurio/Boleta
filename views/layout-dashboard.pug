@@ -2,21 +2,26 @@ extends layout
 
 block sublayout
 
-  #dashboard__wrapper 
-    #dashboard-content
+  #dashboard__wrapper.d-flex 
+
+    //- 
+    //- Main content
+    section#dashboard__content.flex-grow-1.order-2
       block content
 
     //- 
     //- Navigation sidebar
-    header#dashboard__header.bg-primary 
+    header#dashboard__header.flex-shrink-0.order-1.bg-primary 
       nav#dashboard__nav.nav.flex-column.justify-content-between
 
         //- 
         //- Nav header
         #dashboard__welcome.nav-item.d-flex.ps-2.pt-4.pb-3.border-bottom.border-primary-subtle
-          img(src="/images/boleta.svg", alt="Boleta", width="36", height="36")
-          .ms-3
-            h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis ¡Hola,
+          a(href="/listas") 
+            img(src="/images/boleta.svg", alt="Boleta", width="36", height="36")
+          .ms-2
+            h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis
+              | ¡Hola,
               br
               | #{user.displayName}!
 

@@ -9,7 +9,7 @@ $custom-font-family: Bitter, system-ui, -apple-system, "Noto Serif",
 @use "../../node_modules/bootstrap/scss/bootstrap.scss" as b with (
     $font-family-sans-serif: $custom-font-family,
     $primary: #3dcc77,
-    $secondary: #e88873,
+    $secondary: #f57d62,
     $light: #ebf5ef,
     $enable-negative-margins: true
 );
@@ -27,7 +27,7 @@ body {
 // Extra colors
 
 $primary-darker: #478f64;
-$primary-shadow: #405c4b;
+$primary-shadow: rgba(64, 92, 75, 0.64);
 
 .bg-primary-darker {
     background-color: $primary-darker;
@@ -35,17 +35,10 @@ $primary-shadow: #405c4b;
 
 // Links adjustment
 
-a.text-light-hover:hover {
-    color: b.$primary !important;
-}
-
-a.text-dark-hover:hover {
-    color: $primary-darker !important;
-}
-
-a.text-light-hover:active,
-a.text-dark-hover:active {
+a.link-alt-hover:hover,
+a.link-alt-hover:active {
     color: b.$secondary !important;
+    text-decoration-color: b.$secondary !important;
 }
 
 // Custom shadow to pop text
@@ -88,7 +81,7 @@ a.text-dark-hover:active {
 // Home
 
 #home__brand {
-    margin-bottom: -4.7rem;
+    margin-bottom: -82px;
 }
 
 #home__brand img {
@@ -100,28 +93,32 @@ a.text-dark-hover:active {
 //
 
 // Make all content use the full height of the viewport
+
+// Dashboard layout
 #dashboard__wrapper,
 #dashboard__header,
 #dashboard__nav,
 #dashboard__content,
-#dashboard__lists__wrapper {
+// Lists section
+#dashboard__lists__wrapper,
+.dashboard__lists__list,
+// Others secction
+#dashboard__panel__wrapper {
     height: 100%;
     min-height: 480px;
 }
 
-#dashboard__wrapper {
-    display: flex;
-}
-
-// Menu
-
 #dashboard__header {
     box-shadow: -4px 0px 12px 4px $primary-shadow;
     flex-basis: 270px;
-    flex-shrink: 0;
-    order: 1;
     z-index: 4;
 }
+
+#dashboard__content {
+    background-color: b.$light;
+}
+
+// Menu
 
 .dashboard__nav__menu__link {
     padding-left: 1.25rem;
@@ -141,17 +138,31 @@ a.text-dark-hover:active {
 
 // Lists
 
-#dashboard-content {
-    background-color: b.$light;
-    order: 2;
-    overflow-x: scroll;
-}
-
 #dashboard__lists__wrapper {
     align-items: flex-start;
 }
 
 // List
+
+// List: Fixed width
+
+.dashboard__lists__list,
+.dashboard__lists__add-new {
+    flex-basis: 290px;
+    flex-shrink: 0;
+}
+
+// List: scroll on items
+
+.dashboard__lists__list .card {
+    max-height: 100%;
+}
+
+.dashboard__lists__list .card-body {
+    overflow-y: scroll;
+}
+
+// List: Styles
 
 .dashboard__lists__list .card-header,
 .dashboard__lists__list .card-body,
@@ -159,26 +170,14 @@ a.text-dark-hover:active {
     background-color: white;
 }
 
-.dashboard__lists__list > .card-header {
-    box-shadow: 0 14px 8px -8px white;
+.dashboard__lists__list > .card > .card-header {
+    box-shadow: 0 16px 8px -8px white;
     z-index: 1;
 }
 
-.dashboard__lists__list > .card-footer {
-    box-shadow: 0 -14px 8px -8px white;
+.dashboard__lists__list > .card > .card-footer {
+    box-shadow: 0 -16px 8px -8px white;
     z-index: 1;
-}
-
-// List: Fixed height
-
-.dashboard__lists__list,
-.dashboard__lists__add-new {
-    flex-basis: 290px;
-    flex-shrink: 0;
-    max-height: 95%;
-}
-.dashboard__lists__list .card-body {
-    overflow-y: scroll;
 }
 
 // List: item form
@@ -200,3 +199,6 @@ a.text-dark-hover:active {
 dashboard__lists__list__item.card:last-child {
     border-bottom: none;
 }
+
+//
+// My account
