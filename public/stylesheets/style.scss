@@ -116,7 +116,7 @@ a.text-dark-hover:active {
 // Menu
 
 #dashboard__header {
-    box-shadow: 0 0 12px 2px $primary-shadow;
+    box-shadow: -4px 0px 12px 4px $primary-shadow;
     flex-basis: 270px;
     flex-shrink: 0;
     order: 1;
@@ -154,8 +154,19 @@ a.text-dark-hover:active {
 // List
 
 .dashboard__lists__list .card-header,
+.dashboard__lists__list .card-body,
 .dashboard__lists__list .card-footer {
     background-color: white;
+}
+
+.dashboard__lists__list > .card-header {
+    box-shadow: 0 14px 8px -8px white;
+    z-index: 1;
+}
+
+.dashboard__lists__list > .card-footer {
+    box-shadow: 0 -14px 8px -8px white;
+    z-index: 1;
 }
 
 // List: Fixed height
@@ -186,6 +197,6 @@ a.text-dark-hover:active {
 
 // Item
 
-dashboard__lists__list__item.card:last-child { 
+dashboard__lists__list__item.card:last-child {
     border-bottom: none;
 }
