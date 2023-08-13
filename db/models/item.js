@@ -1,7 +1,7 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const { dinero, toSnapshot, add, multiply, toDecimal } = require('dinero.js');
+const { dinero, toSnapshot, add, subtract, multiply, toDecimal } = require('dinero.js');
 const currencies = require('@dinero.js/currencies');
 
 module.exports = (sequelize, DataTypes) => {
@@ -139,34 +139,64 @@ module.exports = (sequelize, DataTypes) => {
 
   // After the creation of a Item
   Item.afterCreate(async item => {
-    let list = await item.getList();
+    let parentList = await item.getList();
 
     if (!item.price) {
-      // if `price` null, set list `partialSum` to true
-      if (!list.partialSum) {
-        // only if not setted already
-        list.partialSum = true;
-        list.save();
+      // Set Parent List `partialSum` to true
+      if (!parentList.partialSum) {
+        // only if not already `true`
+        parentList.partialSum = true;
+        await parentList.save();
       }
-    } else if (!list.total) {
-      // if `total` is null, asign `price`
+    } else if (!parentList.total) {
+      // Asign Item `price` directly, multiplied by `quantity`
       const amount = multiply(
         dinero(JSON.parse(item.price)),
         item.quantity
       )
-      list.total = JSON.stringify(amount);
-      list.save();
-    } else if (item.price && list.total) {
-      // if there's `price` and `total`, sum both and update total
+      parentList.total = JSON.stringify(amount);
+      await parentList.save();
+    } else if (item.price && parentList.total) {
+      // Sum List `total` and Item `price` (multiplied by `quantity`)
       const sum = add(
-        dinero(JSON.parse(list.total)),
+        dinero(JSON.parse(parentList.total)),
         multiply(
           dinero(JSON.parse(item.price)),
           item.quantity
         )
       );
-      list.total = JSON.stringify(sum);
-      list.save();
+      parentList.total = JSON.stringify(sum);
+      await parentList.save();
+    }
+  });
+
+  // After the deletion of an Item
+  Item.afterDestroy(async item => {
+    let parentList = await item.getList();
+
+    if (!item.price) {
+      const otherItemsWithoutPrice = await Item.count({
+        where: {
+          listId: item.listId,
+          price: null
+        }
+      });
+      // if there're no other `Item` with `price` unassigned,
+      // set List `partialSum` to false
+      if (otherItemsWithoutPrice === 0){
+        parentList.partialSum = false;
+        await parentList.save();
+      }
+    } else {
+      const remainder = subtract(
+        dinero(JSON.parse(parentList.total)),
+        multiply(
+          dinero(JSON.parse(item.price)),
+          item.quantity
+        )
+      );
+      parentList.total = JSON.stringify(remainder);
+      await parentList.save();
     }
   });
 
