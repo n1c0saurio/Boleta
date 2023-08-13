@@ -9,11 +9,13 @@ exports.newList = async (formData) => {
         workspaceId: formData.listWorkspace
       }
     });
+
     await models.List.create({
       name: formData.listName,
       position: count + 1,
       workspaceId: formData.listWorkspace
     });
+
   } catch (err) {
     let errors = {}
     if (err.errors) {
@@ -37,6 +39,7 @@ exports.deleteList = async (listId) => {
       }
     });
     await listToDelete.destroy();
+
   } catch (err) {
     let errors = {}
     if (err.errors) {
@@ -59,13 +62,18 @@ exports.newItem = async (formData) => {
         listId: formData.listId
       }
     });
+
+    let itemAmount = (formData.itemPrice) ?
+      toSnapshot(dinero({
+        amount: parseInt(formData.itemPrice),
+        currency: currencies[formData.listCurrency]
+      })) :
+      undefined;
+
     await models.Item.create({
       name: formData.itemName,
       position: count + 1,
-      price: toSnapshot(dinero({
-        amount: parseInt(formData.itemPrice),
-        currency: currencies[formData.listCurrency]
-      })),
+      price: itemAmount,
       quantity: formData.itemQuantity,
       listId: formData.listId
     })
@@ -93,6 +101,7 @@ exports.deleteItem = async (itemId) => {
       }
     });
     await itemToDelete.destroy();
+
   } catch (err) {
     let errors = {}
     if (err.errors) {
