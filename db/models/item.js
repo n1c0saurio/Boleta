@@ -1,7 +1,7 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const { dinero, toSnapshot, multiply, toDecimal } = require('dinero.js');
+const { dinero, toSnapshot, add, multiply, toDecimal } = require('dinero.js');
 const currencies = require('@dinero.js/currencies');
 
 module.exports = (sequelize, DataTypes) => {
@@ -133,6 +133,41 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Item',
+  });
+
+  // Update total of parent List...
+
+  // After the creation of a Item
+  Item.afterCreate(async item => {
+    let list = await item.getList();
+
+    if (!item.price) {
+      // if `price` null, set list `partialSum` to true
+      if (!list.partialSum) {
+        // only if not setted already
+        list.partialSum = true;
+        list.save();
+      }
+    } else if (!list.total) {
+      // if `total` is null, asign `price`
+      const amount = multiply(
+        dinero(JSON.parse(item.price)),
+        item.quantity
+      )
+      list.total = JSON.stringify(amount);
+      list.save();
+    } else if (item.price && list.total) {
+      // if there's `price` and `total`, sum both and update total
+      const sum = add(
+        dinero(JSON.parse(list.total)),
+        multiply(
+          dinero(JSON.parse(item.price)),
+          item.quantity
+        )
+      );
+      list.total = JSON.stringify(sum);
+      list.save();
+    }
   });
 
   return Item;
