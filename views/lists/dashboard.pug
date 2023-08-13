@@ -38,10 +38,14 @@ block content
                       h4.fs-6.flex-grow-1.fs-6.my-2 #{item.name}
 
                     .card-body.d-flex.flex-wrap.justify-content-end.px-0.column-gap-3.pt-0.pb-2
-                      if item.displayUnitPrice
-                        .text-body-tertiary #{item.displayUnitPrice.amount}&nbsp;#{item.displayUnitPrice.currency}&nbsp;×&nbsp;#{item.quantity}  
-
-                      if item.displayTotalPrice
+                      if item.quantity > 1
+                        .text-body-tertiary
+                          if item.price
+                            | #{item.displayUnitPrice.amount}&nbsp;#{item.displayUnitPrice.currency}&nbsp;×&nbsp;#{item.quantity}
+                          else 
+                            | #{item.quantity}&nbsp;unidades
+                          | &nbsp;
+                      if item.price
                         .fw-bold #{item.displayTotalPrice.amount}&nbsp;#{item.displayTotalPrice.currency}
                       else 
                         div.text-bg-warning
@@ -96,15 +100,20 @@ block content
                         button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newItem") Agregar
 
               //- Total of the list
-              .dashboard__list-total.mt-3
-                h3.fs-6.fw-bold.text-end.p-2.mb-2 Total:&emsp;EXAMPLE #{user.defaultCurrency}
+              h3.dashboard__list-total.fs-6.fw-bold.text-end.py-3.mt-3.mb-1
+                if !list.total
+                  span.bg-warning.px-2.py-2 Total desconocido
+                else if list.partialSum
+                  span.bg-warning.px-2.py-1 Subtotal:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
+                else
+                  span.py-1 Total:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
 
     .dashboard__lists__add-new
 
       //- 
       //- Empty board message
-      if ! lists
-        h2.text-center.fs-4.fw-bold.mt-4 ¡Aquí no hay listas!
+      if lists.length === 0
+        h2.text-center.fs-4.fw-bold.mt-4 ¡Aún no hay listas!
         h3.text-center.fs-6.fst-italic ¿Qué tal si creas la primera&hellip;&thinsp;?
         p.text-center.fs-4.my-4(aria-hidden="true") (╯°ヮ°)╯ $ $ $
       
