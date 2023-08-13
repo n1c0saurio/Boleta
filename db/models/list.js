@@ -1,7 +1,7 @@
 'use strict';
 
 const { Model } = require('sequelize');
-const { dinero, toSnapshot } = require('dinero.js');
+const { dinero, toSnapshot, toDecimal } = require('dinero.js');
 const currencies = require('@dinero.js/currencies');
 
 let listCountOnWorkspace;
