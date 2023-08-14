@@ -5,6 +5,7 @@ block content
   //- To inform navigation what page is this
   - var section = "dashboard"
   - var current = "my-lists"
+  - var currencies = currencies
 
   #dashboard__lists-wrapper.d-flex.flex-nowrap.overflow-x-scroll.py-3.px-4
     if lists 
@@ -63,7 +64,7 @@ block content
 
             .card-footer
 
-              //- Add ttem form
+              //- Add item form
               form.dashboard__add-item.accordion.accordion-flush(id=list.id + "_form", action="/listas", method="post")
                 .accordion-item
                   h5.accordion-header(id=list.id + "_form-toggle")
@@ -87,7 +88,7 @@ block content
                         //-     span #{errors.name}
 
                       .input-group.mt-2
-                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", placeholder="Precio", value="")
+                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", pattern="[0-9.,]*", onkeydown="forbiddenChars(event)", onkeyup="priceFormating(this.value)", placeholder="Precio", value="")
                         label.visually-hidden(for="itemPrice") Precio
                         span.input-group-text #{user.defaultCurrency}
                         //- TODO: check with new list form
