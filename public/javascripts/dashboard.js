@@ -8,3 +8,4 @@ if (window.screen.width >= 768) {
     headerContent.classList.add('show');
   }
 }
+

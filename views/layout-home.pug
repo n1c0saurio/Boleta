@@ -7,35 +7,35 @@ block sublayout
     //- 
     //- Header
     header#home__header
-      nav.navbar.navbar-expand-sm.bg-primary.text-shadow-emphasis
+      nav.navbar.bg-primary
         .container-fluid
 
           //- Brand
-          .navbar-brand
-            a.d-flex.align-items-center.link-light.text-decoration-none(href="/") 
+          .navbar-brand.flex-grow-1
+            a.d-flex.justify-content-center.align-items-center.link-light.text-decoration-none(href="/") 
               img(src="/images/boleta.svg", alt="Boleta", width="48", height="48")
-              span.fw-bold.fs-3.ms-3 Boleta
-          button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#home__header__nav__user", aria-controls="home__header__nav__user", aria-expanded="false", aria-label="Toggle navigation") 
-            span.navbar-toggler-icon
+              span.fw-bold.fs-3.text-shadow-emphasis.ms-3 Boleta
 
           //- Menu
-          ul#home__header-menu.navbar-nav.justify-content-end.collapse.navbar-collapse
-            if user
-              li.nav-item.dropdown 
-                a.nav-link.link-light.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown") Hola, #{user.firstName}
-                ul.dropdown-menu 
-                  li 
-                    a.home__nav-item.dropdown-item(href="/listas") Mis listas
-                  li
-                    a.home__nav-item.dropdown-item(href="/mi-cuenta") Mi cuenta
-                  li
-                    hr.dropdown-divider
-                  li
-                    form(action="/logout", method="post")
-                      input.dropdown-item(type="submit", value="Salir")
-            else
-              li
-                a.home__nav-item.nav-link.link-light(href="/registro", class=(current === 'register' ? 'active' : '')) Registrarse
+          //- button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#home__header__nav__user", aria-controls="home__header__nav__user", aria-expanded="false", aria-label="Toggle navigation") 
+          //-   span.navbar-toggler-icon
+          //- ul#home__header-menu.navbar-nav.justify-content-end.collapse.navbar-collapse
+          //-   if user
+          //-     li.nav-item.dropdown 
+          //-       a.nav-link.link-light.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown") Hola, #{user.firstName}
+          //-       ul.dropdown-menu 
+          //-         li 
+          //-           a.home__nav-item.dropdown-item(href="/listas") Mis listas
+          //-         li
+          //-           a.home__nav-item.dropdown-item(href="/mi-cuenta") Mi cuenta
+          //-         li
+          //-           hr.dropdown-divider
+          //-         li
+          //-           form(action="/logout", method="post")
+          //-             input.dropdown-item(type="submit", value="Salir")
+          //-   else
+          //-     li
+          //-       a.home__nav-item.nav-link.link-light(href="/registro", class=(current === 'register' ? 'active' : '')) Registrarse
       .border-serrated--primary
 
     //- 

@@ -6,7 +6,7 @@ block content
   - var current = "register"
 
   //- Back to home
-  .col-sm-8.col-xl-6.mt-5 
+  .col-md-10.col-lg-8.col-xl-6.mt-5 
     a.btn.btn-primary.text-light.text-shadow-emphasis(href="/")
       span.bi.bi-arrow-left 
       | Volver 
@@ -14,7 +14,7 @@ block content
     //- 
     //- Register form
     section.card.my-5.border-0.shadow-lg
-      .card-body.p-5
+      .card-body.p-4.p-md-5
         h2.card-title.mt-2.mb-3 Registro
         p Cree una cuenta para guardar sus propias listas.
         form(action="/registro", method="post")
