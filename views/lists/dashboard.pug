@@ -2,14 +2,18 @@ extends ../layout-dashboard
 
 block content
 
-  #dashboard__lists__wrapper.d-flex.flex-nowrap.overflow-x-scroll.p-3
+  //- To inform navigation what page is this
+  - var section = "dashboard"
+  - var current = "my-lists"
+
+  #dashboard__lists-wrapper.d-flex.flex-nowrap.overflow-x-scroll.py-3.px-4
     if lists 
       each list in lists
 
         //- 
         //- List element
         .dashboard__lists__list
-          .card.mx-2.border-0.shadow
+          .card.mx-2.bg-transparent.border-0.drop-shadow
 
             //- List menu
             .card-header.d-flex.align-items-center
@@ -53,9 +57,9 @@ block content
 
               //- Empty list message
               else
-                .text-body-tertiary.text-center.my-4
-                  h4.fs-5(aria-hidden="true") (・_・;)
-                  h4.fs-6.fst-italic Esta lista está vacía&hellip;
+                .text-body-tertiary.text-center.my-5
+                  h4.fs-6.fst-italic.mb-4 Esta lista está vacía&hellip;
+                  h4.fs-5(aria-hidden="true") .・・.・゜・。.*҉ 
 
             .card-footer
 
@@ -96,30 +100,33 @@ block content
                         input(type="text", name="listCurrency", value=user.defaultCurrency, readonly=true)
                         input(type="text", name="listId", value=list.id, readonly=true)
 
-                      .d-grid.mt-2 
+                      .d-grid.my-2 
                         button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newItem") Agregar
 
               //- Total of the list
-              h3.dashboard__list-total.fs-6.fw-bold.text-end.py-3.mt-3.mb-1
-                if !list.total
-                  span.bg-warning.px-2.py-2 Total desconocido
-                else if list.partialSum
-                  span.bg-warning.px-2.py-1 Subtotal:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
-                else
-                  span.py-1 Total:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
+              if list.Items.length > 0
+                h3.dashboard__list-total.fs-6.fw-bold.text-end.py-3.mt-3.mb-1
+                  if !list.total
+                    span.bg-warning.px-2.py-2 Total desconocido
+                  else if list.partialSum
+                    span.bg-warning.px-2.py-1 Subtotal:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
+                  else
+                    span.py-1 Total:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
+            .border-serrated
 
     .dashboard__lists__add-new
 
       //- 
       //- Empty board message
       if lists.length === 0
-        h2.text-center.fs-4.fw-bold.mt-4 ¡Aún no hay listas!
-        h3.text-center.fs-6.fst-italic ¿Qué tal si creas la primera&hellip;&thinsp;?
-        p.text-center.fs-4.my-4(aria-hidden="true") (╯°ヮ°)╯ $ $ $
+        .text-center.text-bas-relief.my-4
+          h2.fs-3.fw-bold ¡Aún no hay listas!
+          h3.fs-6.fst-italic Aquí puedes crear la primera&hellip;&thinsp;
       
       //- 
       //- Add list form
-      .card.mx-2.border-0.shadow
+      .card.mx-2.bg-transparent.border-0.drop-shadow
+        .card-header.border-bottom-0
         .card-body.p-4
           form(action="/listas", method="post")
 
@@ -138,3 +145,10 @@ block content
 
             .d-grid.mt-2
               button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newList") Crear nueva lista
+              
+              //- Empty board kaomoji
+              if lists.length === 0
+                .text-center.mt-4
+                  p.fs-4(aria-hidden="true") (╯°ヮ°)╯ $ $ $
+
+        .border-serrated

@@ -4,41 +4,42 @@ block content
 
   //- 
   //- Welcome message
-  section#home__welcome.col-sm-10.col-xl-7.mt-5
+  section#home__welcome.col-sm-12.col-md-8.col-lg-6.col-xl-5.col-xxl-4.mx-lg-5.mt-lg-5
     .row.justify-content-center.text-center
-      .col-12
-        h1.fw-bold.fst-italic.text-bas-relief Haga listas de compra y sepa cuánto gastará de antemano
-      .col-sm-8.mt-4 
-        p.lead Con Boleta podrá crear listas de compra y llevar fácilmente la cuenta de cuanto gastará en sus compras.
-      #home__brand.col-12.text-bas-relief.text-center.pb-2.mt-3.z-3
-        img(src="/images/boleta_no-shadow.svg", alt="Boleta logo", width="124px")
+      .col-12.mt-5
+        h1.fw-bold.fst-italic.text-bas-relief ¡Organiza tus listas de compra en un solo lugar!
+      .col-sm-8.col-md-10.col-xl-12.mt-4 
+        p.lead Con Boleta podrás crear listas de compra y llevar fácilmente la cuenta de cuanto gastarás en ellas.
 
   //- 
   //- Login form
-  section#home__login.col-sm-8.col-xl-6 
-    section.card.mb-5.border-0.shadow-lg
-      .card-body.p-5
-        h2.card-title.mt-5.mb-3 Inicie sesión
-        p.mb-4 Para crear y guardar listas de compra necesita tener una cuenta. Si no tiene una puede 
-          a.link-dark.link-alt-hover(href="/registro") crear una aquí
-          |.
-        form(action="/", method="post")
+  section#home__login.col-sm-10.col-md-8.col-lg-6.col-xl-5.col-xxl-4.mt-3.mt-xl-5
+    section
+      #home__brand.d-block.text-center.pb-2.mt-3.position-relative.z-1
+        img(src="/images/boleta_no-shadow.svg", alt="Boleta logo", width="124px")
+      .card.mb-5.border-0.shadow-lg
+        .card-body.p-5
+          h2.card-title.mt-5.mb-3 Inicie sesión
+          p.mb-4 Para crear y guardar listas de compra necesita tener una cuenta. Si no tiene una puede 
+            a.link-dark.link-alt-hover(href="/registro") crear una aquí
+            |.
+          form(action="/", method="post")
 
-          if errors.invalid_credentials
-            .alert.alert-warning
-              span Correo o contraseña incorrectos.
+            if errors.invalid_credentials
+              .alert.alert-warning
+                span Correo o contraseña incorrectos.
 
-          .form-floating.mb-3
-            input.form-control(type="email", name="email", required=true)
-            label(for="email") Email:
+            .form-floating.mb-3
+              input.form-control(type="email", name="email", required=true)
+              label(for="email") Email:
 
-          .form-floating.mb-3
-            input.form-control(type="password", name="password", required=true)
-            label(for="password") Contraseña:
+            .form-floating.mb-3
+              input.form-control(type="password", name="password", required=true)
+              label(for="password") Contraseña:
 
-          .mb-4
-            button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
+            .mb-4
+              button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
 
-          .mb-3
-            small
-              a.link-dark.link-alt-hover(href="http://") ¿Olvidaste tu contraseña?
+            .mb-3
+              small
+                a.link-dark.link-alt-hover(href="http://") ¿Olvidaste tu contraseña?
