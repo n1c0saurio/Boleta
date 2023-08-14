@@ -8,9 +8,9 @@ $custom-font-family: Bitter, system-ui, -apple-system, "Noto Serif",
 
 @use "../../node_modules/bootstrap/scss/bootstrap.scss" as b with (
     $font-family-sans-serif: $custom-font-family,
-    $primary: #3dcc77,
+    $primary: #00b379,
     $secondary: #f57d62,
-    $light: #ebf5ef,
+    $light: #e1f5ee,
     $enable-negative-margins: true
 );
 
@@ -26,8 +26,9 @@ body {
 
 // Extra colors
 
-$primary-darker: #478f64;
-$primary-shadow: rgba(64, 92, 75, 0.64);
+$primary-darker: #0e805b;
+$primary-shadow: rgba(9, 82, 58, 0.64);
+$primary-shadow-subtle: rgba(9, 82, 58, 0.32);
 
 .bg-primary-darker {
     background-color: $primary-darker;
@@ -47,12 +48,34 @@ a.link-alt-hover:active {
 }
 
 .text-bas-relief {
-    text-shadow: -2px 2px white;
+    text-shadow: -1px 1px white, 1px -1px $primary-shadow-subtle;
 }
 
 // Hide icon on dropdows with custom ones
 .bi.dropdown-toggle::after {
     display: none;
+}
+
+// Serrated border effect
+.border-serrated {
+    background-repeat: repeat-x;
+    height: 10px;
+    background-size: 8px;
+    background-image: url("../images/prepicado--blank.svg");
+
+    &--primary {
+        @extend .border-serrated;
+        background-image: url("../images/prepicado--primary.svg");
+    }
+
+    &--primary-light {
+        @extend .border-serrated;
+        background-image: url("../images/prepicado--primary-light.svg");
+    }
+}
+
+.drop-shadow {
+    filter: drop-shadow(0 4px 12px $primary-shadow);
 }
 
 //
@@ -68,17 +91,32 @@ a.link-alt-hover:active {
     min-height: 100%;
 }
 
-#main-content {
+#home__content {
     flex-grow: 1;
 }
 
-// Footer
+// Header styles
+
+#home__header {
+    filter: drop-shadow(0 -4px 12px $primary-shadow);
+}
+
+.home__nav-item.active {
+    text-decoration: underline;
+    text-decoration-color: b.$secondary !important;
+}
+
+// Footer styles
 
 #home__footer {
     box-shadow: inset 0 12px 16px -16px $primary-shadow;
 }
 
 // Home
+
+#home__welcome h1 {
+    font-size: 3rem;
+}
 
 #home__brand {
     margin-bottom: -82px;
@@ -96,11 +134,14 @@ a.link-alt-hover:active {
 
 // Dashboard layout
 #dashboard__wrapper,
+// Header section
 #dashboard__header,
+#dashboard__header-container,
+#dashboard__header-content,
 #dashboard__nav,
-#dashboard__content,
 // Lists section
-#dashboard__lists__wrapper,
+#dashboard__content,
+#dashboard__lists-wrapper,
 .dashboard__lists__list,
 // Others secction
 #dashboard__panel__wrapper {
@@ -108,27 +149,41 @@ a.link-alt-hover:active {
     min-height: 480px;
 }
 
-#dashboard__header {
-    box-shadow: -4px 0px 12px 4px $primary-shadow;
-    flex-basis: 270px;
-    z-index: 4;
+#dashboard__wrapper {
+    background-color: b.$light;
 }
 
-#dashboard__content {
-    background-color: b.$light;
+// Allow header overlaps lists when them overflows
+#dashboard__header {
+    z-index: 1;
 }
 
 // Menu
 
+#dashboard__header-toggle {
+    border-radius: 0 10% 10% 0;
+}
+
+// Negative margin must be equal to
+// header-toggle to allow it overlaps list
+#dashboard__lists-wrapper {
+    margin-left: -26px;
+}
+
+#dashboard__nav {
+    width: 240px;
+}
+
 .dashboard__nav__menu__link {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
-}
 
-.dashboard__nav__menu__link:hover,
-.dashboard__nav__menu__link:active {
-    color: white !important;
-    background-color: b.$secondary !important;
+    &.active,
+    &:hover,
+    &:active {
+        color: white !important;
+        background-color: b.$secondary !important;
+    }
 }
 
 #dashboard__nav__logout:hover,
@@ -138,7 +193,7 @@ a.link-alt-hover:active {
 
 // Lists
 
-#dashboard__lists__wrapper {
+#dashboard__lists-wrapper {
     align-items: flex-start;
 }
 
@@ -148,7 +203,7 @@ a.link-alt-hover:active {
 
 .dashboard__lists__list,
 .dashboard__lists__add-new {
-    flex-basis: 290px;
+    flex-basis: 320px;
     flex-shrink: 0;
 }
 
@@ -164,10 +219,13 @@ a.link-alt-hover:active {
 
 // List: Styles
 
-.dashboard__lists__list .card-header,
-.dashboard__lists__list .card-body,
-.dashboard__lists__list .card-footer {
-    background-color: white;
+.dashboard__lists__list,
+.dashboard__lists__add-new {
+    .card-header,
+    .card-body,
+    .card-footer {
+        background-color: white;
+    }
 }
 
 .dashboard__lists__list > .card > .card-header {

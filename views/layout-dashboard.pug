@@ -11,68 +11,77 @@ block sublayout
 
     //- 
     //- Navigation sidebar
-    header#dashboard__header.flex-shrink-0.order-1.bg-primary 
-      nav#dashboard__nav.nav.flex-column.justify-content-between
+    header#dashboard__header.flex-shrink-0.order-1
+      #dashboard__header-container.d-flex.flex-row-reverse.align-items-center.drop-shadow
 
-        //- 
-        //- Nav header
-        #dashboard__welcome.nav-item.d-flex.ps-2.pt-4.pb-3.border-bottom.border-primary-subtle
-          a(href="/listas") 
-            img(src="/images/boleta.svg", alt="Boleta", width="36", height="36")
-          .ms-2
-            h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis
-              | ¡Hola,
-              br
-              | #{user.displayName}!
+        //- Toggle nav
+        button#dashboard__header-toggle.btn.btn-primary.ps-1.pe-1.py-4.z-1(type="button" data-bs-toggle="collapse" data-bs-target="#dashboard__header-content" aria-expanded="false" aria-controls="dashboard__header-content")
+          span.bi.bi-list.text-light
 
-        //- 
-        //- Menu
-        #dashboard__menu.nav-item.accordion.accordion-flush.flex-grow-1
+        //- Nav content
+        #dashboard__header-content.collapse.collapse-horizontal.bg-primary 
+          nav#dashboard__nav.nav.flex-column.justify-content-between
 
-          //- Lists submenu
-          .accordion-item.bg-transparent
-            #dashboard__menu-lists-btn.accordion-header
-              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-lists", aria-expanded="true", aria-controls="dashboard__menu-lists")
-                span.bi.bi-kanban-fill
-                span.ms-2 Tablero
-            #dashboard__menu-lists.accordion-collapse.collapse.show(aria-labelledby="dashboard__menu-lists-btn", data-bs-parent="#dashboard__menu")
-              .accordion-body.bg-primary-darker.px-0
-                ul.nav.flex-column
-                  li.nav-item 
-                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/listas") 
-                      span.bi.bi-list-check
-                      span.ms-2 Mis listas
-                  li.nav-item 
-                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
-                      span.bi.bi-trash3
-                      span.ms-2 Ítems eliminados
-                  li.nav-item 
-                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
-                      span.bi.bi-archive
-                      span.ms-2 Listas archivadas
+            //- 
+            //- Nav header
+            #dashboard__welcome.nav-item.d-flex.ps-2.pt-4.pb-3.border-bottom.border-primary-subtle
+              a(href="/listas") 
+                img(src="/images/boleta.svg", alt="Boleta", width="36", height="36")
+              .ms-2
+                h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis
+                  | ¡Hola,
+                  br
+                  | #{user.firstName}!
 
-          //- Account submenu
-          .accordion-item.bg-transparent 
-            #dashboard__menu-account-btn.accordion-header 
-              button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-account", aria-expanded="false", aria-controls="dashboard__menu-account")
-                span.bi.bi-person-circle
-                span.ms-2 Mi cuenta 
-            #dashboard__menu-account.accordion-collapse.collapse(aria-labelledby="dashboard__menu-account-btn", data-bs-parent="#dashboard__menu")
-              .accordion-body.bg-primary-darker.px-0 
-                ul.nav.flex-column
-                  li.nav-item 
-                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta") 
-                      span.bi.bi-person-vcard
-                      span.ms-2 Mis datos
-                  li.nav-item 
-                    a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta/contrasena") 
-                      span.bi.bi-asterisk
-                      span.ms-2 Cambiar contraseña
+            //- 
+            //- Menu
+            #dashboard__menu.nav-item.accordion.accordion-flush.flex-grow-1
 
-        //- 
-        //- Logout
-        form#dashboard__nav__logout.nav-item.d-grid.border-top.border-primary-subtle(action="/logout", method="post")
-          button.nav-link.link-light.text-shadow-emphasis.text-start(type="submit")
-            span.bi.bi-box-arrow-left
-            span.ms-2 Salir
-          
+              //- Lists submenu
+              .accordion-item.bg-transparent
+                #dashboard__menu-lists-btn.accordion-header
+                  button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-lists", aria-expanded="true", aria-controls="dashboard__menu-lists")
+                    span.bi.bi-kanban-fill
+                    span.ms-2 Tablero
+                #dashboard__menu-lists.accordion-collapse.collapse(aria-labelledby="dashboard__menu-lists-btn", data-bs-parent="#dashboard__menu", class=(section === 'dashboard' ? 'show' : ''))
+                  .accordion-body.bg-primary-darker.px-0
+                    ul.nav.flex-column
+                      li.nav-item 
+                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/listas", class=(current === 'my-lists' ? 'active' : '')) 
+                          span.bi.bi-list-check
+                          span.ms-2 Mis listas
+                      li.nav-item 
+                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
+                          span.bi.bi-trash3
+                          span.ms-2 Ítems eliminados
+                      li.nav-item 
+                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
+                          span.bi.bi-archive
+                          span.ms-2 Listas archivadas
+
+              //- Account submenu
+              .accordion-item.bg-transparent 
+                #dashboard__menu-account-btn.accordion-header 
+                  button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-account", aria-expanded="false", aria-controls="dashboard__menu-account")
+                    span.bi.bi-person-circle
+                    span.ms-2 Mi cuenta 
+                #dashboard__menu-account.accordion-collapse.collapse(aria-labelledby="dashboard__menu-account-btn", data-bs-parent="#dashboard__menu", class=(section === 'my-account' ? 'show' : ''))
+                  .accordion-body.bg-primary-darker.px-0 
+                    ul.nav.flex-column
+                      li.nav-item 
+                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta", class=(current === 'account-data' ? 'active' : '')) 
+                          span.bi.bi-person-vcard
+                          span.ms-2 Mis datos
+                      li.nav-item 
+                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta/contrasena", class=(current === 'password' ? 'active' : '')) 
+                          span.bi.bi-asterisk
+                          span.ms-2 Cambiar contraseña
+
+            //- 
+            //- Logout
+            form#dashboard__nav__logout.nav-item.d-grid.border-top.border-primary-subtle(action="/logout", method="post")
+              button.nav-link.link-light.text-shadow-emphasis.text-start(type="submit")
+                span.bi.bi-box-arrow-left
+                span.ms-2 Salir
+
+  script(src="/javascripts/dashboard.js") 
