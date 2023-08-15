@@ -8,9 +8,9 @@ Este proyecto se comenzo con la finalidad de practicar desarrollo web en **Expre
 - [x] Inicio/cierre de sesión
 - [x] Actualizar datos de usuario
 - [ ] Eliminar cuenta
-- [ ] Administrar listas
-- [ ] Administrar ítems de las listas
-- [ ] Sumar el precio de los ítems de una lista
+- [x] Administrar listas
+- [x] Administrar ítems de las listas
+- [x] Sumar el precio de los ítems de una lista
 - [ ] Restaurar ítems eliminados
 - [ ] Archivar listas
 - [ ] Gestión de usuarios para los administradores
