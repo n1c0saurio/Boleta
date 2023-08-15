@@ -9,9 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 
       // A role can't be deleted if there're users associated with it
       Role.hasMany(models.User, {
-        foreignKey: {
-          name: 'roleId'
-        },
+        foreignKey: 'roleId',
         onDelete: 'RESTRICT'
       });
     }
