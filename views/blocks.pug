@@ -1,0 +1,32 @@
+mixin loginForm()
+  form(action="/", method="post")
+
+    if errors.invalid_credentials
+      .alert.alert-warning
+        span Correo o contraseña incorrectos.
+
+    .form-floating.mb-3
+      input.form-control(type="email", name="email", required=true)
+      label(for="email") Email:
+
+    .form-floating.mb-3
+      input.form-control(type="password", name="password", required=true)
+      label(for="password") Contraseña:
+
+    .d-grid.mb-4
+      button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
+
+    .mb-3
+      small
+        a.link-dark.link-alt-hover(href="http://") ¿Olvidaste tu contraseña?
+  
+  hr.my-4
+
+  h3.fs-4.mb-3 ¿No tienes cuenta aún?
+  p.mb-4 Si no tienes una puedes, crear una aquí:
+  .d-grid
+    a.btn.btn-primary.text-light.text-shadow-emphasis(href="/registro") Regístrate 
+
+mixin brandBadge()
+  #brand-badge.d-block.text-center.pb-2.mt-3.position-relative.z-1
+    img(src="/images/boleta_no-shadow.svg", alt="Boleta logo", width="124px")
