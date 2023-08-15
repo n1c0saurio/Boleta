@@ -43,6 +43,7 @@ a.link-alt-hover:active {
 }
 
 // Custom shadow to pop text
+
 .text-shadow-emphasis {
     text-shadow: -1px 1px $primary-shadow;
 }
@@ -51,9 +52,22 @@ a.link-alt-hover:active {
     text-shadow: -1px 1px white, 1px -1px $primary-shadow-subtle;
 }
 
+// Fixes an adjustments
+
 // Hide icon on dropdows with custom ones
 .bi.dropdown-toggle::after {
     display: none;
+}
+
+// Decorations
+
+// Brand as a overlapping badge
+#brand-badge {
+    margin-bottom: -82px;
+}
+
+#brand-badge img {
+    filter: drop-shadow(0 8px 16px b.$gray-500);
 }
 
 // Serrated border effect
@@ -76,6 +90,12 @@ a.link-alt-hover:active {
 
 .drop-shadow {
     filter: drop-shadow(0 4px 12px $primary-shadow);
+}
+
+// Error page
+
+#error-wrapper {
+    min-height: 100%;
 }
 
 //
@@ -113,14 +133,6 @@ a.link-alt-hover:active {
 }
 
 // Home
-
-#home__brand {
-    margin-bottom: -82px;
-}
-
-#home__brand img {
-    filter: drop-shadow(0 8px 16px b.$gray-500);
-}
 
 //
 // DASHBOARD STYLES
@@ -259,4 +271,4 @@ dashboard__lists__list__item.card:last-child {
 
 //
 // RESPONSIVE STYLES
-// 
+//

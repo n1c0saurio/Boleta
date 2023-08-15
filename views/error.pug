@@ -1,6 +1,39 @@
 extends layout
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+block sublayout
+  #error-wrapper.bg-light
+    .container
+      .row.justify-content-center 
+        .col-sm-11.col-md-10.col-lg-8.col-xl-6
+          .card.p-sm-4.p-lg-5.border-0.my-5.shadow-lg 
+            
+            header.card-header.pb-4.bg-transparent
+              .fs-1.mb-4(aria-hidden="true") (;・_・)
+              h1.fw-bold Error #{error.status}
+              h2.fs-3= message
+            
+            .card-body.pt-4
+              //- Extra messages
+              if error.status === 401
+                include blocks.pug 
+                loginForm()
+
+              if error.status === 404
+                p.mb-4 Aquí no hay nada de nada. Puede que el contenido que buscabas ya no esté disponible porque fue movido o haya sido eliminado.
+                a.btn.btn-primary.link-light.text-shadow-emphasis.mb-5(href="/")
+                  span.bi.bi-chevron-left 
+                  span Volver
+
+              if error.status >= 500
+                p.mb-4 Parece que tuvimos un problema interno, lamento que hayas tenido que ver esto.
+                d-grid.mb-5
+                  a.btn.btn-primary.link-light.text-shadow-emphasis(href="/")
+                    span.bi.bi-chevron-left 
+                    span Volver
+                  a.btn.btn-primary-outline.text-shadow-emphasis(href="/")
+                    span.bi.bi-arrow-clockwise
+                    span Intenar de nuevo
+
+              if error.stack
+                pre.fs-5.mb-3 Debug stack:
+                pre #{error.stack}
