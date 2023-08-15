@@ -25,6 +25,7 @@ module.exports = {
       },
       userPerformerId: {
         type: Sequelize.UUID,
+        onDelete: 'SET NULL',
         references: {
           model: 'User',
           key: 'id'
@@ -35,6 +36,7 @@ module.exports = {
       },
       userAffectedId: {
         type: Sequelize.UUID,
+        onDelete: 'SET NULL',
         references: {
           model: 'User',
           key: 'id'

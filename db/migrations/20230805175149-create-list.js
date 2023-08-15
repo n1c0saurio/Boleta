@@ -33,6 +33,7 @@ module.exports = {
       workspaceId: {
         type: Sequelize.UUID,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: 'Workspace',
           key: 'id'

@@ -33,6 +33,7 @@ module.exports = {
       listId: {
         type: Sequelize.UUID,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: 'List',
           key: 'id'
