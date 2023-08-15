@@ -9,8 +9,9 @@ var session = require('express-session');
 var passport = require('./passport');
 var userMiddleware = require('./middlewares/user');
 // Custom routers
-var userRouter = require('./routes/user');
-var listsRouter = require('./routes/lists');
+const indexRouter = require('./routes/index');
+const listsRouter = require('./routes/lists');
+const userRouter = require('./routes/user');
 
 var app = express();
 
@@ -39,8 +40,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // custom routes
-app.use('/', userRouter);
+app.use('/', indexRouter);
 app.use('/listas', userMiddleware.authRequired, listsRouter);
+app.use('/mi-cuenta', userMiddleware.authRequired, userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
