@@ -7,9 +7,10 @@ require('dotenv').config();
 // User session managment
 var session = require('express-session');
 var passport = require('./passport');
+var userMiddleware = require('./middlewares/user');
 // Custom routers
-var listsRouter = require('./routes/lists');
 var userRouter = require('./routes/user');
+var listsRouter = require('./routes/lists');
 
 var app = express();
 
@@ -38,8 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // custom routes
-app.use('/listas', listsRouter);
 app.use('/', userRouter);
+app.use('/listas', userMiddleware.authRequired, listsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
