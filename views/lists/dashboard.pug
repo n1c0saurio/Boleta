@@ -115,19 +115,18 @@ block content
                     span.py-1 Total:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
             .border-serrated
 
-    .dashboard__lists__add-new
+    .dashboard__lists__add-new(class=(lists.length === 0 ? 'mx-5' : ''))
 
-      //- 
-      //- Empty board message
-      if lists.length === 0
-        .text-center.text-bas-relief.my-4
-          h2.fs-3.fw-bold ¡Aún no hay listas!
-          h3.fs-6.fst-italic Aquí puedes crear la primera&hellip;&thinsp;
-      
       //- 
       //- Add list form
       .card.mx-2.bg-transparent.border-0.drop-shadow
         .card-header.border-bottom-0
+          //- Empty board message
+          if lists.length === 0
+            .text-center.mt-4
+              h2.fs-3.fw-bold.mb-3 ¡No hay listas en este tablero!
+              h3.fs-6.fst-italic Pero no te preocupes, aquí abajo puedes crear la primera&hellip;
+
         .card-body.p-4
           form(action="/listas", method="post")
 
@@ -149,7 +148,7 @@ block content
               
               //- Empty board kaomoji
               if lists.length === 0
-                .text-center.mt-4
+                .text-center.mt-5
                   p.fs-4(aria-hidden="true") (╯°ヮ°)╯ $ $ $
 
         .border-serrated

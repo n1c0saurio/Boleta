@@ -28,7 +28,8 @@ body {
 
 $primary-darker: #0e805b;
 $primary-shadow: rgba(9, 82, 58, 0.64);
-$primary-shadow-subtle: rgba(9, 82, 58, 0.32);
+$primary-shadow-bevel: rgba(9, 82, 58, 0.32);
+$primary-shadow-subtle: rgba(9, 82, 58, 0.16);
 
 .bg-primary-darker {
     background-color: $primary-darker;
@@ -36,10 +37,17 @@ $primary-shadow-subtle: rgba(9, 82, 58, 0.32);
 
 // Links adjustment
 
-a.link-alt-hover:hover,
-a.link-alt-hover:active {
-    color: b.$secondary !important;
-    text-decoration-color: b.$secondary !important;
+a.link-alt-hover {
+    &:hover,
+    &:active {
+        color: b.$secondary !important;
+        text-decoration-color: b.$secondary !important;
+    }
+}
+
+a.btn-outline-primary:hover {
+    @extend .text-shadow-emphasis;
+    color: white;
 }
 
 // Custom shadow to pop text
@@ -48,8 +56,12 @@ a.link-alt-hover:active {
     text-shadow: -1px 1px $primary-shadow;
 }
 
+.text-shadow-subtle {
+    text-shadow: -1px 1px $primary-shadow-subtle;
+}
+
 .text-bas-relief {
-    text-shadow: -1px 1px white, 1px -1px $primary-shadow-subtle;
+    text-shadow: -1px 1px white, 1px -1px $primary-shadow-bevel;
 }
 
 // Fixes an adjustments

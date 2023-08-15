@@ -1,10 +1,6 @@
 mixin loginForm()
   form(action="/", method="post")
 
-    if errors.invalid_credentials
-      .alert.alert-warning
-        span Correo o contraseña incorrectos.
-
     .form-floating.mb-3
       input.form-control(type="email", name="email", required=true)
       label(for="email") Email:
