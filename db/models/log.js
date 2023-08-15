@@ -55,13 +55,15 @@ module.exports = (sequelize, DataTypes) => {
       // Sometimes a user performs an action that can be recorded.
       Log.belongsTo(models.User, {
         as: 'Performer',
-        foreignKey: 'userPerformerId'
+        foreignKey: 'userPerformerId',
+        onDelete: 'SET NULL'
       });
 
       // Sometimes a user is affected by an action that can be recorded.
       Log.belongsTo(models.User, {
         as: 'Affected',
-        foreignKey: 'userAffectedId'
+        foreignKey: 'userAffectedId',
+        onDelete: 'SET NULL'
       });
 
       // And sometimes, both things can happen,

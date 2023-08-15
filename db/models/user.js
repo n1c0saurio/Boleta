@@ -36,13 +36,14 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Role, {
         foreignKey: {
           name: 'roleId',
-          allowNull: false,
+          allowNull: false
         },
         onDelete: 'RESTRICT'
       });
 
       User.hasMany(models.Workspace, {
-        foreignKey: 'userId'
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
       });
 
       // Sometimes, a user is the performer or is affected by an action,

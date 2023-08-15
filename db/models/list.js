@@ -20,12 +20,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           name: 'workspaceId',
           allowNull: false
-        }
+        },
+        onDelete: 'CASCADE'
       });
 
       // Cannot exist Items without a List
       List.hasMany(models.Item, {
-        foreignKey: 'listId'
+        foreignKey: 'listId',
+        onDelete: 'CASCADE'
       });
     }
   }
