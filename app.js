@@ -32,7 +32,7 @@ app.use("/javascripts/bootstrap", express.static(path.join(
 
 // user session
 app.use(session({
-  secret: process.env.SESION_SECRET, // TODO: fix typo
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
