@@ -1,9 +1,15 @@
 {
   "name": "boleta",
   "version": "0.1.0",
-  "author": "Nicoñás Castañeda González (https://github.com/n1c0saurio/)",
+  "author": "Nicolás C. González (https://github.com/n1c0saurio/)",
+  "homepage": "https://github.com/n1c0saurio/boleta/blob/main/README.md",
+  "bugs": {
+    "url": "https://github.com/n1c0saurio/boleta/issues"
+  },
+  "license": "GPL-3.0-or-later",
   "private": true,
   "scripts": {
+    "dockerized-init": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && npm start",
     "start": "export NODE_ENV=production && node ./bin/www",
     "dev": "export NODE_ENV=development && nodemon --trace-warnings ./bin/www",
     "test": "export NODE_ENV=test && jest --watchAll"
