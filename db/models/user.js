@@ -166,7 +166,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Create a default Workspace
-  User.afterCreate(async user => {
+  User.afterSave(async user => {
     await user.createWorkspace({
       name: 'Área de trabajo por defecto',
       isDefault: true
