@@ -2,8 +2,8 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
+require('dotenv').config();
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -14,8 +14,8 @@ module.exports = {
       // in the database, create a default one.
       await User.create({
         firstName: 'Administrador',
-        email: 'correo@example.com',
-        password: await bcrypt.hash('secret', 10),
+        email: process.env.ADMIN_EMAIL || 'mail@example.com',
+        password: process.env.ADMIN_PASS || 'Secret_4321',
         defaultCurrency: 'CLP',
         roleId: 'admin'
       });
