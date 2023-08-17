@@ -67,3 +67,11 @@ docker-compose.yml
 Dockerfile
 DB.Dockerfile
 DB-init.sql
+
+# UP TO THIS LINE, THIS IS A VERBATIM OF .GITIGNORE
+
+# Git related files
+.git
+.gitignore
+documents
+README.md
