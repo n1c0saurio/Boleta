@@ -63,7 +63,8 @@ typings/
 # CUSTOM
 
 # Docker stuff
-docker-compose.yml
 Dockerfile
+docker-compose.yml
+postgres
 DB.Dockerfile
 DB-init.sql
