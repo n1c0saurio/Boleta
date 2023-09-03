@@ -13,7 +13,7 @@ if (window.screen.width >= 768) {
 // Prevent unwanted characters on `itemPrice` input
 function forbiddenChars(event) {
   // TODO: format this in a better way
-  const allowedKeys = /[0-9]|Backspace|Delete|ArrowLeft|ArrowRight|ArrowUp|ArrowDown|PageUp|PageDown/;
+  const allowedKeys = /[0-9]|Enter|Tab|Backspace|Delete|ArrowLeft|ArrowRight|ArrowUp|ArrowDown|PageUp|PageDown/;
   // Filter unallowed characters
   if (!allowedKeys.test(event.key) &&
     !event.ctrlKey &&
