@@ -10,6 +10,9 @@ block content
   #dashboard__lists-wrapper.d-flex.flex-nowrap.overflow-x-scroll.py-3.px-4
     if lists 
       each list in lists
+        //- Formatter to style price on the List's currency
+        - let listCurrency = list.currency ? list.currency : user.defaultCurrency;
+        - let currencyFormatter = Intl.NumberFormat('es-CL', { style: 'currency', currency: listCurrency }); //- TODO: de-harcode this
 
         //- 
         //- List element
@@ -28,6 +31,7 @@ block content
 
             .card-body.p-0
               if list.Items.length > 0
+
                 each item in list.Items
 
                   //- 
@@ -46,12 +50,12 @@ block content
                       if item.quantity > 1
                         .text-body-tertiary
                           if item.price
-                            | #{item.displayUnitPrice.amount}&nbsp;#{item.displayUnitPrice.currency}&nbsp;×&nbsp;#{item.quantity}
+                            | #{currencyFormatter.format(item.displayUnitPrice.amount)}&nbsp;×&nbsp;#{item.quantity}
                           else 
                             | #{item.quantity}&nbsp;unidades
                           | &nbsp;
                       if item.price
-                        .fw-bold #{item.displayTotalPrice.amount}&nbsp;#{item.displayTotalPrice.currency}
+                        .fw-bold #{currencyFormatter.format(item.displayTotalPrice.amount)}
                       else 
                         div.text-bg-warning
                           span.fst-italic.px-2.py-1 Sin precio
@@ -110,9 +114,9 @@ block content
                   if !list.total
                     span.bg-warning.px-2.py-2 Total desconocido
                   else if list.partialSum
-                    span.bg-warning.px-2.py-1 Subtotal:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
+                    span.bg-warning.px-2.py-1 Subtotal:&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
                   else
-                    span.py-1 Total:&emsp;#{list.displayTotal.amount}&nbsp;#{list.displayTotal.currency}
+                    span.py-1 Total:&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
             .border-serrated
 
     .dashboard__lists__add-new(class=(lists.length === 0 ? 'mx-5' : ''))
