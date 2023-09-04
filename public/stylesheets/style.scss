@@ -162,7 +162,7 @@ a.btn-outline-primary:hover {
 // Lists section
 #dashboard__content,
 #dashboard__lists-wrapper,
-.dashboard__lists__list,
+.dashboard__list,
 // Others secction
 #dashboard__panel__wrapper {
     height: 100%;
@@ -221,26 +221,26 @@ a.btn-outline-primary:hover {
 
 // List: Fixed width
 
-.dashboard__lists__list,
-.dashboard__lists__add-new {
+.dashboard__list,
+.dashboard__new-list {
     flex-basis: 320px;
     flex-shrink: 0;
 }
 
 // List: scroll on items
 
-.dashboard__lists__list .card {
+.dashboard__list .card {
     max-height: 100%;
 }
 
-.dashboard__lists__list .card-body {
+.dashboard__list .card-body {
     overflow-y: scroll;
 }
 
 // List: Styles
 
-.dashboard__lists__list,
-.dashboard__lists__add-new {
+.dashboard__list,
+.dashboard__new-list {
     .card-header,
     .card-body,
     .card-footer {
@@ -248,12 +248,12 @@ a.btn-outline-primary:hover {
     }
 }
 
-.dashboard__lists__list > .card > .card-header {
+.dashboard__list > .card > .card-header {
     box-shadow: 0 16px 8px -8px white;
     z-index: 1;
 }
 
-.dashboard__lists__list > .card > .card-footer {
+.dashboard__list > .card > .card-footer {
     box-shadow: 0 -16px 8px -8px white;
     z-index: 1;
 }
@@ -274,7 +274,7 @@ a.btn-outline-primary:hover {
 
 // Item
 
-dashboard__lists__list__item.card:last-child {
+.dashboard__item.card:last-child {
     border-bottom: none;
 }
 

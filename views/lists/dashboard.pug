@@ -16,7 +16,7 @@ block content
 
         //- 
         //- List element
-        .dashboard__lists__list
+        .dashboard__list(id=list.id)
           .card.mx-2.bg-transparent.border-0.drop-shadow
 
             //- List menu
@@ -37,7 +37,7 @@ block content
                   //- 
                   //- Item element
                   //- TODO: modularize this
-                  dashboard__lists__list__item.card.border-top-0.border-start-0.border-end-0.rounded-0.mx-3
+                  .dashboard__item.card.border-top-0.border-start-0.border-end-0.rounded-0.border-dark.mx-3(id=item.id)
 
                     .card-header.d-flex.px-0.pb-0.border-bottom-0
                       .dropdown
@@ -51,7 +51,7 @@ block content
                       if item.quantity > 1
                         .text-body-tertiary
                           if item.price
-                            | #{currencyFormatter.format(item.displayUnitPrice.amount)}&nbsp;×&nbsp;#{item.quantity}
+                            | #{item.quantity}&nbsp;×&nbsp;#{currencyFormatter.format(item.displayUnitPrice.amount)}
                           else 
                             | #{item.quantity}&nbsp;unidades
                           | &nbsp;
@@ -96,7 +96,7 @@ block content
                       .input-group.mt-2
                         input.dashboard__add-item-price.form-control(type="text", name="itemPrice", pattern="[0-9.,]*", onkeydown="forbiddenChars(event)", onkeyup="priceFormating(this)", placeholder="Precio", value="")
                         label.visually-hidden(for="itemPrice") Precio
-                        span.input-group-text #{user.defaultCurrency}
+                        span.input-group-text #{listCurrency}
                         //- TODO: check with new list form
                         //- if errors.price
                         //-   .text-danger.mt-2
@@ -121,7 +121,7 @@ block content
                     span.py-1 Total:&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
             .border-serrated
 
-    .dashboard__lists__add-new(class=(lists.length === 0 ? 'mx-5' : ''))
+    .dashboard__new-list(class=(lists.length === 0 ? 'mx-5' : ''))
 
       //- 
       //- Add list form
