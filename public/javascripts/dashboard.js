@@ -26,19 +26,22 @@ function forbiddenChars(event) {
 }
 
 // WORKING EXAMPLE WITH USD
-function priceFormating(value) {
+function priceFormating(inputElement) {
   // Value must be converted to the minimum unit of the currency,
   // to do so, use the 'currency.exponent' property of the
   // object version of the currency.
   // This means:
   // a. Import @dinero.js/currencies to this script, or
   // b. Send the actual currency object from URL handler (preferred)
-  value = value / 100;
+
+  let value = inputElement.value.replace(/[^0-9]/g, ''); // TODO: divide by currency exponent
+  
+
   const formatter = Intl.NumberFormat(
-    'en-US', // Get locale from: user profile or browser (preferred)
+    'es-CL', // TODO: Get locale from: user profile or browser (preferred)
     {
       style: 'currency',
-      currency: 'USD' // Get currency from: users `defaultCurrency` or lists `currency` (implement) 
+      currency: 'CLP' // TODO: Get currency from: users `defaultCurrency` or lists `currency` (implement) 
     }
   );
   // This function will return the value formatted to the input,
@@ -46,5 +49,5 @@ function priceFormating(value) {
   // a. On this function itself,
   // b. On the corresponding validator method, or
   // c. In both places
-  console.log(formatter.format(value));
+  inputElement.value = formatter.format(value);
 }
