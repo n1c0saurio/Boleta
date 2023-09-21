@@ -25,7 +25,10 @@ function forbiddenChars(event) {
   }
 }
 
-// WORKING EXAMPLE WITH USD
+function priceCleanning(price) {
+  return price.replace(/[^0-9]/g, '');
+}
+
 function priceFormating(inputElement) {
   // Value must be converted to the minimum unit of the currency,
   // to do so, use the 'currency.exponent' property of the
@@ -34,7 +37,7 @@ function priceFormating(inputElement) {
   // a. Import @dinero.js/currencies to this script, or
   // b. Send the actual currency object from URL handler (preferred)
 
-  let value = inputElement.value.replace(/[^0-9]/g, ''); // TODO: divide by currency exponent
+  let value = priceCleanning(inputElement.value); // TODO: convert to decimal with dinero.js
   
 
   const formatter = Intl.NumberFormat(
@@ -50,4 +53,9 @@ function priceFormating(inputElement) {
   // b. On the corresponding validator method, or
   // c. In both places
   inputElement.value = formatter.format(value);
+}
+
+function submitCleannig(formElement) {
+  let inputPrice = formElement['itemPrice'];
+  inputPrice.value = priceCleanning(inputPrice.value);
 }
