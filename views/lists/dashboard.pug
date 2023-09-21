@@ -3,16 +3,16 @@ extends ../layout-dashboard
 block content
 
   //- To inform navigation what page is this
-  - var section = "dashboard"
-  - var current = "my-lists"
-  - var currencies = currencies
+  - const section = "dashboard"
+  - const current = "my-lists"
+  - const currencies = currencies
 
   #dashboard__lists-wrapper.d-flex.flex-nowrap.overflow-x-scroll.py-3.px-4
     if lists 
       each list in lists
         //- Formatter to style price on the List's currency
-        - let listCurrency = list.currency ? list.currency : user.defaultCurrency;
-        - let currencyFormatter = Intl.NumberFormat('es-CL', { style: 'currency', currency: listCurrency }); //- TODO: de-harcode this
+        - const listCurrency = list.currency ? list.currency : user.defaultCurrency;
+        - const currencyFormatter = Intl.NumberFormat('es-CL', { style: 'currency', currency: listCurrency }); //- TODO: de-harcode this
 
         //- 
         //- List element
