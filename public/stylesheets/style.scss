@@ -248,6 +248,12 @@ a.btn-outline-primary:hover {
     }
 }
 
+.dashboard__list-header,
+.dashboard__item,
+.dashboard__list-footer {
+    border-style: dashed;
+}
+
 .dashboard__list > .card > .card-header {
     box-shadow: 0 16px 8px -8px white;
     z-index: 1;
