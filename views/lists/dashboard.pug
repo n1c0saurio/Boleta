@@ -20,7 +20,7 @@ block content
           .card.mx-2.bg-transparent.border-0.drop-shadow
 
             //- List menu
-            .card-header.d-flex.align-items-center
+            .dashboard__list-header.card-header.d-flex.align-items-center.border-top-0.border-start-0.border-end-0
               .dropdown
                   button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
                   ul.dropdown-menu
@@ -29,7 +29,7 @@ block content
               //- List name
               h2.fs-5.flex-grow-1.m-0 #{list.name}
 
-            .card-body.p-0
+            .card-body.py-0
               if list.Items.length > 0
 
                 each item in list.Items
@@ -37,7 +37,7 @@ block content
                   //- 
                   //- Item element
                   //- TODO: modularize this
-                  .dashboard__item.card.border-top-0.border-start-0.border-end-0.rounded-0.border-dark.mx-3(id=item.id)
+                  .dashboard__item.card.border-top-0.border-start-0.border-end-0.rounded-0(id=item.id)
 
                     .card-header.d-flex.px-0.pb-0.border-bottom-0
                       .dropdown
@@ -67,7 +67,7 @@ block content
                   h4.fs-6.fst-italic.mb-4 Esta lista está vacía&hellip;
                   h4.fs-5(aria-hidden="true") .・・.・゜・。.*҉ 
 
-            .card-footer
+            .dashboard__list-footer.card-footer.border-start-0.border-end-0.border-bottom-0
 
               //- Add item form
               //- TODO: modularize this
@@ -94,7 +94,7 @@ block content
                         //-     span #{errors.name}
 
                       .input-group.mt-2
-                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup="priceFormating(this)", placeholder="Precio", value="") 
+                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup="priceFormating(this," + listCurrency + ")", placeholder="Precio", value="") 
                         //- TODO: ADD CURRENCY TO THE METHODS PARAMETERS (AND THE CURRENCY OBJECT{MAYBE JUST THE WHOLE CURRENCY OBJECT})
                         label.visually-hidden(for="itemPrice") Precio
                         span.input-group-text #{listCurrency}

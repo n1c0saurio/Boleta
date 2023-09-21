@@ -29,7 +29,7 @@ function priceCleanning(price) {
   return price.replace(/[^0-9]/g, '');
 }
 
-function priceFormating(inputElement) {
+function priceFormating(inputElement, currencyCode) {
   // Value must be converted to the minimum unit of the currency,
   // to do so, use the 'currency.exponent' property of the
   // object version of the currency.
@@ -44,7 +44,7 @@ function priceFormating(inputElement) {
     'es-CL', // TODO: Get locale from: user profile or browser (preferred)
     {
       style: 'currency',
-      currency: 'CLP' // TODO: Get currency from: users `defaultCurrency` or lists `currency` (implement) 
+      currency: currencyCode // TODO: Get currency from: users `defaultCurrency` or lists `currency` (implement) 
     }
   );
   // This function will return the value formatted to the input,
