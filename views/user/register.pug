@@ -1,7 +1,10 @@
 extends ../layout-home
 
+
 block content
 
+  //- To translate currency codes to natural names
+  - const currencyInLocale = new Intl.DisplayNames(['es-CL'], { type: 'currency' });
   //- To inform navigation what page is this
   - const current = "register"
 
@@ -45,9 +48,9 @@ block content
               option 
               each currency in currencies
                 if currency.code === formData.defaultCurrency
-                  option(value=currency.code, selected) #{currency.code}
+                  option(value=currency.code, selected) #{currencyInLocale.of(currency.code)} (#{currency.code})
                 else 
-                  option(value=currency.code) #{currency.code}
+                  option(value=currency.code) #{currencyInLocale.of(currency.code)} (#{currency.code})
             label(for="defaultCurrency") Moneda&thinsp;*  
             if errors.defaultCurrency
               .text-danger.mt-2 
