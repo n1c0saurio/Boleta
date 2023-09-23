@@ -9,6 +9,10 @@ let listCountOnWorkspace;
 module.exports = (sequelize, DataTypes) => {
   class List extends Model {
 
+    getCurrencyObject(currencyCode) {
+      return currencies[currencyCode];
+    }
+
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
