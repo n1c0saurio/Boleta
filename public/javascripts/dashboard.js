@@ -19,7 +19,7 @@ function forbiddenChars(event) {
     !event.ctrlKey &&
     !event.altKey &&
     !event.shiftKey &&
-    !event.metaKey 
+    !event.metaKey
   ) {
     event.preventDefault();
   }
@@ -29,22 +29,16 @@ function priceCleanning(price) {
   return price.replace(/[^0-9]/g, '');
 }
 
-function priceFormating(inputElement, currencyCode) {
-  // Value must be converted to the minimum unit of the currency,
-  // to do so, use the 'currency.exponent' property of the
-  // object version of the currency.
-  // This means:
-  // a. Import @dinero.js/currencies to this script, or
-  // b. Send the actual currency object from URL handler (preferred)
+function priceFormating(inputElement, currency) {
 
-  let value = priceCleanning(inputElement.value); // TODO: convert to decimal with dinero.js
-  
+  let value = priceCleanning(inputElement.value);
+  value = parseInt(value) / (10 ** currency.exponent); // convert to a real number
 
   const formatter = Intl.NumberFormat(
     'es-CL', // TODO: Get locale from: user profile or browser (preferred)
     {
       style: 'currency',
-      currency: currencyCode // TODO: Get currency from: users `defaultCurrency` or lists `currency` (implement) 
+      currency: currency.code
     }
   );
   // This function will return the value formatted to the input,
