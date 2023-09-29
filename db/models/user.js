@@ -139,9 +139,21 @@ module.exports = (sequelize, DataTypes) => {
         validCode(value) {
           let noMatch = true;
           for (const currency in currencies) {
-            if (currency === value) noMatch = false;
+            if (currency === value) {
+              noMatch = false;
+              break;
+            };
           }
           if (noMatch) throw new Error('Invalid currency code');
+        }
+      }
+    },
+    preferredLocale: {
+      type: DataTypes.STRING,
+      defaultValue: 'en',
+      validate: {
+        isLocale: {
+          msg: "Código de lenguaje inválido."
         }
       }
     },
@@ -153,7 +165,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     isBlocked: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
+      validate: {
+        isBoolean: {
+          msg: 'Tipo de dato incorrecto.'
+        }
+      }
     }
   }, {
     sequelize,
