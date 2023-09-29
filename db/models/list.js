@@ -56,6 +56,21 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    currency: {
+      type: DataTypes.STRING,
+      validate: {
+        validCode(value) {
+          let noMatch = true;
+          for (const currency in currencies) {
+            if (currency === value) {
+              noMatch = false;
+              break;
+            };
+          }
+          if (noMatch) throw new Error('Invalid currency code');
+        }
+      }
+    },
     total: {
       type: DataTypes.STRING,
       validate: {
