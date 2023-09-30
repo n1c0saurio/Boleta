@@ -150,6 +150,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     preferredLocale: {
       type: DataTypes.STRING,
+      allowNull: false,
       defaultValue: 'en',
       validate: {
         isLocale: {
