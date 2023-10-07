@@ -12,7 +12,7 @@ block content
       each list in lists
         //- Formatter to style price on the List's currency
         - const listCurrency = list.currency ? list.currency : user.defaultCurrency;
-        - const currencyFormatter = Intl.NumberFormat('es-CL', { style: 'currency', currency: listCurrency }); //- TODO: de-harcode this
+        - const currencyFormatter = Intl.NumberFormat(user.preferredLocale, { style: 'currency', currency: listCurrency }); //- TODO: de-harcode this
 
         //- 
         //- List element
@@ -94,8 +94,8 @@ block content
                         //-     span #{errors.name}
 
                       .input-group.mt-2
-                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup='priceFormating(this, ' + JSON.stringify(list.getCurrencyObject(listCurrency)) + ', "' + user.preferredLocale + '\")', placeholder="Precio", value="") 
-                        label.visually-hidden(for="itemPrice") Precio
+                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup='priceFormating(this, ' + JSON.stringify(list.getCurrencyObject(listCurrency)) + ', "' + user.preferredLocale + '")', placeholder="Precio", value="") 
+                        label.visually-hidden(for="itemPrice") Preciouser.preferredLocale
                         span.input-group-text #{listCurrency}
                         //- TODO: check with new list form
                         //- if errors.price
