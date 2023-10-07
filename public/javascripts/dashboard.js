@@ -29,24 +29,20 @@ function priceCleanning(price) {
   return price.replace(/[^0-9]/g, '');
 }
 
-function priceFormating(inputElement, currency) {
-
+function priceFormating(inputElement, currency, locale) {
   let value = priceCleanning(inputElement.value);
-  value = parseInt(value) / (10 ** currency.exponent); // convert to a real number
 
-  const formatter = Intl.NumberFormat(
-    'es-CL', // TODO: Get locale from: user profile or browser (preferred)
-    {
-      style: 'currency',
-      currency: currency.code
-    }
-  );
-  // This function will return the value formatted to the input,
-  // that means when the form is submitted, it needs to be sanitized again:
-  // a. On this function itself,
-  // b. On the corresponding validator method, or
-  // c. In both places
-  inputElement.value = formatter.format(value);
+  if (value) {
+    value = parseInt(value) / (10 ** currency.exponent);
+    const formatter = Intl.NumberFormat(
+      locale,
+      {
+        style: 'currency',
+        currency: currency.code
+      }
+    );
+    inputElement.value = formatter.format(value);
+  }
 }
 
 function submitCleannig(formElement) {
