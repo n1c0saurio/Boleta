@@ -22,28 +22,28 @@ block content
         p Cree una cuenta para guardar sus propias listas.
         form(action="/registro", method="post")
 
-          .form-floating.mb-3
+          .form-floating.mt-3.mb-1
             input.form-control(type="text", name="firstName", value=formData.firstName, required=true)
             label(for="firstName") Nombre&thinsp;*
-            if errors.firstName
-              .text-danger.mt-2
-                small #{errors.firstName}
+          if errors.firstName
+            .alert.alert-danger.py-1.px-2.my-2
+              small #{errors.firstName}
 
-          .form-floating.mb-3
+          .form-floating.mt-3.mb-1
             input.form-control(type="text", name="lastName", value=formData.lastName)
             label(for="lastName") Apellido
-            if errors.lastName
-              .text-danger.mt-2
-                small #{errors.lastName}
+          if errors.lastName
+            .alert.alert-danger.py-1.px-2.my-2
+              small #{errors.lastName}
 
-          .form-floating.mb-3
+          .form-floating.mt-3.mb-1
             input.form-control(type="email", name="email", value=formData.email, required=true)
             label(for="email") Correo electrónico&thinsp;*
-            if errors.email
-              .text-danger.mt-2
-                small #{errors.email}
+          if errors.email
+            .alert.alert-danger.py-1.px-2.my-2
+              small #{errors.email}
 
-          .form-floating.mb-3
+          .form-floating.mt-3.mb-1
             select.form-select(name="preferredLocale", required=true)
               option
               - for (const lang in langmap)
@@ -51,42 +51,43 @@ block content
                   option(value=lang, selected) #{langmap[lang]['nativeName']}
                 else 
                   option(value=lang) #{langmap[lang]['nativeName']}
-            label(for="preferredLocale") Idioma&thinsp;*  
-            if errors.defaultCurrency
-              .text-danger.mt-2 
-                small #{errors.defaultCurrency}
+            label(for="preferredLocale") Idioma de preferencia&thinsp;*  
+          if errors.defaultCurrency
+            .alert.alert-danger.py-1.px-2.my-2 
+              small #{errors.defaultCurrency}
+          p.mx-2
+            small.fst-italic A&uacute;n si este sitio no posea traducci&oacute;n para el idioma seleccionado, esta preferencia se usar&aacute; para mostrar correctamente el formato de los valores, las monedas y otros elementos.
 
-          .form-floating.mb-3 
+          .form-floating.mt-3.mb-1 
             select.form-select(name="defaultCurrency", required=true)
               option 
               each currency in currencies
                 if currency.code === formData.defaultCurrency
-                  option(value=currency.code, selected) #{currencyInLocale.of(currency.code)} (#{currency.code})
+                  option(value=currency.code, selected) #{currency.code} &endash; #{currencyInLocale.of(currency.code)}
                 else 
-                  option(value=currency.code) #{currencyInLocale.of(currency.code)} (#{currency.code})
+                  option(value=currency.code) #{currency.code} &ndash; #{currencyInLocale.of(currency.code)}
             label(for="defaultCurrency") Moneda&thinsp;*  
-            if errors.defaultCurrency
-              .text-danger.mt-2 
-                small #{errors.defaultCurrency}
+          if errors.defaultCurrency
+            .alert.alert-danger.py-1.px-2.my-2 
+              small #{errors.defaultCurrency}
 
-          .form-floating.mb-3
+          .form-floating.mt-3.mb-1
             input.form-control(type="password", name="password", required=true)
             label(for="password") Contraseña&thinsp;*
-            if errors.password
-              .text-danger.mt-2
-                small #{errors.password}
+          if errors.password
+            .alert.alert-danger.py-1.px-2.my-2
+              small #{errors.password}
           p.mx-2
             small.fst-italic La contraseña debe tener entre 8 y 72 caracteres, y al menos una minúscula, una mayúscula, un dígito y un caracter especial.
 
-          .form-floating.mb-3
+          .form-floating.mt-3.mb-1
             input.form-control(type="password", name="passwordConfirmation", required=true)
             label(for="passwordConfirmation") Repita la contraseña&thinsp;*
-            if errors.passwordConfirmation
-              .text-danger.mt-2
-                small #{errors.passwordConfirmation}
+          if errors.passwordConfirmation
+            .alert.alert-danger.py-1.px-2.my-2
+              small #{errors.passwordConfirmation}
 
-          p.mx-2.mb-4 
-            small.fst-italic Los campos marcados con * son obligatorios.
+          p.mx-2.my-4 Los campos marcados con * son obligatorios.
 
           div
             button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Registrarse
