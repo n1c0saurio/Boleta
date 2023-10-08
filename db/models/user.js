@@ -117,8 +117,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         is: {
           args: [validPassword],
-          msg: 'La contraseña debe tener entre 8 y 72 caracteres, y al menos '
-            + 'una minúscula, una mayúscula, un dígito y un caracter especial.'
+          msg: 'La contraseña no cumple las condiciones solicitadas.'
         }
       }
     },

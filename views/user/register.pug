@@ -43,8 +43,21 @@ block content
               .text-danger.mt-2
                 small #{errors.email}
 
+          .form-floating.mb-3
+            select.form-select(name="preferredLocale", required=true)
+              option
+              - for (const lang in langmap)
+                if lang === formData.preferredLocale 
+                  option(value=lang, selected) #{langmap[lang]['nativeName']}
+                else 
+                  option(value=lang) #{langmap[lang]['nativeName']}
+            label(for="preferredLocale") Idioma&thinsp;*  
+            if errors.defaultCurrency
+              .text-danger.mt-2 
+                small #{errors.defaultCurrency}
+
           .form-floating.mb-3 
-            select.form-select(name="defaultCurrency", value=formData.defaultCurrency, required=true)
+            select.form-select(name="defaultCurrency", required=true)
               option 
               each currency in currencies
                 if currency.code === formData.defaultCurrency
@@ -62,6 +75,8 @@ block content
             if errors.password
               .text-danger.mt-2
                 small #{errors.password}
+          p.mx-2
+            small.fst-italic La contraseña debe tener entre 8 y 72 caracteres, y al menos una minúscula, una mayúscula, un dígito y un caracter especial.
 
           .form-floating.mb-3
             input.form-control(type="password", name="passwordConfirmation", required=true)
@@ -70,9 +85,8 @@ block content
               .text-danger.mt-2
                 small #{errors.passwordConfirmation}
 
-          .mb-3 
-            p 
-              small.fst-italic Los campos marcados con * son obligatorios.
+          p.mx-2.mb-4 
+            small.fst-italic Los campos marcados con * son obligatorios.
 
           div
             button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Registrarse

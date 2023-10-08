@@ -2,6 +2,8 @@ const userValidations = require('../validators/user');
 const currencies = require('@dinero.js/currencies');
 const passport = require('../passport');
 
+const langmap = require('../public/javascripts/language-mapping-list');
+
 exports.getLogin = (req, res, next) => {
   if (req.user) {
     res.redirect('/listas');
@@ -27,6 +29,7 @@ exports.logout = (req, res, next) => {
 exports.getRegister = (req, res, next) => {
   res.render('user/register', {
     formData: {},
+    langmap: langmap,
     currencies: currencies,
     errors: {}
   });
@@ -37,6 +40,7 @@ exports.postRegister = async (req, res, next) => {
   if (errors) {
     res.render('user/register', {
       formData: req.body,
+      langmap: langmap,
       currencies: currencies,
       errors: errors
     });
