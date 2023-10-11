@@ -51,10 +51,14 @@ exports.updateMyAccount = async (id, formData) => {
 exports.updatePassword = async (id, formData) => {
   try {
     let user = await models.User.findOne({ where: { 'id': id } });
-    await user.update({
-      password: formData.password,
-      passwordConfirmation: formData.passwordConfirmation
-    });
+    if (await user.matchPassword(formData.currentPassword)) {
+      await user.update({
+        password: formData.newPassword,
+        passwordConfirmation: formData.passwordConfirmation
+      });
+    } else {
+      return { currentPassword: 'Contraseña incorrecta' };
+    }
   } catch (err) {
     let errors = {}
     if (err.errors) {

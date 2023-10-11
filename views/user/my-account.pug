@@ -45,44 +45,44 @@ block content
                     .text-danger.mt-2 
                       small #{errors.email}
               div 
-                button.btn.btn-primary(type="submit", name="fromForm", value="updateUser") Actualizar datos
+                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updateUser") Actualizar datos
 
       //- Update password
-      //- section.dashboard__panel.col-xl-6
-      //-   .card.mb-4.border-0.shadow-lg
-      //-     .card-header.p-4.pb-0
-      //-       h2.mb-4 Cambiar contraseña
+      section.dashboard__panel.col-xl-6
+        .card.mb-4.border-0.shadow-lg
+          .card-header.p-4.pb-0
+            h2.mb-4 Cambiar contraseña
         
-      //-     .card-body.p-4
-      //-       if success 
-      //-         p ¡Contraseña actualizada!
-      //-       form(action="/mi-cuenta/contrasena", method="post")
+          .card-body.p-4
+            if success 
+              p ¡Contraseña actualizada!
+            form(action="/mi-cuenta", method="post")
 
-      //-         .row.mb-3 
-      //-           .col-sm-6.mb-1
-      //-             label(for="currentPassword") Contraseña actual&thinsp;*
-      //-           .col-sm-6
-      //-             input(type="password", name="currentPassword", required=true, class="form-control")
-      //-             if errors.currentPassword 
-      //-               .text-danger.mt-2
-      //-                 small #{errors.currentPassword}
+              .row.mb-3 
+                .col-sm-6.mb-1
+                  label(for="currentPassword") Contraseña actual&thinsp;*
+                .col-sm-6
+                  input(type="password", name="currentPassword", required=true, class="form-control")
+                  if errors.currentPassword 
+                    .text-danger.mt-2
+                      small #{errors.currentPassword}
               
-      //-         .row.mb-3 
-      //-           .col-sm-6.mb-1
-      //-             label(for="newPassword") Nueva contraseña&thinsp;*
-      //-           .col-sm-6
-      //-             input(type="password", name="newPassword", required=true, class="form-control")
-      //-             if errors.newPassword 
-      //-               .text-danger.mt-2
-      //-                 small #{errors.newPassword}
+              .row.mb-3 
+                .col-sm-6.mb-1
+                  label(for="newPassword") Nueva contraseña&thinsp;*
+                .col-sm-6
+                  input(type="password", name="newPassword", required=true, class="form-control")
+                  if errors.newPassword 
+                    .text-danger.mt-2
+                      small #{errors.newPassword}
 
-      //-         .row.mb-3
-      //-           .col-sm-6.mb-1
-      //-             label(for="passwordConfirmation") Repita la contraseña&thinsp;*
-      //-           .col-sm-6 
-      //-             input(type="password", name="passwordConfirmation", required=true, class="form-control")
-      //-             if errors.passwordConfirmation 
-      //-               .text-danger.mt-2
-      //-                 small #{errors.passwordConfirmation}
-      //-         div 
-      //-           button(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary") Actualizar contraseña
+              .row.mb-3
+                .col-sm-6.mb-1
+                  label(for="passwordConfirmation") Repita la contraseña&thinsp;*
+                .col-sm-6 
+                  input(type="password", name="passwordConfirmation", required=true, class="form-control")
+                  if errors.passwordConfirmation 
+                    .text-danger.mt-2
+                      small #{errors.passwordConfirmation}
+              div 
+                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary") Actualizar contraseña
