@@ -178,8 +178,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Hashing the password
-  User.afterValidate(async user => {
-    user.password = await bcrypt.hash(user.password, 10);
+  User.beforeSave(async user => {
+    if (user.changed('password')) {
+      user.password = await bcrypt.hash(user.password, 10);
+    }
   });
 
   // Create a default Workspace
