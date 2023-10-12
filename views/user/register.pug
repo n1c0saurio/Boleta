@@ -63,7 +63,7 @@ block content
               option 
               each currency in currencies
                 if currency.code === formData.defaultCurrency
-                  option(value=currency.code, selected) #{currency.code} &endash; #{currencyInLocale.of(currency.code)}
+                  option(value=currency.code, selected) #{currency.code} &ndash; #{currencyInLocale.of(currency.code)}
                 else 
                   option(value=currency.code) #{currency.code} &ndash; #{currencyInLocale.of(currency.code)}
             label(for="defaultCurrency") Moneda&thinsp;*  
