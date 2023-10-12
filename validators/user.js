@@ -7,9 +7,10 @@ exports.registerForm = async (formData) => {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
+      preferredLocale: formData.preferredLocale,
+      defaultCurrency: formData.defaultCurrency,
       password: formData.password,
       passwordConfirmation: formData.passwordConfirmation,
-      defaultCurrency: formData.defaultCurrency,
       roleId: 'enduser'
     });
   } catch (err) {
