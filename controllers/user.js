@@ -1,7 +1,9 @@
+const langmap = require('../public/javascripts/language-mapping-list');
+const currencies = require('@dinero.js/currencies');
 const userValidations = require('../validators/user');
 
 exports.getMyAccount = (req, res, next) => {
-  res.render('user/my-account', { user: req.user, errors: {} });
+  res.render('user/my-account', { user: req.user, langmap: langmap, currencies: currencies, errors: {} });
 }
 
 exports.updateMyAccount = async (req, res, next) => {
@@ -16,7 +18,7 @@ exports.updateMyAccount = async (req, res, next) => {
   } else if (req.body.fromForm === 'updatePassword') {
     errors = await userValidations.updatePassword(req.user.id, req.body);
   }
-  res.render('user/my-account', { user: req.user, errors: (errors) ? errors : {} });
+  res.render('user/my-account', { user: req.user, langmap: langmap, currencies: currencies, errors: (errors) ? errors : {} });
 }
 
 exports.getUpdatePassword = (req, res, next) => {

@@ -1,12 +1,18 @@
 extends ../layout-dashboard
 
-block content
-
-  //- To inform navigation what page is this
+block pageMeta
+  //- Page title
+  - const pageTitle = 'Mi cuenta'
+  //- Set the current pages
   - const section = "my-account"
   - const current = "account-data"
 
-  #dashboard__panel__wrapper.container.px-5.py-4.overflow-y-scroll
+block content
+
+  //- To translate currency codes to natural names
+  - const currencyInLocale = new Intl.DisplayNames(['es-CL'], { type: 'currency' });
+
+  #dashboard__panel__wrapper.container.p-5.overflow-y-scroll
     .row
 
       //- Update user profile
@@ -44,6 +50,38 @@ block content
                   if errors.email 
                     .text-danger.mt-2 
                       small #{errors.email}
+              
+              .row.mb-3
+                .col-sm-4.mb-1 
+                  label(for="preferredLocale") Idioma de preferencia&thinsp;*
+                .col-sm-8
+                  select.form-select(name="preferredLocale", required=true)
+                    - for (const lang in langmap)
+                      if lang === user.preferredLocale 
+                        option(value=lang, selected) #{langmap[lang]['nativeName']}
+                      else 
+                        option(value=lang) #{langmap[lang]['nativeName']}
+                  if errors.preferredLocale 
+                    .text-danger.mt-2 
+                      small #{errors.preferredLocale}
+              
+              //- TODO: Keep readonly until list could had different currencies that the user default,
+              //- so when a user changes its default currency, all list that default to user's
+              //- previous default are setted explicitly to that currency.
+              .row.mb-3
+                .col-sm-4.mb-1 
+                  label(for="defaultCurrency") Moneda&thinsp;
+                .col-sm-8
+                  p #{user.defaultCurrency} &ndash; #{currencyInLocale.of(user.defaultCurrency)}
+                  //- select.form-select(name="defaultCurrency", required=true)
+                  //-   each currency in currencies
+                  //-     if currency.code === user.defaultCurrency
+                  //-       option(value=currency.code, selected) #{currency.code} &ndash; #{currencyInLocale.of(currency.code)}
+                  //-     else 
+                  //-       option(value=currency.code) #{currency.code} &ndash; #{currencyInLocale.of(currency.code)}
+                  //- if errors.defaultCurrency 
+                  //-   .text-danger.mt-2 
+                  //-     small #{errors.defaultCurrency}
               div 
                 button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updateUser") Actualizar datos
 
