@@ -1,46 +1,48 @@
 extends layout
 
+block meta
+  block pageMeta
+
 block sublayout
 
-  #dashboard__wrapper.d-flex 
+  #dashboard__wrapper
 
     //- 
     //- Main content
-    section#dashboard__content.flex-grow-1.order-2
+    section#dashboard__content
       block content
 
     //- 
     //- Navigation sidebar
-    header#dashboard__header.flex-shrink-0.order-1
-      #dashboard__header-container.d-flex.flex-row-reverse.align-items-center.drop-shadow
+    header#dashboard__header
+      #dashboard__header-container.d-flex.flex-row-reverse.drop-shadow
 
         //- Toggle nav
-        button#dashboard__header-toggle.btn.btn-primary.ps-1.pe-1.py-4.z-1(type="button" data-bs-toggle="collapse" data-bs-target="#dashboard__header-content" aria-expanded="false" aria-controls="dashboard__header-content")
-          span.bi.bi-list.text-light
+        button#dashboard__header-toggle.btn.btn-primary.px-0.py-2.z-1(type="button" data-bs-toggle="collapse" data-bs-target="#dashboard__header-content" aria-expanded="false" aria-controls="dashboard__header-content" onclick="switchNavigation(this.children[0])")
+          span.bi.bi-chevron-right.fs-5.text-light
 
         //- Nav content
-        #dashboard__header-content.collapse.collapse-horizontal.bg-primary 
-          nav#dashboard__nav.nav.flex-column.justify-content-between
+        #dashboard__header-content.collapse.collapse-horizontal.py-2
+          nav#dashboard__nav.nav.flex-column.justify-content-between.bg-primary
 
             //- 
             //- Nav header
-            #dashboard__welcome.nav-item.d-flex.ps-2.pt-4.pb-3.border-bottom.border-primary-subtle
-              a(href="/listas") 
-                img(src="/images/boleta.svg", alt="Boleta", width="36", height="36")
-              .ms-2
-                h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis
-                  | ¡Hola,
-                  br
-                  | #{user.firstName}!
+            #dashboard__welcome.nav-item.d-flex.p-3.pt-0
+              a.text-center(href="/listas") 
+                img(src="/images/boleta_no-shadow.svg", alt="Boleta", width="48", height="48")
+              h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis.mb-0
+                | ¡Hola,
+                br
+                | #{user.firstName}!
 
             //- 
             //- Menu
             #dashboard__menu.nav-item.accordion.accordion-flush.flex-grow-1
 
               //- Lists submenu
-              .accordion-item.bg-transparent
-                #dashboard__menu-lists-btn.accordion-header
-                  button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-lists", aria-expanded="true", aria-controls="dashboard__menu-lists")
+              .accordion-item.bg-transparent.border-primary-subtle
+                #dashboard__menu-lists-btn.accordion-header(data-bs-theme="dark")
+                  button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent.shadow-none(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-lists", aria-expanded="true", aria-controls="dashboard__menu-lists")
                     span.bi.bi-kanban-fill
                     span.ms-2 Tablero
                 #dashboard__menu-lists.accordion-collapse.collapse(aria-labelledby="dashboard__menu-lists-btn", data-bs-parent="#dashboard__menu", class=(section === 'dashboard' ? 'show' : ''))
@@ -52,17 +54,17 @@ block sublayout
                           span.ms-2 Mis listas
                       li.nav-item 
                         a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
-                          span.bi.bi-trash3
-                          span.ms-2 Ítems eliminados
-                      li.nav-item 
-                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
                           span.bi.bi-archive
                           span.ms-2 Listas archivadas
+                      li.nav-item 
+                        a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
+                          span.bi.bi-trash3
+                          span.ms-2 Ítems eliminados
 
               //- Account submenu
-              .accordion-item.bg-transparent 
-                #dashboard__menu-account-btn.accordion-header 
-                  button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-account", aria-expanded="false", aria-controls="dashboard__menu-account")
+              .accordion-item.bg-transparent.border-primary-subtle
+                #dashboard__menu-account-btn.accordion-header(data-bs-theme="dark")
+                  button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent.shadow-none(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-account", aria-expanded="false", aria-controls="dashboard__menu-account")
                     span.bi.bi-person-circle
                     span.ms-2 Mi cuenta 
                 #dashboard__menu-account.accordion-collapse.collapse(aria-labelledby="dashboard__menu-account-btn", data-bs-parent="#dashboard__menu", class=(section === 'my-account' ? 'show' : ''))

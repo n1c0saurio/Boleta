@@ -1,14 +1,38 @@
 // 
 // Dashboard scripts
 
+// 
+// Navigation
 
-// Show navigation menu if screen size is medium or more
+// Set navigation menu visible by default if screen size is medium or more
 if (window.screen.width >= 768) {
-  let headerContent = document.getElementById('dashboard__header-content');
-  if (headerContent) {
-    headerContent.classList.add('show');
-  }
+  const sidebar = document.getElementById('dashboard__header-content');
+  const sidebarToggle = document.getElementById('dashboard__header-toggle');
+
+  sidebar.classList.add('show');
+  switchNavigation(sidebarToggle.children[0]);
 }
+
+// Switch icon of navigation's toggle when clicked
+function switchNavigation(childElement) {
+  // Set a delay to give the `DOM` time to be updated 
+  setTimeout(() => {
+    const dashboardContent = document.getElementById('dashboard__content');
+    const navStatus = document.getElementById('dashboard__header-content')
+      .classList.contains('show');
+
+    if (navStatus) {
+      childElement.classList.add('dashboard__header-toggle--open');
+      dashboardContent.classList.add('nav-open');
+    } else {
+      childElement.classList.remove('dashboard__header-toggle--open');
+      dashboardContent.classList.remove('nav-open');
+    }
+  }, 400);
+}
+
+// 
+// Add item form
 
 // Prevent unwanted characters on `itemPrice` input
 function forbiddenChars(event) {

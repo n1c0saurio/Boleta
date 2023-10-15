@@ -8,9 +8,9 @@ $custom-font-family: Bitter, system-ui, -apple-system, "Noto Serif",
 
 @use "../../node_modules/bootstrap/scss/bootstrap.scss" as b with (
     $font-family-sans-serif: $custom-font-family,
-    $primary: #00b379,
+    $primary: #00a86b,
     $secondary: #f57d62,
-    $light: #e1f5ee,
+    $light: #e2f5ee,
     $enable-negative-margins: true
 );
 
@@ -26,10 +26,10 @@ body {
 
 // Extra colors
 
-$primary-darker: #0e805b;
-$primary-shadow: rgba(9, 82, 58, 0.64);
-$primary-shadow-bevel: rgba(9, 82, 58, 0.32);
-$primary-shadow-subtle: rgba(9, 82, 58, 0.16);
+$primary-darker: #006540;
+$primary-shadow: rgba(0, 101, 64, 0.64);
+$primary-shadow-bevel: rgba(0, 101, 64, 0.32);
+$primary-shadow-subtle: rgba(0, 101, 64, 0.16);
 
 .bg-primary-darker {
     background-color: $primary-darker;
@@ -69,6 +69,18 @@ a.btn-outline-primary:hover {
 // Hide icon on dropdows with custom ones
 .bi.dropdown-toggle::after {
     display: none;
+}
+
+// Fix scrollbar size on chromium browsers
+.dashboard__list-items::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0.25rem;
+}
+.dashboard__list-items::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+}
+.dashboard__item .card-body::-webkit-scrollbar {
+    width: 0; // hide scrollbar showed on item price
 }
 
 // Decorations
@@ -153,6 +165,11 @@ a.btn-outline-primary:hover {
 // Make all content use the full height of the viewport
 
 // Dashboard layout
+
+#dashboard__wrapper {
+    min-height: 480px;
+}
+
 #dashboard__wrapper,
 // Header section
 #dashboard__header,
@@ -166,7 +183,6 @@ a.btn-outline-primary:hover {
 // Others secction
 #dashboard__panel__wrapper {
     height: 100%;
-    min-height: 480px;
 }
 
 #dashboard__wrapper {
@@ -175,23 +191,36 @@ a.btn-outline-primary:hover {
 
 // Allow header overlaps lists when them overflows
 #dashboard__header {
+    left: 0;
+    position: fixed;
+    top: 0;
     z-index: 1;
 }
 
 // Menu
 
+#dashboard__nav,
 #dashboard__header-toggle {
-    border-radius: 0 10% 10% 0;
+    border-radius: 0 6px 6px 0;
 }
 
-// Negative margin must be equal to
-// header-toggle to allow it overlaps list
-#dashboard__lists-wrapper {
-    margin-left: -26px;
+#dashboard__header-toggle .bi::before {
+    transition: transform 0.25s;
+}
+
+.dashboard__header-toggle--open::before {
+    transform: rotate(-180deg);
 }
 
 #dashboard__nav {
     width: 240px;
+}
+
+// Style
+
+#dashboard__welcome {
+    flex-direction: column;
+    margin-top: -10px;
 }
 
 .dashboard__nav__menu__link {
@@ -223,7 +252,6 @@ a.btn-outline-primary:hover {
 
 .dashboard__list,
 .dashboard__new-list {
-    flex-basis: 320px;
     flex-shrink: 0;
 }
 
@@ -290,3 +318,56 @@ a.btn-outline-primary:hover {
 //
 // RESPONSIVE STYLES
 //
+
+//
+// Mobile (default)
+
+// List full viewport width
+.dashboard__list,
+.dashboard__new-list {
+    flex-basis: 100vw;
+}
+
+// Low the dashboard nav toggle
+#dashboard__header-toggle {
+    align-self: self-end;
+    margin-bottom: 12rem;
+}
+
+//
+// Tablet and up
+
+@media only screen and (min-width: 576px) {
+    //
+    // Dashboard
+
+    // Up the dashboard nav toggle
+    #dashboard__header-toggle {
+        align-self: self-start;
+        margin-bottom: 0;
+        margin-top: 4rem;
+    }
+
+    // Pad the dashboard to give room to header when open
+    #dashboard__content > div {
+        transition: padding 0.25s;
+    }
+    #dashboard__content.nav-open > div {
+        padding-left: 260px !important;
+    }
+
+    //
+    // Lists
+
+    // Fixed list width
+    .dashboard__list,
+    .dashboard__new-list {
+        flex-basis: 360px;
+    }
+}
+
+//
+// Desktop and up
+
+@media only screen and (min-width: 1200px) {
+}
