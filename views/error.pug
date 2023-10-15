@@ -4,10 +4,10 @@ block sublayout
   #error-wrapper.bg-light
     .container
       .row.justify-content-center 
-        .col-sm-11.col-md-10.col-lg-8.col-xl-6
+        .col-sm-11.col-md-9.col-lg-7.col-xl-6.col-xxl-5.p-sm-4
           include blocks.pug 
           +brandBadge()
-          .card.pt-5.p-sm-4.p-lg-5.border-0.mb-5.shadow-lg 
+          .card.pt-5.p-3.p-sm-4.p-lg-5.border-0.mb-5.shadow-lg 
             
             header.card-header.pb-4.bg-transparent.border-bottom-0
               .fs-1.mb-4(aria-hidden="true") (;・_・)
@@ -17,23 +17,26 @@ block sublayout
             .card-body.pt-4
               //- Extra messages
               if error.status === 401
-                .card.p-3.p-sm-4.p-md-5.mb-5
-                  include blocks.pug 
-                  +loginForm()
+                //- .card.p-3.p-sm-4.p-md-5.mb-5
+                include blocks.pug 
+                +loginForm()
+                a.btn.btn-primary.link-light.text-shadow-emphasis.my-5(href="/")
+                  span.bi.bi-chevron-left 
+                  span Volver al inicio
 
               if error.status === 404
                 p.mb-4 Aquí no hay nada de nada. Puede que el contenido que buscabas ya no esté disponible porque fue movido o haya sido eliminado.
                 a.btn.btn-primary.link-light.text-shadow-emphasis.mb-5(href="/")
                   span.bi.bi-chevron-left 
-                  span Volver
+                  span Volver al inicio
 
               if error.status > 499
                 p.mb-4 Parece que tuvimos un problema interno, lamento que hayas tenido que ver esto.
                 .btn-group.mb-5
                   a.btn.btn-primary.link-light.text-shadow-emphasis(href="/")
                     span.bi.bi-chevron-left 
-                    span Volver
-                  a.btn.btn-outline-primary.text-shadow-subtle(href="/")
+                    span Volver al inicio
+                  button.btn.btn-outline-primary.text-shadow-subtle(type="button", onclick="location.reload()")
                     span.bi.bi-arrow-clockwise
                     span Intenar de nuevo
 
