@@ -1,10 +1,17 @@
 doctype html
-html
+
+block meta
+
+html(lang="es")
   head
 
     //- Meta
-    title= title
+    title #{(pageTitle) ? `${pageTitle} -` : ''} Boleta
 
+    //- Settings
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    
     //- Appearance
     link(rel="shortcut icon", href="/images/boleta.svg", type="image/x-icon")
     link(rel="stylesheet", href="/stylesheets/fonts/bitter.css")
