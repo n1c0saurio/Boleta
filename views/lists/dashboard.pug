@@ -1,13 +1,15 @@
 extends ../layout-dashboard
 
-block content
-
-  //- To inform navigation what page is this
+block pageMeta
+  //- Page title
+  - const pageTitle = 'Mis listas'
+  //- Set the current pages
   - const section = "dashboard"
   - const current = "my-lists"
   //- - const currencies = currencies
 
-  #dashboard__lists-wrapper.d-flex.flex-nowrap.overflow-x-scroll.py-3.px-4
+block content
+  #dashboard__lists-wrapper.d-flex.flex-nowrap.overflow-x-scroll.px-sm-4.py-3
     if lists 
       each list in lists
         //- Formatter to style price on the List's currency
@@ -17,7 +19,7 @@ block content
         //- 
         //- List element
         .dashboard__list(id=list.id)
-          .card.mx-2.bg-transparent.border-0.drop-shadow
+          .card.bg-transparent.px-3.border-0.drop-shadow
 
             //- List menu
             .dashboard__list-header.card-header.d-flex.align-items-center.border-top-0.border-start-0.border-end-0
@@ -29,7 +31,7 @@ block content
               //- List name
               h2.fs-5.flex-grow-1.m-0 #{list.name}
 
-            .card-body.py-0
+            .dashboard__list-items.card-body.p-0
               if list.Items.length > 0
 
                 each item in list.Items
@@ -37,7 +39,7 @@ block content
                   //- 
                   //- Item element
                   //- TODO: modularize this
-                  .dashboard__item.card.border-top-0.border-start-0.border-end-0.rounded-0(id=item.id)
+                  .dashboard__item.card.px-3.border-top-0.border-start-0.border-end-0.rounded-0(id=item.id)
 
                     .card-header.d-flex.px-0.pb-0.border-bottom-0
                       .dropdown
@@ -47,7 +49,7 @@ block content
                             a.dropdown-item(href="/listas/item/" + item.id) Eliminar
                       h4.fs-6.flex-grow-1.fs-6.my-2 #{item.name}
 
-                    .card-body.d-flex.flex-wrap.justify-content-end.px-0.column-gap-3.pt-0.pb-2
+                    .card-body.d-flex.flex-wrap.justify-content-end.column-gap-3.px-0.pt-0.pb-2
                       if item.quantity > 1
                         .text-body-tertiary
                           if item.price
@@ -121,17 +123,18 @@ block content
                     span.py-1 Total:&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
             .border-serrated
 
-    .dashboard__new-list(class=(lists.length === 0 ? 'mx-5' : ''))
+    .dashboard__new-list 
+      //- (class=(lists.length === 0 ? 'mx-5' : ''))
 
       //- 
       //- Add list form
-      .card.mx-2.bg-transparent.border-0.drop-shadow
+      .card.bg-transparent.px-3.border-0.drop-shadow
         .card-header.border-bottom-0
           //- Empty board message
           if lists.length === 0
             .text-center.mt-4
-              h2.fs-3.fw-bold.mb-3 ¡No hay listas en este tablero!
-              h3.fs-6.fst-italic Pero no te preocupes, aquí abajo puedes crear la primera&hellip;
+              h2.fs-3.fw-bold.mb-3 ¡Este tablero está vacío!
+              h3.fs-6.fst-italic Aquí abajo puedes crear la primera lista de compras&hellip;
 
         .card-body.p-4
           form(action="/listas", method="post")

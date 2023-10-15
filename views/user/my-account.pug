@@ -12,11 +12,11 @@ block content
   //- To translate currency codes to natural names
   - const currencyInLocale = new Intl.DisplayNames(['es-CL'], { type: 'currency' });
 
-  #dashboard__panel__wrapper.container.p-5.overflow-y-scroll
-    .row
+  #dashboard__panel__wrapper.container-xxl
+    .row.px-sm-4.py-4
 
       //- Update user profile
-      section.dashboard__panel.col-xl-6
+      section.dashboard__panel.col-lg-6
         .card.mb-4.border-0.shadow-lg
           .card-header.p-4.pb-0
             h2.mb-4 Datos de mi cuenta
@@ -86,7 +86,7 @@ block content
                 button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updateUser") Actualizar datos
 
       //- Update password
-      section.dashboard__panel.col-xl-6
+      section.dashboard__panel.col-lg-6
         .card.mb-4.border-0.shadow-lg
           .card-header.p-4.pb-0
             h2.mb-4 Cambiar contraseña
