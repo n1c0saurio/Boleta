@@ -1,0 +1,13 @@
+{
+    "home": {
+        "welcome": "Crea listas de compra y lleva fácilmente la cuenta de cuanto gastarás.",
+        "reception": "Inicia sesión para acceder a tus listas.",
+        "signupInvitation": "¿No tienes cuenta aún?"
+    },
+    "register": {
+        "title": "Registrate para crear tus propias listas.",
+        "preferredLocaleComment": "Aún si hubiera traducción para el idioma seleccionado, esta preferencia se usará para mostrar correctamente el formato de las monedas y otros elementos.",
+        "passwordComment": "La contraseña debe tener entre 8 y 72 caracteres, y al menos una minúscula, una mayúscula, un dígito y un caracter especial.",
+        "mandatoryFieldsComment": "Los campos marcados con * son obligatorios."
+    }
+}

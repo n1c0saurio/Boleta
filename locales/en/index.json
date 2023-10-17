@@ -1,0 +1,13 @@
+{
+    "home": {
+        "welcome": "Make shopping lists and track easily how much you'll spend.",
+        "reception": "Log in to manage your lists.",
+        "signupInvitation": "¿No tienes cuenta aún?"
+    },
+    "register": {
+        "title": "Sign up to make your own lists.",
+        "preferredLocaleComment": "Even if there were no translation for the selected language, this preference will be used to correctly format currencies and other elements.",
+        "passwordComment": "Password must be 8 to 72 characters long, and contains at least one lowercase, one uppercase, one number and one special character.",
+        "mandatoryFieldsComment": "All fields with an * are mandatories."
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "global": {
+        "footerMessage": "Hecho con ❤ por:"
+    },
+    "session": {
+        "register": "Registrate",
+        "signup": "Registrarse",
+        "login": "Iniciar sesion",
+        "logout": "Salir",
+        "loginError": "Correo o contraseña incorrectos.",
+        "forgotPassword": "¿Olvidaste tu contraseña?"
+    },
+    "role": {
+        "role_one": "Rol",
+        "role_other": "Roles",
+        "id": "Identificador",
+        "name": "Nombre del rol",
+        "description": "Descripción del rol"
+    },
+    "user": {
+        "user_one": "Usuario",
+        "user_other": "Usuarios",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo electrónico",
+        "currency": "Moneda",
+        "preferredLocale": "Idioma de preferencia",
+        "password": "Contraseña",
+        "passwordConfirmation": "Confirme la contraseña"
+    },
+    "workspace": {
+        "workspace_one": "Área de trabajo",
+        "workspace_other": "Áreas de trabajo",
+        "name": "Nombre del área de trabajo",
+        "defaultName": "Área de trabajo por defecto"
+    },
+    "list": {
+        "list_one": "Lista",
+        "list_other": "Listas",
+        "name": "Nombre de la lista",
+        "position": "Posición",
+        "currency": "Moneda de la lista",
+        "total": "Total",
+        "partialSum": "Subtotal",
+        "isArchived": "Archivada"
+    },
+    "item": {
+        "item_one": "Ítem",
+        "item_other": "Ítems",
+        "price": "Precio",
+        "quantity": "Cantidad"
+    },
+    "validations": {
+        "idEmpty": "El identificador no puede quedar vacío.",
+        "nameEmpty": "El nombre no puede quedar vacío.",
+        "firstNameEmpty": "El nombre no puede quedar vacío.",
+        "emailEmpty": "El correo no puede quedar vacío.",
+        "emailInvalid": "El correo ingresado no es válido.",
+        "emailAlreadyRegistered": "Este correo ya está registrado.",
+        "passwordInvalid": "La contraseña no cumple las condiciones solicitadas.",
+        "passwordConfirmationInvalid": "Las contraseñas no coinciden.",
+        "preferredLocaleInvalid": "El idioma ingresado no es válido.",
+        "currencyInvalid": "La moneda ingresada no es válida.",
+        "priceInvalid": "El monto debe ser un objeto `dinero.js` válido",
+        "quantityInvalid": "La cantidad debe ser un número entero igual o mayor a 1",
+        "booleanInvalid": "El tipo de dato debe ser verdadero o falso",
+        "positionInvalid": "La posición debe ser un número entero igual o mayor a 1.",
+        "descriptionEmpty": "La descripción no puede quedar vacía."
+    }
+}
