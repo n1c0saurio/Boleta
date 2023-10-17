@@ -8,6 +8,10 @@ require('dotenv').config();
 var session = require('express-session');
 var passport = require('./passport');
 var userMiddleware = require('./middlewares/user');
+// Localization tools
+const i18n = require('i18next');
+const i18nMiddleware = require('i18next-http-middleware');
+const i18nBackend = require('i18next-fs-backend');
 // Custom routers
 const indexRouter = require('./routes/index');
 const listsRouter = require('./routes/lists');
@@ -29,6 +33,19 @@ app.use("/stylesheets/icons", express.static(path.join(
   __dirname, "node_modules/bootstrap-icons/font")));
 app.use("/javascripts/bootstrap", express.static(path.join(
   __dirname, "node_modules/bootstrap/dist/js")));
+
+// Localization setup
+i18n
+  .use(i18nBackend)
+  .use(i18nMiddleware.LanguageDetector)
+  .init({
+    ns: ['index'],
+    fallbackLng: 'es',
+    backend: {
+      loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
+    }
+  });
+app.use(i18nMiddleware.handle(i18n));
 
 // user session
 app.use(session({
