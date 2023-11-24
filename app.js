@@ -39,8 +39,9 @@ i18n
   .use(i18nBackend)
   .use(i18nMiddleware.LanguageDetector)
   .init({
-    ns: ['index'],
-    fallbackLng: 'es',
+    ns: ['common', 'index', 'user', 'dashboard'],
+    defaultNS: 'common',
+    fallbackLng: 'en',
     backend: {
       loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
     }
