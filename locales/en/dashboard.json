@@ -1,0 +1,24 @@
+{
+  "workspace": {
+    "workspace_one": "Workspace",
+    "workspace_other": "Workspaces",
+    "name": "Workspace name",
+    "defaultName": "Default workspace"
+  },
+  "list": {
+    "list_one": "List",
+    "list_other": "Lists",
+    "name": "List name",
+    "position": "Position",
+    "currency": "List currency",
+    "total": "Total",
+    "partialSum": "Subtotal",
+    "isArchived": "Archived"
+  },
+  "item": {
+    "item_one": "Item",
+    "item_other": "Items",
+    "price": "Price",
+    "quantity": "Quantity"
+  }
+}

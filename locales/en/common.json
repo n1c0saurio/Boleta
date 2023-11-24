@@ -1,70 +1,34 @@
 {
-    "global": {
-        "footerMessage": "Made with ❤ by:"
-    },
-    "session": {
-        "register": "Register",
-        "signup": "Sign up",
-        "login": "Log in",
-        "logout": "Log out",
-        "loginError": "Wrong email or password.",
-        "forgotPassword": "Forgot your password?"
-    },
-    "role": {
-        "role_one": "Role",
-        "role_other": "Roles",
-        "id": "Identifier",
-        "name": "Role name",
-        "description": "Role Description"
-    },
-    "user": {
-        "user_one": "User",
-        "user_other": "Users",
-        "firstName": "Name",
-        "lastName": "Surname",
-        "email": "Email",
-        "currency": "Currency",
-        "preferredLocale": "Preferred language",
-        "password": "Password",
-        "passwordConfirmation": "Password confirmation"
-    },
-    "workspace": {
-        "workspace_one": "Workspace",
-        "workspace_other": "Workspaces",
-        "name": "Workspace name",
-        "defaultName": "Default workspace"
-    },
-    "list": {
-        "list_one": "List",
-        "list_other": "Lists",
-        "name": "List name",
-        "position": "Position",
-        "currency": "List currency",
-        "total": "Total",
-        "partialSum": "Subtotal",
-        "isArchived": "Archived"
-    },
-    "item": {
-        "item_one": "Item",
-        "item_other": "Items",
-        "price": "Price",
-        "quantity": "Quantity"
-    },
-    "validations": {
-        "idEmpty": "Identifier cannot be empty.",
-        "nameEmpty": "Name cannot be empty.",
-        "firstNameEmpty": "Name cannot be empty.",
-        "emailEmpty": "Email cannot be empty.",
-        "emailInvalid": "Email is invalid",
-        "emailAlreadyRegistered": "Email is already registered.",
-        "passwordInvalid": "Password doesn't meet the required conditions.",
-        "passwordConfirmationInvalid": "Passwords doesn't match.",
-        "preferredLocaleInvalid": "Language is invalid.",
-        "currencyInvalid": "Currency is invalid.",
-        "priceInvalid": "Amount must be a valid `dinero.js` object",
-        "quantityInvalid": "Quantity must be an integer equal or greater than 1",
-        "booleanInvalid": "Data type must be true or false",
-        "positionInvalid": "Position must be an integer equal or greater than 1.",
-        "descriptionEmpty": "Description cannot be empty."
-    }
+  "global": {
+    "footerMessage": "Made with ❤ by:"
+  },
+  "navigation": {
+    "back": "Back"
+  },
+  "session": {
+    "register": "Register",
+    "signup": "Sign up",
+    "login": "Log in",
+    "logout": "Log out",
+    "loginError": "Wrong email or password.",
+    "forgotPassword": "Forgot your password?",
+    "signupInvitation": "Don't have an account?"
+  },
+  "validations": {
+    "idEmpty": "Identifier cannot be empty.",
+    "nameEmpty": "Name cannot be empty.",
+    "firstNameEmpty": "Name cannot be empty.",
+    "emailEmpty": "Email cannot be empty.",
+    "emailInvalid": "Email is invalid",
+    "emailAlreadyRegistered": "Email is already registered.",
+    "passwordInvalid": "Password doesn't meet the required conditions.",
+    "passwordConfirmationInvalid": "Passwords doesn't match.",
+    "preferredLocaleInvalid": "Language is invalid.",
+    "currencyInvalid": "Currency is invalid.",
+    "priceInvalid": "Amount must be a valid `dinero.js` object",
+    "quantityInvalid": "Quantity must be an integer equal or greater than 1",
+    "booleanInvalid": "Data type must be true or false",
+    "positionInvalid": "Position must be an integer equal or greater than 1.",
+    "descriptionEmpty": "Description cannot be empty."
+  }
 }

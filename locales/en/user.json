@@ -1,0 +1,20 @@
+{
+  "role": {
+    "role_one": "Role",
+    "role_other": "Roles",
+    "id": "Identifier",
+    "name": "Role name",
+    "description": "Role Description"
+  },
+  "user": {
+    "user_one": "User",
+    "user_other": "Users",
+    "firstName": "Name",
+    "lastName": "Surname",
+    "email": "Email",
+    "currency": "Currency",
+    "preferredLocale": "Preferred language",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation"
+  }
+}

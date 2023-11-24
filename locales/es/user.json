@@ -1,0 +1,20 @@
+{
+  "role": {
+    "role_one": "Rol",
+    "role_other": "Roles",
+    "id": "Identificador",
+    "name": "Nombre del rol",
+    "description": "Descripción del rol"
+  },
+  "user": {
+    "user_one": "Usuario",
+    "user_other": "Usuarios",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "currency": "Moneda",
+    "preferredLocale": "Idioma de preferencia",
+    "password": "Contraseña",
+    "passwordConfirmation": "Confirme la contraseña"
+  }
+}
