@@ -3,25 +3,22 @@ mixin loginForm()
 
     .form-floating.mb-3
       input.form-control(type="email", name="email", required=true)
-      label(for="email") Email:
+      label(for="email") #{t('user:user.email')}:
 
     .form-floating.mb-3
       input.form-control(type="password", name="password", required=true)
-      label(for="password") Contraseña:
+      label(for="password") #{t('user:user.password')}:
 
     .d-grid.mb-4
-      button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit") Iniciar sesión
+      button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit")= t('session.login')
 
     .mb-3
       small
-        a.link-dark.link-alt-hover(href="http://") ¿Olvidaste tu contraseña?
-  
+        a.link-dark.link-alt-hover(href="http://")= t('session.forgotPassword')
   hr.my-4
-
-  h3.fs-4.mb-3 ¿No tienes cuenta aún?
-  p.mb-4 Si no tienes una puedes, crear una aquí:
-  .d-grid
-    a.btn.btn-primary.text-light.text-shadow-emphasis(href="/registro") Regístrate 
+  p.mb-4
+    | #{t('session.signupInvitation')} 
+    a.link-dark.link-alt-hover(href="/registro") #{t('session.signup')} 
 
 mixin brandBadge()
   #brand-badge.d-block.text-center.pb-2.mt-3.position-relative.z-1

@@ -1,15 +1,17 @@
 extends ../layout-home
 
+block pageMeta
+  //- 
+
 block content
 
   //- 
   //- Welcome message
-  section#home__welcome.col-md-8.col-lg-6.col-xl-5.col-xxl-4.p-4.mx-lg-5.mt-xl-5
+  section#home__welcome.col-md-8.col-lg-6.col-xl-5.col-xxl-4.p-5.mt-xl-5
     .row.justify-content-center.text-center
       .col-12.mt-5
-        h1.fw-bold.fst-italic.text-bas-relief ¡Organiza tus listas de compra en un solo lugar!
-      .col-sm-8.col-md-10.col-xl-12.mt-4 
-        p.lead Con Boleta podrás crear listas de compra y llevar fácilmente la cuenta de cuanto gastarás en ellas.
+        h1.fst-italic.text-bas-relief= t('index:home.welcome')
+      //- .col-sm-8.col-md-10.col-xl-12.mt-4 
 
   //- 
   //- Login form
@@ -20,12 +22,11 @@ block content
       
       .card.mb-5.border-0.shadow-lg
         .card-body.p-4.p-md-5
-          h2.card-title.mt-5.mb-3 Inicie sesión
-          p.mb-4 Para crear y guardar listas de compra necesitas tener una cuenta. 
+          h2.card-title.fs-5.mt-5.mb-4= t('index:home.reception')
 
           if errors.invalid_credentials
             .alert.alert-warning
-              span Correo o contraseña incorrectos.
+              span= t('session.loginError')
           
           include ../blocks.pug
           +loginForm()
