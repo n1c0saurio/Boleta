@@ -16,5 +16,15 @@
     "preferredLocale": "Preferred language",
     "password": "Password",
     "passwordConfirmation": "Password confirmation"
+  },
+  "myAccount": {
+    "pageTitle": "My account",
+    "accountDataSection": "Account data",
+    "updateAccountData": "Update account data",
+    "passwordSection": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "passwordUpdated": "Password changed!",
+    "updatePassword": "Update password"
   }
 }
