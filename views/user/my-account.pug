@@ -2,7 +2,7 @@ extends ../layout-dashboard
 
 block pageMeta
   //- Page title
-  - const pageTitle = 'Mi cuenta'
+  - const pageTitle = t('user:views.myAccount')
   //- Set the current pages
   - const section = "my-account"
   - const current = "account-data"
@@ -19,14 +19,14 @@ block content
       section.dashboard__panel.col-lg-6
         .card.mb-4.border-0.shadow-lg
           .card-header.p-4.pb-0
-            h2.mb-4 Datos de mi cuenta
+            h2.mb-4= t('user:myAccount.accountDataSection')
     
           .card-body.p-4
             form(action="/mi-cuenta", method="post") 
 
               .row.mb-3
                 .col-sm-4.mb-1
-                  label(for="firstName") Nombre&thinsp;*
+                  label(for="firstName") #{t('user:views.firstName')}&thinsp;*
                 .col-sm-8
                   input.form-control(type="text", name="firstName", value=user.firstName, required)
                   if errors.firstName
@@ -35,7 +35,7 @@ block content
 
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="lastName") Apellido 
+                  label(for="lastName") #{t('user:views.lastName')} 
                 .col-sm-8
                   input.form-control(type="text", name="lastName", value=user.lastName)
                   if errors.lastName 
@@ -44,7 +44,7 @@ block content
             
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="email") Correo&thinsp;*
+                  label(for="email") #{t('user:views.email')}&thinsp;*
                 .col-sm-8
                   input.form-control(type="text", name="email", value=user.email, required)
                   if errors.email 
@@ -53,7 +53,7 @@ block content
               
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="preferredLocale") Idioma de preferencia&thinsp;*
+                  label(for="preferredLocale") #{t('user:views.preferredLocale')}&thinsp;*
                 .col-sm-8
                   select.form-select(name="preferredLocale", required=true)
                     - for (const lang in langmap)
@@ -70,7 +70,7 @@ block content
               //- previous default are setted explicitly to that currency.
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="defaultCurrency") Moneda&thinsp;
+                  label(for="defaultCurrency") #{t('user:views.currency')}&thinsp;
                 .col-sm-8
                   p #{user.defaultCurrency} &ndash; #{currencyInLocale.of(user.defaultCurrency)}
                   //- select.form-select(name="defaultCurrency", required=true)
@@ -89,16 +89,16 @@ block content
       section.dashboard__panel.col-lg-6
         .card.mb-4.border-0.shadow-lg
           .card-header.p-4.pb-0
-            h2.mb-4 Cambiar contraseña
+            h2.mb-4= t('user:myAccount.passwordSection')
         
           .card-body.p-4
             if success 
-              p ¡Contraseña actualizada!
+              p= t('user:myAccount.passwordUpdated')
             form(action="/mi-cuenta", method="post")
 
               .row.mb-3 
                 .col-sm-6.mb-1
-                  label(for="currentPassword") Contraseña actual&thinsp;*
+                  label(for="currentPassword") #{t('user:myAccount.currentPassword')}&thinsp;*
                 .col-sm-6
                   input(type="password", name="currentPassword", required=true, class="form-control")
                   if errors.currentPassword 
@@ -107,7 +107,7 @@ block content
               
               .row.mb-3 
                 .col-sm-6.mb-1
-                  label(for="newPassword") Nueva contraseña&thinsp;*
+                  label(for="newPassword") #{t('user:myAccount.newPassword')}&thinsp;*
                 .col-sm-6
                   input(type="password", name="newPassword", required=true, class="form-control")
                   if errors.newPassword 
@@ -116,11 +116,11 @@ block content
 
               .row.mb-3
                 .col-sm-6.mb-1
-                  label(for="passwordConfirmation") Repita la contraseña&thinsp;*
+                  label(for="passwordConfirmation") #{t('user:user.passwordConfirmation')}&thinsp;*
                 .col-sm-6 
                   input(type="password", name="passwordConfirmation", required=true, class="form-control")
                   if errors.passwordConfirmation 
                     .text-danger.mt-2
                       small #{errors.passwordConfirmation}
               div 
-                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary") Actualizar contraseña
+                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary")= t('user:myAccount.updatePassword')
