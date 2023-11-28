@@ -3,7 +3,15 @@
     "footerMessage": "Made with ❤ by:"
   },
   "navigation": {
-    "back": "Back"
+    "back": "Back",
+    "reloadPage": "Reload the page",
+    "menuGreeting": "Hi, {{name}}!",
+    "dashboard": "Dashboard",
+    "myList": "My lists",
+    "archivedLists": "Archived lists",
+    "trashedItems": "Trashed items",
+    "myAccount": "My account",
+    "accountData": "Account data"
   },
   "session": {
     "register": "Register",
@@ -30,5 +38,10 @@
     "booleanInvalid": "Data type must be true or false",
     "positionInvalid": "Position must be an integer equal or greater than 1.",
     "descriptionEmpty": "Description cannot be empty."
+  },
+  "errorPage": {
+    "title": "Error {{errorCode}}",
+    "404message": "There's nothing here at all. You could have been follow a broken link, or the content could have been moved or deleted.",
+    "500message": "Looks like we have an internal error, this is so embarrasing!"
   }
 }

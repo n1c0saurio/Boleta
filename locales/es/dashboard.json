@@ -1,4 +1,28 @@
 {
+  "myList": {
+    "pageTitle": "Mis listas",
+    "emptyWorkspaceMessageTitle": "¡Este tablero está vacío!",
+    "emptyWorkspaceMessageSubtitle": "Aquí abajo puedes crear la primera lista de compras…",
+    "newListField": "Escribe el nombre de la lista",
+    "newListButton": "Crear lista",
+    "listTotal": "Total:",
+    "listSubtotal": "Subtotal:",
+    "listWithoutTotal": "Total desconocido",
+    "emptyListMessage": "Esta lista está vacía…",
+    "deleteList": "Eliminar lista",
+    "addItemForm": "Añadir ítem",
+    "addItemButton": "Añadir a la lista",
+    "deleteItem": "Eliminar ítem",
+    "itemUnit_one": "unidad",
+    "itemUnit_other": "unidades",
+    "itemWithoutPrice": "Sin precio"
+  },
+  "archivedLists": {
+    "pageTitle": "Archived lists"
+  },
+  "trashedItems": {
+    "pageTitle": "Trashed items"
+  },
   "workspace": {
     "workspace_one": "Área de trabajo",
     "workspace_other": "Áreas de trabajo",
@@ -18,6 +42,7 @@
   "item": {
     "item_one": "Ítem",
     "item_other": "Ítems",
+    "name": "Nombre",
     "price": "Precio",
     "quantity": "Cantidad"
   }

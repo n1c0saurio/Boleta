@@ -1,4 +1,28 @@
 {
+  "myList": {
+    "pageTitle": "My lists",
+    "emptyWorkspaceMessageTitle": "This dashboard is empty",
+    "emptyWorkspaceMessageSubtitle": "Below, you can create the first shopping list…",
+    "newListField": "Write a name for the list",
+    "newListButton": "Create list",
+    "listTotal": "Total:",
+    "listSubtotal": "Subtotal:",
+    "listWithoutTotal": "Unknown total",
+    "emptyListMessage": "This list is empty…",
+    "deleteList": "Delete list",
+    "addItemForm": "Add item",
+    "addItemButton": "Add to list",
+    "deleteItem": "Delete item",
+    "itemUnit_one": "item",
+    "itemUnit_other": "items",
+    "itemWithoutPrice": "Unpriced"
+  },
+  "archivedLists": {
+    "pageTitle": "Archived lists"
+  },
+  "trashedItems": {
+    "pageTitle": "Trashed items"
+  },
   "workspace": {
     "workspace_one": "Workspace",
     "workspace_other": "Workspaces",
@@ -18,6 +42,7 @@
   "item": {
     "item_one": "Item",
     "item_other": "Items",
+    "name": "Name",
     "price": "Price",
     "quantity": "Quantity"
   }

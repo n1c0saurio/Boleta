@@ -3,7 +3,15 @@
     "footerMessage": "Hecho con ❤ por:"
   },
   "navigation": {
-    "back": "Volver"
+    "back": "Volver",
+    "reloadPage": "Recargar la página",
+    "menuGreeting": "¡Hola, {{name}}!",
+    "dashboard": "Tablero",
+    "myList": "Mis listas",
+    "archivedLists": "Listas archivadas",
+    "trashedItems": "Ítems eliminados",
+    "myAccount": "Mi cuenta",
+    "accountData": "Mis datos"
   },
   "session": {
     "register": "Registrate",
@@ -30,5 +38,10 @@
     "booleanInvalid": "El tipo de dato debe ser verdadero o falso",
     "positionInvalid": "La posición debe ser un número entero igual o mayor a 1.",
     "descriptionEmpty": "La descripción no puede quedar vacía."
+  },
+  "errorPage": {
+    "title": "Error {{errorCode}}",
+    "404message": "Aquí no hay nada de nada. Puede que hayas seguido un enlace roto, o el contenido pudo haberse movido o eliminado.",
+    "500message": "Parece que tuvimos un problema interno, esto es tan vergonzoso!"
   }
 }

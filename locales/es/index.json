@@ -4,8 +4,9 @@
     "reception": "Inicia sesión para acceder a tus listas."
   },
   "register": {
-    "title": "Registrate para crear tus propias listas.",
-    "preferredLocaleComment": "Aún si hubiera traducción para el idioma seleccionado, esta preferencia se usará para mostrar correctamente el formato de las monedas y otros elementos.",
+    "pageTitle": "Regístrate",
+    "title": "Regístrate para crear tus propias listas.",
+    "preferredLocaleComment": "Aún si no hubiera traducción para el idioma seleccionado, esta preferencia se usará para mostrar correctamente el formato de las monedas y otros elementos.",
     "passwordComment": "La contraseña debe tener entre 8 y 72 caracteres, y al menos una minúscula, una mayúscula, un dígito y un caracter especial.",
     "mandatoryFieldsComment": "Los campos marcados con * son obligatorios."
   }

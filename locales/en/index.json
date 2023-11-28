@@ -4,6 +4,7 @@
     "reception": "Log in to manage your own lists."
   },
   "register": {
+    "pageTitle": "Sign up",
     "title": "Sign up to make your own lists.",
     "preferredLocaleComment": "Even if there were no translation for the selected language, this preference will be used to correctly format currencies and other elements.",
     "passwordComment": "Password must be 8 to 72 characters long, and contains at least one lowercase, one uppercase, one number and one special character.",
