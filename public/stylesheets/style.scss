@@ -3,15 +3,16 @@
 //
 
 $custom-font-family: Bitter, system-ui, -apple-system, "Noto Serif",
-    "Liberation Serif", "Georgia", serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+  "Liberation Serif", "Georgia", serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol", "Noto Color Emoji";
 
 @use "../../node_modules/bootstrap/scss/bootstrap.scss" as b with (
-    $font-family-sans-serif: $custom-font-family,
-    $primary: #00a86b,
-    $secondary: #f57d62,
-    $light: #e2f5ee,
-    $enable-negative-margins: true
+  $font-family-sans-serif: $custom-font-family,
+  $primary: #00a86b,
+  $secondary: #e0725a,
+  // $secondary: #f57d62,
+  $light: #e2f5ee,
+  $enable-negative-margins: true
 );
 
 //
@@ -21,7 +22,7 @@ $custom-font-family: Bitter, system-ui, -apple-system, "Noto Serif",
 // Allow element use the full height of the viewport
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 // Extra colors
@@ -32,94 +33,94 @@ $primary-shadow-bevel: rgba(0, 101, 64, 0.32);
 $primary-shadow-subtle: rgba(0, 101, 64, 0.16);
 
 .bg-primary-darker {
-    background-color: $primary-darker;
+  background-color: $primary-darker;
 }
 
 // Links adjustment
 
 a.link-alt-hover {
-    &:hover,
-    &:active {
-        color: b.$secondary !important;
-        text-decoration-color: b.$secondary !important;
-    }
+  &:hover,
+  &:active {
+    color: b.$secondary !important;
+    text-decoration-color: b.$secondary !important;
+  }
 }
 
 a.btn-outline-primary:hover {
-    @extend .text-shadow-emphasis;
-    color: white;
+  @extend .text-shadow-emphasis;
+  color: white;
 }
 
 // Custom shadow to pop text
 
 .text-shadow-emphasis {
-    text-shadow: -1px 1px $primary-shadow;
+  text-shadow: -1px 1px $primary-shadow;
 }
 
 .text-shadow-subtle {
-    text-shadow: -1px 1px $primary-shadow-subtle;
+  text-shadow: -1px 1px $primary-shadow-subtle;
 }
 
 .text-bas-relief {
-    text-shadow: -1px 1px white, 1px -1px $primary-shadow-bevel;
+  text-shadow: -1px 1px white, 1px -1px $primary-shadow-bevel;
 }
 
 // Fixes an adjustments
 
 // Hide icon on dropdows with custom ones
 .bi.dropdown-toggle::after {
-    display: none;
+  display: none;
 }
 
 // Fix scrollbar size on chromium browsers
 .dashboard__list-items::-webkit-scrollbar {
-    background-color: transparent;
-    width: 0.25rem;
+  background-color: transparent;
+  width: 0.25rem;
 }
 .dashboard__list-items::-webkit-scrollbar-thumb {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 .dashboard__item .card-body::-webkit-scrollbar {
-    width: 0; // hide scrollbar showed on item price
+  width: 0; // hide scrollbar showed on item price
 }
 
 // Decorations
 
 // Brand as a overlapping badge
 #brand-badge {
-    margin-bottom: -82px;
+  margin-bottom: -82px;
 }
 
 #brand-badge img {
-    filter: drop-shadow(0 8px 16px b.$gray-500);
+  filter: drop-shadow(0 8px 16px b.$gray-500);
 }
 
 // Serrated border effect
 .border-serrated {
-    background-repeat: repeat-x;
-    height: 10px;
-    background-size: 8px;
-    background-image: url("../images/prepicado--blank.svg");
+  background-repeat: repeat-x;
+  height: 10px;
+  background-size: 8px;
+  background-image: url("../images/prepicado--blank.svg");
 
-    &--primary {
-        @extend .border-serrated;
-        background-image: url("../images/prepicado--primary.svg");
-    }
+  &--primary {
+    @extend .border-serrated;
+    background-image: url("../images/prepicado--primary.svg");
+  }
 
-    &--primary-light {
-        @extend .border-serrated;
-        background-image: url("../images/prepicado--primary-light.svg");
-    }
+  &--primary-light {
+    @extend .border-serrated;
+    background-image: url("../images/prepicado--primary-light.svg");
+  }
 }
 
 .drop-shadow {
-    filter: drop-shadow(0 4px 12px $primary-shadow);
+  filter: drop-shadow(0 4px 12px $primary-shadow);
 }
 
 // Error page
 
 #error-wrapper {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 //
@@ -129,31 +130,31 @@ a.btn-outline-primary:hover {
 // Make content use at least the full height available of the
 // viewport automatically, minus Header and Footer
 #home__wrapper {
-    background-color: b.$light;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+  background-color: b.$light;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 #home__content {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 // Header styles
 
 #home__header {
-    filter: drop-shadow(0 -4px 12px $primary-shadow);
+  filter: drop-shadow(0 -4px 12px $primary-shadow);
 }
 
 .home__nav-item.active {
-    text-decoration: underline;
-    text-decoration-color: b.$secondary !important;
+  text-decoration: underline;
+  text-decoration-color: b.$secondary !important;
 }
 
 // Footer styles
 
 #home__footer {
-    box-shadow: inset 0 12px 16px -16px $primary-shadow;
+  box-shadow: inset 0 12px 16px -16px $primary-shadow;
 }
 
 // Home
@@ -167,7 +168,7 @@ a.btn-outline-primary:hover {
 // Dashboard layout
 
 #dashboard__wrapper {
-    min-height: 480px;
+  min-height: 480px;
 }
 
 #dashboard__wrapper,
@@ -182,68 +183,68 @@ a.btn-outline-primary:hover {
 .dashboard__list,
 // Others secction
 #dashboard__panel__wrapper {
-    height: 100%;
+  height: 100%;
 }
 
 #dashboard__wrapper {
-    background-color: b.$light;
+  background-color: b.$light;
 }
 
 // Allow header overlaps lists when them overflows
 #dashboard__header {
-    left: 0;
-    position: fixed;
-    top: 0;
-    z-index: 1;
+  left: 0;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 // Menu
 
 #dashboard__nav,
 #dashboard__header-toggle {
-    border-radius: 0 6px 6px 0;
+  border-radius: 0 6px 6px 0;
 }
 
 #dashboard__header-toggle .bi::before {
-    transition: transform 0.25s;
+  transition: transform 0.25s;
 }
 
 .dashboard__header-toggle--open::before {
-    transform: rotate(-180deg);
+  transform: rotate(-180deg);
 }
 
 #dashboard__nav {
-    width: 240px;
+  width: 240px;
 }
 
 // Style
 
 #dashboard__welcome {
-    flex-direction: column;
-    margin-top: -10px;
+  flex-direction: column;
+  margin-top: -10px;
 }
 
 .dashboard__nav__menu__link {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 
-    &.active,
-    &:hover,
-    &:active {
-        color: white !important;
-        background-color: b.$secondary !important;
-    }
+  &.active,
+  &:hover,
+  &:active {
+    color: white !important;
+    background-color: b.$secondary !important;
+  }
 }
 
 #dashboard__nav__logout:hover,
 #dashboard__nav__logout:active {
-    background-color: b.$secondary !important;
+  background-color: b.$secondary !important;
 }
 
 // Lists
 
 #dashboard__lists-wrapper {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 // List
@@ -252,64 +253,69 @@ a.btn-outline-primary:hover {
 
 .dashboard__list,
 .dashboard__new-list {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 // List: scroll on items
 
 .dashboard__list .card {
-    max-height: 100%;
+  max-height: 100%;
 }
 
 .dashboard__list .card-body {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 // List: Styles
 
 .dashboard__list,
 .dashboard__new-list {
-    .card-header,
-    .card-body,
-    .card-footer {
-        background-color: white;
-    }
+  .card-header,
+  .card-body,
+  .card-footer {
+    background-color: white;
+  }
 }
 
 .dashboard__list-header,
 .dashboard__item,
 .dashboard__list-footer {
-    border-style: dashed;
+  border-style: dashed;
 }
 
 .dashboard__list > .card > .card-header {
-    box-shadow: 0 16px 8px -8px white;
-    z-index: 1;
+  box-shadow: 0 16px 8px -8px white;
+  z-index: 1;
 }
 
 .dashboard__list > .card > .card-footer {
-    box-shadow: 0 -16px 8px -8px white;
-    z-index: 1;
+  box-shadow: 0 -16px 8px -8px white;
+  z-index: 1;
 }
 
 // List: item form
 
 .dashboard__add-item .accordion-button.collapsed::after {
-    content: "\F64D";
-    font-family: bootstrap-icons !important;
-    font-size: 1.25rem;
-    line-height: 0.9;
-    background-image: none;
+  content: "\F64D";
+  font-family: bootstrap-icons !important;
+  font-size: 1.25rem;
+  line-height: 0.9;
+  background-image: none;
+}
+
+.dashboard__add-item .accordion-button {
+  background: transparent;
+  box-shadow: none;
 }
 
 .dashboard__add-item-name {
-    flex-grow: 2 !important;
+  flex-grow: 2 !important;
 }
 
 // Item
 
 .dashboard__item.card:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 //
@@ -325,45 +331,45 @@ a.btn-outline-primary:hover {
 // List full viewport width
 .dashboard__list,
 .dashboard__new-list {
-    flex-basis: 100vw;
+  flex-basis: 100vw;
 }
 
 // Low the dashboard nav toggle
 #dashboard__header-toggle {
-    align-self: self-end;
-    margin-bottom: 12rem;
+  align-self: self-end;
+  margin-bottom: 12rem;
 }
 
 //
 // Tablet and up
 
 @media only screen and (min-width: 576px) {
-    //
-    // Dashboard
+  //
+  // Dashboard
 
-    // Up the dashboard nav toggle
-    #dashboard__header-toggle {
-        align-self: self-start;
-        margin-bottom: 0;
-        margin-top: 4rem;
-    }
+  // Up the dashboard nav toggle
+  #dashboard__header-toggle {
+    align-self: self-start;
+    margin-bottom: 0;
+    margin-top: 4rem;
+  }
 
-    // Pad the dashboard to give room to header when open
-    #dashboard__content > div {
-        transition: padding 0.25s;
-    }
-    #dashboard__content.nav-open > div {
-        padding-left: 260px !important;
-    }
+  // Pad the dashboard to give room to header when open
+  #dashboard__content > div {
+    transition: padding 0.25s;
+  }
+  #dashboard__content.nav-open > div {
+    padding-left: 260px !important;
+  }
 
-    //
-    // Lists
+  //
+  // Lists
 
-    // Fixed list width
-    .dashboard__list,
-    .dashboard__new-list {
-        flex-basis: 360px;
-    }
+  // Fixed list width
+  .dashboard__list,
+  .dashboard__new-list {
+    flex-basis: 360px;
+  }
 }
 
 //
