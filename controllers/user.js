@@ -15,6 +15,7 @@ exports.updateMyAccount = async (req, res, next) => {
     req.user.firstName = req.body.firstName;
     req.user.lastName = req.body.lastName;
     req.user.email = req.body.email;
+    req.user.preferredLocale = req.body.preferredLocale
   } else if (req.body.fromForm === 'updatePassword') {
     errors = await userValidations.updatePassword(req.user.id, req.body);
   }

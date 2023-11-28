@@ -33,7 +33,8 @@ exports.updateMyAccount = async (id, formData) => {
     await user.update({
       firstName: formData.firstName,
       lastName: formData.lastName,
-      email: formData.email
+      email: formData.email,
+      preferredLocale: formData.preferredLocale
     });
   } catch (err) {
     let errors = {};
