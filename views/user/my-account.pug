@@ -2,7 +2,7 @@ extends ../layout-dashboard
 
 block pageMeta
   //- Page title
-  - const pageTitle = t('user:views.myAccount')
+  - const pageTitle = t('user:myAccount.pageTitle', { lng: user.preferredLocale })
   //- Set the current pages
   - const section = "my-account"
   - const current = "account-data"
@@ -10,7 +10,7 @@ block pageMeta
 block content
 
   //- To translate currency codes to natural names
-  - const currencyInLocale = new Intl.DisplayNames(['es-CL'], { type: 'currency' });
+  - const currencyInLocale = new Intl.DisplayNames([user.preferredLocale], { type: 'currency' });
 
   #dashboard__panel__wrapper.container-xxl
     .row.px-sm-4.py-4
@@ -19,14 +19,14 @@ block content
       section.dashboard__panel.col-lg-6
         .card.mb-4.border-0.shadow-lg
           .card-header.p-4.pb-0
-            h2.mb-4= t('user:myAccount.accountDataSection')
+            h2.mb-4= t('user:myAccount.accountDataSection', { lng: user.preferredLocale })
     
           .card-body.p-4
             form(action="/mi-cuenta", method="post") 
 
               .row.mb-3
                 .col-sm-4.mb-1
-                  label(for="firstName") #{t('user:views.firstName')}&thinsp;*
+                  label(for="firstName") #{t('user:user.firstName', { lng: user.preferredLocale })}&thinsp;*
                 .col-sm-8
                   input.form-control(type="text", name="firstName", value=user.firstName, required)
                   if errors.firstName
@@ -35,7 +35,7 @@ block content
 
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="lastName") #{t('user:views.lastName')} 
+                  label(for="lastName") #{t('user:user.lastName', { lng: user.preferredLocale })} 
                 .col-sm-8
                   input.form-control(type="text", name="lastName", value=user.lastName)
                   if errors.lastName 
@@ -44,7 +44,7 @@ block content
             
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="email") #{t('user:views.email')}&thinsp;*
+                  label(for="email") #{t('user:user.email', { lng: user.preferredLocale })}&thinsp;*
                 .col-sm-8
                   input.form-control(type="text", name="email", value=user.email, required)
                   if errors.email 
@@ -53,7 +53,7 @@ block content
               
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="preferredLocale") #{t('user:views.preferredLocale')}&thinsp;*
+                  label(for="preferredLocale") #{t('user:user.preferredLocale', { lng: user.preferredLocale })}&thinsp;*
                 .col-sm-8
                   select.form-select(name="preferredLocale", required=true)
                     - for (const lang in langmap)
@@ -70,7 +70,7 @@ block content
               //- previous default are setted explicitly to that currency.
               .row.mb-3
                 .col-sm-4.mb-1 
-                  label(for="defaultCurrency") #{t('user:views.currency')}&thinsp;
+                  label(for="defaultCurrency") #{t('user:user.currency', { lng: user.preferredLocale })}&thinsp;
                 .col-sm-8
                   p #{user.defaultCurrency} &ndash; #{currencyInLocale.of(user.defaultCurrency)}
                   //- select.form-select(name="defaultCurrency", required=true)
@@ -83,22 +83,22 @@ block content
                   //-   .text-danger.mt-2 
                   //-     small #{errors.defaultCurrency}
               div 
-                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updateUser") Actualizar datos
+                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updateUser")= t('user:myAccount.updateAccountData', { lng: user.preferredLocale })
 
       //- Update password
       section.dashboard__panel.col-lg-6
         .card.mb-4.border-0.shadow-lg
           .card-header.p-4.pb-0
-            h2.mb-4= t('user:myAccount.passwordSection')
+            h2.mb-4= t('user:myAccount.passwordSection', { lng: user.preferredLocale })
         
           .card-body.p-4
             if success 
-              p= t('user:myAccount.passwordUpdated')
+              p= t('user:myAccount.passwordUpdated', { lng: user.preferredLocale })
             form(action="/mi-cuenta", method="post")
 
               .row.mb-3 
                 .col-sm-6.mb-1
-                  label(for="currentPassword") #{t('user:myAccount.currentPassword')}&thinsp;*
+                  label(for="currentPassword") #{t('user:myAccount.currentPassword', { lng: user.preferredLocale })}&thinsp;*
                 .col-sm-6
                   input(type="password", name="currentPassword", required=true, class="form-control")
                   if errors.currentPassword 
@@ -107,7 +107,7 @@ block content
               
               .row.mb-3 
                 .col-sm-6.mb-1
-                  label(for="newPassword") #{t('user:myAccount.newPassword')}&thinsp;*
+                  label(for="newPassword") #{t('user:myAccount.newPassword', { lng: user.preferredLocale })}&thinsp;*
                 .col-sm-6
                   input(type="password", name="newPassword", required=true, class="form-control")
                   if errors.newPassword 
@@ -116,11 +116,11 @@ block content
 
               .row.mb-3
                 .col-sm-6.mb-1
-                  label(for="passwordConfirmation") #{t('user:user.passwordConfirmation')}&thinsp;*
+                  label(for="passwordConfirmation") #{t('user:user.passwordConfirmation', { lng: user.preferredLocale })}&thinsp;*
                 .col-sm-6 
                   input(type="password", name="passwordConfirmation", required=true, class="form-control")
                   if errors.passwordConfirmation 
                     .text-danger.mt-2
                       small #{errors.passwordConfirmation}
               div 
-                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary")= t('user:myAccount.updatePassword')
+                button.btn.btn-primary.text-light(type="submit", name="fromForm", value="updatePassword", class="btn btn-primary")= t('user:myAccount.updatePassword', { lng: user.preferredLocale })
