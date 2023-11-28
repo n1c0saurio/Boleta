@@ -1,7 +1,12 @@
 # <img src="public/images/boleta.svg" width="36" style="vertical-align:bottom">&ensp;Boleta
-## _Una webapp para guardar listas de compra_
 
-Este proyecto se comenzo con la finalidad de practicar desarrollo web en **Express.js**. Las funcionalidades que se planean desarrollar son:
+A web app to create shopping lists.
+
+<img
+    src="screenshot.png"
+    style="border-radius: 0.4rem;">
+
+<!-- Las funcionalidades que se planean desarrollar son:
 
 - [x] Registro de usuario
 - [ ] Recuperación de contraseña
@@ -15,50 +20,63 @@ Este proyecto se comenzo con la finalidad de practicar desarrollo web en **Expre
 - [ ] Archivar listas
 - [ ] Gestión de usuarios para los administradores
 - [ ] Registrar eventos
-- [ ] Detectar automáticamente el idioma del usuario (español o inglés)
-- [ ] Cambiar tipo de moneda por lista
+- [x] Detectar automáticamente el idioma del usuario (español o inglés)
+- [ ] Cambiar tipo de moneda por lista -->
 
-<!-- ## Installation
+## How to use it
 
-You can get this app pulling the docker image...
+If there were any administrator user registered on the database, or the database were empty, the app will automatically creates a default administrator user with the following credentials:
 
-Or by cloning/download this repo and installing the dependencies...
+- email: `mail@example.com`
+- password: `Secret_4321`
 
-The default administrator credentials are the following:
-* email: correo@example.com
-* password: secret -->
+You can run this app with it's corresponding PosgreSQL database using this `docker-compose.yml`&thinsp;:
 
-Desarrollado en [Codium](https://github.com/VSCodium/vscodium/).
+```yaml
+version: "3.8"
+services:
+  db:
+    image: postgres:15.4-alpine3.18
+    environment:
+      # Setting up the user and the database for the app
+      POSTGRES_USER: app-user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: app-db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db:/var/lib/postgresql/data:z
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    image: n1c0saurio/boleta:latest
+    environment:
+      # Default administrator user credentials can
+      # be overwritten setting this variables
+      ADMIN_EMAIL: email@example.com
+      ADMIN_PASS:
+        Secret_4321
+        # Password must be 8 to 72 character long and
+        # contain at least  a number, an upper and
+        # a lowercase letter and a special character
 
-<!-- ---
+      # Database credentials must be the same to
+      # the declared on the db service
+      DB: app-db
+      DB_USER: app-user
+      DB_PASS: secret
+      DB_HOST: db
+      DB_PORT: 5432
 
-# 📜 Boleta
-## _A webapp to save shopping/groceries lists_
+      # Set the secret for express-session
+      SESSION_SECRET: keyboardcat
+      # Where to expose the app
+      PORT: 3000
+    ports:
+      - 3000:3000
+```
 
-This proyect was started to practice web development with **Node.js** using **Express.js**. The functionalities that are meant to develop are:
-
-- [x] User registration
-- [ ] Recover password
-- [x] User login/logout
-- [x] Update user data
-- [ ] Manage lists
-- [ ] Manage items on a list
-- [ ] Sum prices of items on a list
-- [ ] Restore trashed items
-- [ ] Archive lists
-- [ ] User management by administrators
-- [ ] Log events
-- [ ] Automatic detection of user languaje (spanish or english)
-- [ ] Set currencies per list
-
-## Installation
-
-You can get this app pulling the docker image...
-
-Or by cloning/download this repo and installing the dependencies...
-
-The default administrator credentials are the following:
-* email: correo@example.com
-* password: secret -->
-
-<!-- Deleveloped in [Codium](https://github.com/VSCodium/vscodium/) under Fedora Linux. -->
+This proyect was started to learn web developing using **Express.js**. Deleveloped in [Codium](https://github.com/VSCodium/vscodium/) under Fedora Linux.
