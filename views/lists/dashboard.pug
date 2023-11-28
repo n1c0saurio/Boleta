@@ -2,7 +2,7 @@ extends ../layout-dashboard
 
 block pageMeta
   //- Page title
-  - const pageTitle = 'Mis listas'
+  - const pageTitle = t('dashboard:myList.pageTitle', { lng: user.preferredLocale })
   //- Set the current pages
   - const section = "dashboard"
   - const current = "my-lists"
@@ -27,7 +27,7 @@ block content
                   button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
                   ul.dropdown-menu
                     li
-                      a.dropdown-item(href="/listas/" + list.id) Eliminar
+                      a.dropdown-item(href="/listas/" + list.id)= t('dashboard:myList.deleteList', { lng: user.preferredLocale })
               //- List name
               h2.fs-5.flex-grow-1.m-0 #{list.name}
 
@@ -46,7 +46,7 @@ block content
                         button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
                         ul.dropdown-menu
                           li
-                            a.dropdown-item(href="/listas/item/" + item.id) Eliminar
+                            a.dropdown-item(href="/listas/item/" + item.id)= t('dashboard:myList.deleteItem', { lng: user.preferredLocale })
                       h4.fs-6.flex-grow-1.fs-6.my-2 #{item.name}
 
                     .card-body.d-flex.flex-wrap.justify-content-end.column-gap-3.px-0.pt-0.pb-2
@@ -55,18 +55,18 @@ block content
                           if item.price
                             | #{item.quantity}&nbsp;×&nbsp;#{currencyFormatter.format(item.displayUnitPrice.amount)}
                           else 
-                            | #{item.quantity}&nbsp;unidades
+                            | #{item.quantity}&nbsp;#{t('dashboard:myList.itemUnit', { count: item.quantity, lng: user.preferredLocale })}
                           | &nbsp;
                       if item.price
                         .fw-bold #{currencyFormatter.format(item.displayTotalPrice.amount)}
                       else 
                         div.text-bg-warning
-                          span.fst-italic.px-2.py-1 Sin precio
+                          span.fst-italic.px-2.py-1= t('dashboard:myList.itemWithoutPrice', { lng: user.preferredLocale })
 
               //- Empty list message
               else
                 .text-body-tertiary.text-center.my-5
-                  h4.fs-6.fst-italic.mb-4 Esta lista está vacía&hellip;
+                  h4.fs-6.fst-italic.mb-4= t('dashboard:myList.emptyListMessage', { lng: user.preferredLocale })
                   h4.fs-5(aria-hidden="true") .・・.・゜・。.*҉ 
 
             .dashboard__list-footer.card-footer.border-start-0.border-end-0.border-bottom-0
@@ -76,19 +76,19 @@ block content
               form.dashboard__add-item.accordion.accordion-flush(id=list.id + "_form", action="/listas", onsubmit="submitCleannig(this)", method="post")
                 .accordion-item
                   h5.accordion-header(id=list.id + "_form-toggle")
-                    button.accordion-button.collapsed.px-2.py-1.rounded-pill.mt-2.mb-3(type="button", data-bs-toggle="collapse", data-bs-target="#" + list.id + "_form-content", aria-expanded="false", aria-controls=list.id + "_form-content") Agregar item
+                    button.accordion-button.collapsed.px-2.py-1.rounded-pill.mt-2.mb-3(type="button", data-bs-toggle="collapse", data-bs-target="#" + list.id + "_form-content", aria-expanded="false", aria-controls=list.id + "_form-content")= t('dashboard:myList.addItemForm', { lng: user.preferredLocale })
                   .accordion-collapse.collapse(id=list.id + "_form-content" aria-labelledby=list.id + "_form-toggle" data-bs-parent="#" + list.id +  + "_form")
                     .accordion-body.p-0
 
                       .input-group.mt-2
                         //- TODO: add value attribute
-                        input.dashboard__add-item-name.form-control(type="text", name="itemName", placeholder="Nombre", value="", required=true)
-                        label.visually-hidden(for="itemName") Nombre
+                        input.dashboard__add-item-name.form-control(type="text", name="itemName", placeholder=t('dashboard:item.name', { lng: user.preferredLocale }), value="", required=true)
+                        label.visually-hidden(for="itemName")= t('dashboard:item.name', { lng: user.preferredLocale })
 
                         span.input-group-text ×
 
                         //- TODO: add value attribute
-                        label.visually-hidden(for="itemQuantity") Cantidad
+                        label.visually-hidden(for="itemQuantity") = t('dashboard:item.quantity', { lng: user.preferredLocale })
                         input.dashboard__add-item-quantity.form-control(type="number", name="itemQuantity", min="1", value="1", required=true)
                         //- TODO: check with new list form
                         //- if errors.name
@@ -96,8 +96,8 @@ block content
                         //-     span #{errors.name}
 
                       .input-group.mt-2
-                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup='priceFormating(this, ' + JSON.stringify(list.getCurrencyObject(listCurrency)) + ', "' + user.preferredLocale + '")', placeholder="Precio", value="") 
-                        label.visually-hidden(for="itemPrice") Preciouser.preferredLocale
+                        input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup='priceFormating(this, ' + JSON.stringify(list.getCurrencyObject(listCurrency)) + ', "' + user.preferredLocale + '")', placeholder=t('dashboard:item.price', { lng: user.preferredLocale }), value="") 
+                        label.visually-hidden(for="itemPrice")= t('dashboard:item.price', { lng: user.preferredLocale })
                         span.input-group-text #{listCurrency}
                         //- TODO: check with new list form
                         //- if errors.price
@@ -110,17 +110,17 @@ block content
                         input(type="text", name="listId", value=list.id, readonly=true)
 
                       .d-grid.my-2 
-                        button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newItem") Agregar
+                        button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newItem")= t('dashboard:myList.addItemButton', { lng: user.preferredLocale })
 
               //- Total of the list
               if list.Items.length > 0
                 h3.dashboard__list-total.fs-6.fw-bold.text-end.py-3.mt-3.mb-1
                   if !list.total
-                    span.bg-warning.px-2.py-2 Total desconocido
+                    span.bg-warning.px-2.py-2= t('dashboard:myList.listWithoutTotal', { lng: user.preferredLocale })
                   else if list.partialSum
-                    span.bg-warning.px-2.py-1 Subtotal:&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
+                    span.bg-warning.px-2.py-1  #{t('dashboard:myList.listSubtotal', { lng: user.preferredLocale })}&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
                   else
-                    span.py-1 Total:&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
+                    span.py-1 #{t('dashboard:myList.listTotal', { lng: user.preferredLocale })}&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
             .border-serrated
 
     .dashboard__new-list 
@@ -132,9 +132,9 @@ block content
         .card-header.border-bottom-0
           //- Empty board message
           if lists.length === 0
-            .text-center.mt-4
-              h2.fs-3.fw-bold.mb-3 ¡Este tablero está vacío!
-              h3.fs-6.fst-italic Aquí abajo puedes crear la primera lista de compras&hellip;
+            .text-center.mt-4.mx-2
+              h2.fs-3.fw-bold.mb-3= t('dashboard:myList.emptyWorkspaceMessageTitle', { lng: user.preferredLocale })
+              h3.fs-6.fst-italic= t('dashboard:myList.emptyWorkspaceMessageSubtitle', { lng: user.preferredLocale })
 
         .card-body.p-4
           form(action="/listas", method="post")
@@ -142,7 +142,7 @@ block content
             .form-floating
               //- TODO: add value attribute
               input.form-control(type="text", name="listName", value="", required=true) 
-              label(for="listName") Escriba el nombre de la lista:
+              label(for="listName")= t('dashboard:myList.newListField', { lng: user.preferredLocale })
               //- TODO: check with new list form
               //- if errors.name 
               //-   .text-danger.mt-2 
@@ -153,7 +153,7 @@ block content
               input(type="text", name="listWorkspace", value=workspace, readonly=true)
 
             .d-grid.mt-2
-              button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newList") Crear nueva lista
+              button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newList")= t('dashboard:myList.newListButton', { lng: user.preferredLocale })
               
               //- Empty board kaomoji
               if lists.length === 0

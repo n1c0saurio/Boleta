@@ -27,13 +27,10 @@ block sublayout
 
             //- 
             //- Nav header
-            #dashboard__welcome.nav-item.d-flex.p-3.pt-0
+            #dashboard__welcome.nav-item.d-flex.px-3.py-2.pt-0
               a.text-center(href="/listas") 
                 img(src="/images/boleta_no-shadow.svg", alt="Boleta", width="48", height="48")
-              h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis.mb-0
-                | ¡Hola,
-                br
-                | #{user.firstName}!
+              h1.text-light.fst-italic.fs-5.lh-sm.text-shadow-emphasis.mt-3.mb-0= t('navigation.menuGreeting', {name: user.firstName,  lng: user.preferredLocale })
 
             //- 
             //- Menu
@@ -44,42 +41,42 @@ block sublayout
                 #dashboard__menu-lists-btn.accordion-header(data-bs-theme="dark")
                   button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent.shadow-none(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-lists", aria-expanded="true", aria-controls="dashboard__menu-lists")
                     span.bi.bi-kanban-fill
-                    span.ms-2 Tablero
+                    span.ms-2= t('navigation.dashboard', { lng: user.preferredLocale })
                 #dashboard__menu-lists.accordion-collapse.collapse(aria-labelledby="dashboard__menu-lists-btn", data-bs-parent="#dashboard__menu", class=(section === 'dashboard' ? 'show' : ''))
                   .accordion-body.bg-primary-darker.px-0
                     ul.nav.flex-column
                       li.nav-item 
                         a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/listas", class=(current === 'my-lists' ? 'active' : '')) 
                           span.bi.bi-list-check
-                          span.ms-2 Mis listas
+                          span.ms-2= t('navigation.myList', { lng: user.preferredLocale })
                       li.nav-item 
                         a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
                           span.bi.bi-archive
-                          span.ms-2 Listas archivadas
+                          span.ms-2= t('navigation.archivedLists', { lng: user.preferredLocale })
                       li.nav-item 
                         a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="#") 
                           span.bi.bi-trash3
-                          span.ms-2 Ítems eliminados
+                          span.ms-2= t('navigation.trashedItems', { lng: user.preferredLocale })
 
               //- Account submenu
               .accordion-item.bg-transparent.border-primary-subtle
                 #dashboard__menu-account-btn.accordion-header(data-bs-theme="dark")
                   button.accordion-button.text-light.fw-bold.text-shadow-emphasis.bg-transparent.shadow-none(type="button", data-bs-toggle="collapse", data-bs-target="#dashboard__menu-account", aria-expanded="false", aria-controls="dashboard__menu-account")
                     span.bi.bi-person-circle
-                    span.ms-2 Mi cuenta 
+                    span.ms-2= t('navigation.myAccount', { lng: user.preferredLocale })
                 #dashboard__menu-account.accordion-collapse.collapse(aria-labelledby="dashboard__menu-account-btn", data-bs-parent="#dashboard__menu", class=(section === 'my-account' ? 'show' : ''))
                   .accordion-body.bg-primary-darker.px-0 
                     ul.nav.flex-column
                       li.nav-item 
                         a.dashboard__nav__menu__link.nav-link.text-light.text-shadow-emphasis(href="/mi-cuenta", class=(current === 'account-data' ? 'active' : '')) 
                           span.bi.bi-person-vcard
-                          span.ms-2 Mis datos
+                          span.ms-2= t('navigation.accountData', { lng: user.preferredLocale })
 
             //- 
             //- Logout
             form#dashboard__nav__logout.nav-item.d-grid.border-top.border-primary-subtle(action="/logout", method="post")
               button.nav-link.link-light.text-shadow-emphasis.text-start(type="submit")
                 span.bi.bi-box-arrow-left
-                span.ms-2 Salir
+                span.ms-2= t('session.logout', { lng: user.preferredLocale })
 
   script(src="/javascripts/dashboard.js") 

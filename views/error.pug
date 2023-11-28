@@ -1,5 +1,9 @@
 extends layout
 
+block meta
+  //- Page title
+  - const pageTitle = t('errorPage.title', { errorCode: error.status })
+
 block sublayout
   #error-wrapper.bg-light
     .container
@@ -11,7 +15,7 @@ block sublayout
             
             header.card-header.pb-4.bg-transparent.border-bottom-0
               .fs-1.mb-4(aria-hidden="true") (;・_・)
-              h1.fw-bold Error #{error.status}
+              h1.fw-bold= t('errorPage.title', { errorCode: error.status })
               h2.fs-4= message
             
             .card-body.pt-4
@@ -22,23 +26,23 @@ block sublayout
                 +loginForm()
                 a.btn.btn-primary.link-light.text-shadow-emphasis.my-5(href="/")
                   span.bi.bi-chevron-left 
-                  span Volver al inicio
+                  span= t('navigation.back')
 
               if error.status === 404
-                p.mb-4 Aquí no hay nada de nada. Puede que el contenido que buscabas ya no esté disponible porque fue movido o haya sido eliminado.
+                p.mb-4= t('errorPage.404message')
                 a.btn.btn-primary.link-light.text-shadow-emphasis.mb-5(href="/")
                   span.bi.bi-chevron-left 
-                  span Volver al inicio
+                  span= t('navigation.back')
 
               if error.status > 499
-                p.mb-4 Parece que tuvimos un problema interno, lamento que hayas tenido que ver esto.
+                p.mb-4= t('errorPage.500message')
                 .btn-group.mb-5
                   a.btn.btn-primary.link-light.text-shadow-emphasis(href="/")
                     span.bi.bi-chevron-left 
-                    span Volver al inicio
+                    span= t('navigation.back')
                   button.btn.btn-outline-primary.text-shadow-subtle(type="button", onclick="location.reload()")
                     span.bi.bi-arrow-clockwise
-                    span Intenar de nuevo
+                    span= t('navigation.reloadPage')
 
               if error.stack
                 pre.fs-5.mb-3 Debug stack:
