@@ -3,12 +3,12 @@ extends ../layout-home
 block pageMeta
 
   //- Page title
-  - const pageTitle = 'Registro'
+  - const pageTitle = t('index:register.pageTitle')
 
 block content
 
   //- To translate currency codes to natural names
-  - const currencyInLocale = new Intl.DisplayNames(['es-CL'], { type: 'currency' });
+  - const currencyInLocale = new Intl.DisplayNames(browserLocale, { type: 'currency' });
   //- To inform navigation what page is this
   - const current = "register"
 
@@ -30,21 +30,21 @@ block content
             label(for="firstName") #{t('user:user.firstName')}&thinsp;*
           if errors.firstName
             .alert.alert-danger.py-1.px-2.my-2
-              small #{errors.firstName}
+              small #{t(errors.firstName)}
 
           .form-floating.mt-3.mb-1
             input.form-control(type="text", name="lastName", value=formData.lastName)
             label(for="lastName") #{t('user:user.lastName')}
           if errors.lastName
             .alert.alert-danger.py-1.px-2.my-2
-              small #{errors.lastName}
+              small #{t(errors.lastName)}
 
           .form-floating.mt-3.mb-1
             input.form-control(type="email", name="email", value=formData.email, required=true)
             label(for="email") #{t('user:user.email')}&thinsp;*
           if errors.email
             .alert.alert-danger.py-1.px-2.my-2
-              small #{errors.email}
+              small #{t(errors.email)}
 
           .form-floating.mt-3.mb-1
             select.form-select(name="preferredLocale", required=true)
@@ -57,7 +57,7 @@ block content
             label(for="preferredLocale") #{t('user:user.preferredLocale')}&thinsp;*  
           if errors.defaultCurrency
             .alert.alert-danger.py-1.px-2.my-2 
-              small #{errors.defaultCurrency}
+              small #{t(errors.defaultCurrency)}
           p.mx-2
             small.fst-italic= t('index:register.preferredLocaleComment')
 
@@ -72,14 +72,14 @@ block content
             label(for="defaultCurrency") #{t('user:user.currency')}&thinsp;*  
           if errors.defaultCurrency
             .alert.alert-danger.py-1.px-2.my-2 
-              small #{errors.defaultCurrency}
+              small #{t(errors.defaultCurrency)}
 
           .form-floating.mt-3.mb-1
             input.form-control(type="password", name="password", required=true)
             label(for="password") #{t('user:user.password')}&thinsp;*
           if errors.password
             .alert.alert-danger.py-1.px-2.my-2
-              small #{errors.password}
+              small #{t(errors.password)}
           p.mx-2
             small.fst-italic= t('index:register.passwordComment')
 
@@ -88,7 +88,7 @@ block content
             label(for="passwordConfirmation") #{t('user:user.passwordConfirmation')}&thinsp;*
           if errors.passwordConfirmation
             .alert.alert-danger.py-1.px-2.my-2
-              small #{errors.passwordConfirmation}
+              small #{t(errors.passwordConfirmation)}
 
           p.mx-2.my-4= t('index:register.mandatoryFieldsComment')
 
