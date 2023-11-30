@@ -27,7 +27,8 @@
     "workspace_one": "Área de trabajo",
     "workspace_other": "Áreas de trabajo",
     "name": "Nombre del área de trabajo",
-    "defaultName": "Área de trabajo por defecto"
+    "defaultName": "Área de trabajo por defecto",
+    "newWorkspaceName": "Nueva área de trabajo"
   },
   "list": {
     "list_one": "Lista",

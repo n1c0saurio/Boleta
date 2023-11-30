@@ -37,7 +37,8 @@
     "quantityInvalid": "Quantity must be an integer equal or greater than 1",
     "booleanInvalid": "Data type must be true or false",
     "positionInvalid": "Position must be an integer equal or greater than 1.",
-    "descriptionEmpty": "Description cannot be empty."
+    "descriptionEmpty": "Description cannot be empty.",
+    "virtualPropertyError": "This property is created dynamically, cannot be set manually."
   },
   "errorPage": {
     "title": "Error {{errorCode}}",
