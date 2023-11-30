@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Workspace extends Model {
-    
+
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -35,11 +35,21 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'New workspace'
+      defaultValue: 'dashboard:workspace.newWorkspaceName',
+      validate: {
+        notEmpty: {
+          msg: 'validations.nameEmpty'
+        }
+      }
     },
     isDefault: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
+      validate: {
+        isBoolean: {
+          msg: 'validations.booleanInvalid'
+        }
+      }
     }
   }, {
     sequelize,

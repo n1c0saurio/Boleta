@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'El nombre no puede quedar vacío.'
+          msg: 'validations.nameEmpty'
         }
       }
     },
@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isInt: {
           // args: { gt: 0, lt: listCountOnWorkspace + 2 },
-          msg: 'El valor ingresado debe ser un número entero.'
+          msg: 'validations.positionInvalid'
         }
       }
     },
@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
               break;
             };
           }
-          if (noMatch) throw new Error('Invalid currency code');
+          if (noMatch) throw new Error('validations.currencyInvalid');
         }
       }
     },
@@ -100,7 +100,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       validate: {
         isBoolean: {
-          msg: 'Tipo de dato incorrecto'
+          msg: 'validations.booleanInvalid'
         }
       }
     },
@@ -123,7 +123,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       set(value) {
         throw new Error(
-          'This property is created dynamically, and cannot be set manually.'
+          'validations.virtualPropertyError'
         );
       }
     },
@@ -132,7 +132,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       validate: {
         isBoolean: {
-          msg: 'Tipo de dato incorrecto.'
+          msg: 'validations.booleanInvalid'
         }
       }
     }
