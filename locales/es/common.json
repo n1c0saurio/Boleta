@@ -37,7 +37,8 @@
     "quantityInvalid": "La cantidad debe ser un número entero igual o mayor a 1",
     "booleanInvalid": "El tipo de dato debe ser verdadero o falso",
     "positionInvalid": "La posición debe ser un número entero igual o mayor a 1.",
-    "descriptionEmpty": "La descripción no puede quedar vacía."
+    "descriptionEmpty": "La descripción no puede quedar vacía.",
+    "virtualPropertyError": "Esta propiedad es creada dinámicamente, no debe definirse manualmente."
   },
   "errorPage": {
     "title": "Error {{errorCode}}",

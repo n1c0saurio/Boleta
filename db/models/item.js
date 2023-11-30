@@ -26,7 +26,12 @@ module.exports = (sequelize, DataTypes) => {
   Item.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'validations.nameEmpty'
+        }
+      }
     },
     position: {
       type: DataTypes.INTEGER,
@@ -34,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isInt: {
           args: { gt: 0 },
-          msg: 'El valor ingresado debe ser un número entero.'
+          msg: 'validations.positionInvalid'
         }
       }
     },
@@ -81,7 +86,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       set(value) {
         throw new Error(
-          'This property is created dynamically, and cannot be set manually.'
+          'validations.virtualPropertyError'
         );
       }
     },
@@ -108,7 +113,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       set(value) {
         throw new Error(
-          'This property is created dynamically, and cannot be set manually.'
+          'validations.virtualPropertyError'
         );
       }
     },
@@ -117,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isInt: {
           args: { gt: 0 },
-          msg: 'La cantidad debe ser igual o mayor a 1.'
+          msg: 'validations.quantityInvalid'
         }
       }
     },
@@ -126,7 +131,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       validate: {
         isBoolean: {
-          msg: 'Tipo de dato incorrecto.'
+          msg: 'validations.booleanInvalid'
         }
       }
     }
@@ -183,7 +188,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       // if there're no other `Item` with `price` unassigned,
       // set List `partialSum` to false
-      if (otherItemsWithoutPrice === 0){
+      if (otherItemsWithoutPrice === 0) {
         parentList.partialSum = false;
         await parentList.save();
       }

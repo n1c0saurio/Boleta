@@ -30,6 +30,7 @@ exports.getRegister = (req, res, next) => {
   res.render('user/register', {
     formData: {},
     langmap: langmap,
+    browserLocale: req.languages,
     currencies: currencies,
     errors: {}
   });

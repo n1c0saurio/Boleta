@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: 'El identificador no puede quedar vacío.'
+          msg: 'validations.idEmpty'
         }
       }
     },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         notEmpty: {
-          msg: 'El nombre no puede quedar vacío.'
+          msg: 'validations.nameEmpty'
         }
       }
     },
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'La descripción no puede quedar vacía.'
+          msg: 'validations.descriptionEmpty'
         }
       }
     }

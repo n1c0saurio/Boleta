@@ -27,7 +27,8 @@
     "workspace_one": "Workspace",
     "workspace_other": "Workspaces",
     "name": "Workspace name",
-    "defaultName": "Default workspace"
+    "defaultName": "Default workspace",
+    "newWorkspaceName": "New workspace"
   },
   "list": {
     "list_one": "List",

@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'El nombre no puede quedar vacío.'
+          msg: 'validations.firstNameEmpty'
         }
       },
       set(value) {
@@ -89,7 +89,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       set(value) {
         throw new Error(
-          'This property is created dynamically, and cannot be set manually.'
+          'validations.virtualPropertyError'
         );
       }
     },
@@ -97,14 +97,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
-        msg: 'Este correo ya está registrado.'
+        msg: 'validations.emailAlreadyRegistered'
       },
       validate: {
         notEmpty: {
-          msg: 'El correo no puede quedar vacío.'
+          msg: 'validations.emailEmpty'
         },
         isEmail: {
-          msg: 'El correo ingresado no es válido.'
+          msg: 'validations.emailInvalid'
         }
       },
       set(value) {
@@ -117,7 +117,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         is: {
           args: [validPassword],
-          msg: 'La contraseña no cumple las condiciones solicitadas.'
+          msg: 'validations.passwordInvalid'
         }
       }
     },
@@ -126,7 +126,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         match(value) {
           if (this.password !== value) {
-            throw new Error('Las contraseñas no coinciden.');
+            throw new Error('validations.passwordConfirmationInvalid');
           }
         }
       }
@@ -143,7 +143,7 @@ module.exports = (sequelize, DataTypes) => {
               break;
             };
           }
-          if (noMatch) throw new Error('Invalid currency code');
+          if (noMatch) throw new Error('validations.currencyInvalid');
         }
       }
     },
@@ -153,7 +153,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'en',
       validate: {
         isLocale: {
-          msg: "Código de lenguaje inválido."
+          msg: "validations.preferredLocaleInvalid"
         }
       }
     },
@@ -168,7 +168,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
       validate: {
         isBoolean: {
-          msg: 'Tipo de dato incorrecto.'
+          msg: 'validations.booleanInvalid'
         }
       }
     }
@@ -187,7 +187,7 @@ module.exports = (sequelize, DataTypes) => {
   // Create a default Workspace
   User.afterSave(async user => {
     await user.createWorkspace({
-      name: 'Área de trabajo por defecto',
+      name: 'dashboard:workspace.defaultName',
       isDefault: true
     });
   });
