@@ -65,6 +65,6 @@ typings/
 # Docker stuff
 Dockerfile
 docker-compose.yml
-postgres
+postgres/
 DB.Dockerfile
 DB-init.sql

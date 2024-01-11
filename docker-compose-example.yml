@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  app:
+    image: node:20.5.1-alpine3.18
+    tty: true
+    stdin_open: true
+    environment:
+      DB: app-db
+      DB_DEV: app-db-dev
+      DB_TEST: app-db-test
+      DB_USER: app-user
+      DB_PASS: bananacat
+      DB_HOST: db
+      DB_PORT: 5432
+      SESSION_SECRET: keyboardcat
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - .:/app:z
+  db:
+    image: postgres:15.4-alpine3.18
+    environment:
+      POSTGRES_DB: app-db
+      POSTGRES_USER: app-user
+      POSTGRES_PASSWORD: bananacat
+    ports:
+      - 5432:5432
+    volumes:
+      - ./DB-init.sql:/docker-entrypoint-initdb.d/:z
+      - ./postgres:/var/lib/postgresql/data:z
