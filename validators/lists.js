@@ -2,6 +2,16 @@ const models = require('../db/models');
 const { dinero, toSnapshot } = require('dinero.js');
 const currencies = require('@dinero.js/currencies');
 
+/**
+ * Validate data to create a new List, and
+ * create it if validation was successfull
+ * @async
+ * @param   {formData} formData
+ *          Body of a POST request with new list data 
+ * @returns {undefined|errors} 
+ *          If validations pass returns undefined, if not returns an object
+ *          with each wrong field as a key and the error message as its value
+ */
 exports.newList = async (formData) => {
   try {
     let { count } = await models.List.findAndCountAll({
@@ -31,6 +41,14 @@ exports.newList = async (formData) => {
   }
 }
 
+/**
+ * Validate a List deletion
+ * @async
+ * @param {string} listId 
+ * @returns {undefined|errors} 
+ *          If validations pass returns undefined, if not returns an object
+ *          with each wrong field as a key and the error message as its value
+ */
 exports.deleteList = async (listId) => {
   try {
     let listToDelete = await models.List.findOne({
@@ -55,6 +73,16 @@ exports.deleteList = async (listId) => {
   }
 }
 
+/**
+ * Validate data to create a new Item, and
+ * create it if validation was successfull
+ * @async
+ * @param   {formData} formData
+ *          Body of a POST request with new item data 
+ * @returns {undefined|errors} 
+ *          If validations pass returns undefined, if not returns an object
+ *          with each wrong field as a key and the error message as its value
+ */
 exports.newItem = async (formData) => {
   try {
     let { count } = await models.Item.findAndCountAll({
@@ -93,6 +121,14 @@ exports.newItem = async (formData) => {
   }
 }
 
+/**
+ * Validate a Item deletion
+ * @async
+ * @param {string} itemId 
+ * @returns {undefined|errors} 
+ *          If validations pass returns undefined, if not returns an object
+ *          with each wrong field as a key and the error message as its value
+ */
 exports.deleteItem = async (itemId) => {
   try {
     let itemToDelete = await models.Item.findOne({
