@@ -7,6 +7,10 @@ const currencies = require('@dinero.js/currencies');
 let listCountOnWorkspace;
 
 module.exports = (sequelize, DataTypes) => {
+
+  /**
+   * Class representing a List where user can add Items on it
+   */
   class List extends Model {
 
     getCurrencyObject(currencyCode) {

@@ -5,6 +5,10 @@ const { dinero, toSnapshot, add, subtract, multiply, toDecimal } = require('dine
 const currencies = require('@dinero.js/currencies');
 
 module.exports = (sequelize, DataTypes) => {
+
+  /**
+   * Class representing a Item of a shopping list
+   */
   class Item extends Model {
     /**
      * Helper method for defining associations.
@@ -13,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
+      // Cannot exist an Item without a parent List
       Item.belongsTo(models.List, {
         foreignKey: {
           name: 'listId',
@@ -140,29 +145,31 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Item',
   });
 
-  // Update total of parent List...
+  // Hooks to keep updated the total of the parent List…
 
-  // After the creation of a Item
+  // After the creation of a new Item…
   Item.afterCreate(async item => {
     let parentList = await item.getList();
 
+    // If Item has no price, set parent List `partialSum` to true…
     if (!item.price) {
-      // Set Parent List `partialSum` to true
+      // …only if not already `true`
       if (!parentList.partialSum) {
-        // only if not already `true`
         parentList.partialSum = true;
         await parentList.save();
       }
+
+      // If parent List has no price, asign Item total price directly
     } else if (!parentList.total) {
-      // Asign Item `price` directly, multiplied by `quantity`
       const amount = multiply(
         dinero(JSON.parse(item.price)),
         item.quantity
       )
       parentList.total = JSON.stringify(amount);
       await parentList.save();
+
+      // Otherwise, sum Item total price to List's total
     } else if (item.price && parentList.total) {
-      // Sum List `total` and Item `price` (multiplied by `quantity`)
       const sum = add(
         dinero(JSON.parse(parentList.total)),
         multiply(
@@ -175,10 +182,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  // After the deletion of an Item
+  // After the deletion of an Item…
   Item.afterDestroy(async item => {
     let parentList = await item.getList();
 
+    // If the Item has no price…
     if (!item.price) {
       const otherItemsWithoutPrice = await Item.count({
         where: {
@@ -186,12 +194,13 @@ module.exports = (sequelize, DataTypes) => {
           price: null
         }
       });
-      // if there're no other `Item` with `price` unassigned,
-      // set List `partialSum` to false
+      // and parent List has no other unpriced Item, set `partialSum` to false
       if (otherItemsWithoutPrice === 0) {
         parentList.partialSum = false;
         await parentList.save();
       }
+
+      // Otherwise, update parent List's total
     } else {
       const remainder = subtract(
         dinero(JSON.parse(parentList.total)),

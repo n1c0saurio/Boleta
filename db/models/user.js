@@ -15,8 +15,20 @@ const validPassword =
   + `$`;
 
 module.exports = (sequelize, DataTypes) => {
+
+  /**
+   * Class representing a registered user
+   * @extends Model
+   */
   class User extends Model {
 
+    /**
+     * Compare an unencripted password with the current user's encripted one
+     * @param   {string} password
+     *          Unencripted password for comparison
+     * @returns {boolean}
+     *          True if passwords match, otherwise false
+     */
     async matchPassword(password) {
       return await bcrypt.compare(password, this.password);
     }
@@ -41,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'RESTRICT'
       });
 
+      // All users can have workspaces, and must have at least one.
       User.hasMany(models.Workspace, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
@@ -177,14 +190,14 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
 
-  // Hashing the password
+  // Hash the password automatically whenever it gets updated
   User.beforeSave(async user => {
     if (user.changed('password')) {
       user.password = await bcrypt.hash(user.password, 10);
     }
   });
 
-  // Create a default Workspace
+  // Create the mandatory default Workspace when a User is succesfully created
   User.afterSave(async user => {
     await user.createWorkspace({
       name: 'dashboard:workspace.defaultName',

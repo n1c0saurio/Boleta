@@ -3,6 +3,10 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
+
+  /**
+   * Class representing Workspace where Users can create Lists on it
+   */
   class Workspace extends Model {
 
     /**
@@ -20,10 +24,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
 
-      // All list will belong to a default created workspace, this will
-      // make easier to develop future fuctionalities, like having diferent
-      // groups of lists or have a special workspace with shared list from
-      // other users.
+      /**
+       * All list will belong to a default workspace, this will make easier
+       * to develop future fuctionalities, like having diferent groups of
+       * lists or having shared workspace with other users.
+       */
       Workspace.hasMany(models.List, {
         foreignKey: 'workspaceId',
         onDelete: 'CASCADE'

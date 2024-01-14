@@ -48,6 +48,10 @@ const actions = {
 };
 
 module.exports = (sequelize, DataTypes) => {
+
+  /**
+   * Class representing Logs that can be registered
+   */
   class Log extends Model {
 
     static associate(models) {
@@ -66,9 +70,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'SET NULL'
       });
 
-      // And sometimes, both things can happen,
-      // e.g.: an administrator blocked a certain user.
-      // Thats why this model have that two optional FK.
+      /**
+       * And sometimes, both things can happen,
+       * e.g.: an administrator blocked a certain user.
+       * Thats why this model have that two optional FK.
+       */
     }
   }
 
