@@ -1,4 +1,5 @@
 const models = require('../db/models');
+const { validationErrorProcesor } = require('./utils');
 const { dinero, toSnapshot } = require('dinero.js');
 const currencies = require('@dinero.js/currencies');
 
@@ -27,17 +28,7 @@ exports.newList = async (formData) => {
     });
 
   } catch (err) {
-    let errors = {}
-    if (err.errors) {
-      err.errors.forEach(error => {
-        console.log(`${error.path}: ${error.message}`);
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: log this
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }
 
@@ -59,17 +50,7 @@ exports.deleteList = async (listId) => {
     await listToDelete.destroy();
 
   } catch (err) {
-    let errors = {}
-    if (err.errors) {
-      err.errors.forEach(error => {
-        console.log(`${error.path}: ${error.message}`);
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: log this
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }
 
@@ -106,18 +87,7 @@ exports.newItem = async (formData) => {
       listId: formData.listId
     })
   } catch (err) {
-    // TODO: modularize
-    let errors = {}
-    if (err.errors) {
-      err.errors.forEach(error => {
-        console.log(`${error.path}: ${error.message}`);
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: log this
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }
 
@@ -139,16 +109,6 @@ exports.deleteItem = async (itemId) => {
     await itemToDelete.destroy();
 
   } catch (err) {
-    let errors = {}
-    if (err.errors) {
-      err.errors.forEach(error => {
-        console.log(`${error.path}: ${error.message}`);
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: log this
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }

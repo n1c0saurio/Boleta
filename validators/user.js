@@ -1,4 +1,5 @@
 const models = require('../db/models');
+const { validationErrorProcesor } = require('./utils');
 
 /**
  * Validate user registration data, and
@@ -23,16 +24,7 @@ exports.registerForm = async (formData) => {
       roleId: 'enduser'
     });
   } catch (err) {
-    let errors = {};
-    if (err.errors) {
-      err.errors.forEach(error => {
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: register on Logs
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }
 
@@ -58,16 +50,7 @@ exports.updateMyAccount = async (id, formData) => {
       preferredLocale: formData.preferredLocale
     });
   } catch (err) {
-    let errors = {};
-    if (err.errors) {
-      err.errors.forEach(error => {
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: save on log
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }
 
@@ -94,15 +77,6 @@ exports.updatePassword = async (id, formData) => {
       return { currentPassword: 'Contraseña incorrecta' };
     }
   } catch (err) {
-    let errors = {}
-    if (err.errors) {
-      err.errors.forEach(error => {
-        errors[error.path] = error.message;
-      });
-    } else {
-      // TODO: save on log
-      console.log(err);
-    }
-    return errors;
+    return validationErrorProcesor(err);
   }
 }
