@@ -5,6 +5,8 @@ const list = require('../controllers/list');
 // User dashboard
 router.get('/', list.getListsAndItems);
 router.post('/', list.postListOrItem);
+
+// Delete a list or an item
 router.get('/:list_id', list.deleteList);
 router.get('/item/:item_id', list.deleteItem);
 
