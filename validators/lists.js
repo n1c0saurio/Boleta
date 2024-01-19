@@ -15,7 +15,7 @@ const currencies = require('@dinero.js/currencies');
  */
 exports.newList = async (formData) => {
   try {
-    let { count } = await models.List.findAndCountAll({
+    const { count } = await models.List.findAndCountAll({
       where: {
         workspaceId: formData.listWorkspace
       }
@@ -42,7 +42,7 @@ exports.newList = async (formData) => {
  */
 exports.deleteList = async (listId) => {
   try {
-    let listToDelete = await models.List.findOne({
+    const listToDelete = await models.List.findOne({
       where: {
         'id': listId
       }
@@ -66,13 +66,13 @@ exports.deleteList = async (listId) => {
  */
 exports.newItem = async (formData) => {
   try {
-    let { count } = await models.Item.findAndCountAll({
+    const { count } = await models.Item.findAndCountAll({
       where: {
         listId: formData.listId
       }
     });
 
-    let itemAmount = (formData.itemPrice) ?
+    const itemAmount = (formData.itemPrice) ?
       toSnapshot(dinero({
         amount: parseInt(formData.itemPrice),
         currency: currencies[formData.listCurrency]
@@ -101,7 +101,7 @@ exports.newItem = async (formData) => {
  */
 exports.deleteItem = async (itemId) => {
   try {
-    let itemToDelete = await models.Item.findOne({
+    const itemToDelete = await models.Item.findOne({
       where: {
         'id': itemId
       }

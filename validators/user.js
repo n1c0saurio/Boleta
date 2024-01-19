@@ -13,7 +13,7 @@ const { validationErrorProcesor } = require('./utils');
  */
 exports.registerForm = async (formData) => {
   try {
-    let newUser = await models.User.create({
+    const newUser = await models.User.create({
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
@@ -42,7 +42,7 @@ exports.registerForm = async (formData) => {
  */
 exports.updateMyAccount = async (id, formData) => {
   try {
-    let user = await models.User.findOne({ where: { 'id': id } });
+    const user = await models.User.findOne({ where: { 'id': id } });
     await user.update({
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -67,7 +67,7 @@ exports.updateMyAccount = async (id, formData) => {
  */
 exports.updatePassword = async (id, formData) => {
   try {
-    let user = await models.User.findOne({ where: { 'id': id } });
+    const user = await models.User.findOne({ where: { 'id': id } });
     if (await user.matchPassword(formData.currentPassword)) {
       await user.update({
         password: formData.newPassword,
