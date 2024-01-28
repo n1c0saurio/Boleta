@@ -1,13 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 require('dotenv').config();
 // User session managment
-var session = require('express-session');
-var passport = require('./passport');
-var userMiddleware = require('./middlewares/user');
+const session = require('express-session');
+const passport = require('./passport');
+const userMiddleware = require('./middlewares/user');
 // Localization tools
 const i18n = require('i18next');
 const i18nMiddleware = require('i18next-http-middleware');
@@ -17,15 +17,15 @@ const indexRouter = require('./routes/index');
 const listsRouter = require('./routes/lists');
 const userRouter = require('./routes/user');
 
-var app = express();
+const app = express();
 
-// server-side utilities
+// Backend utilities
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// client-side utilities
+// Frontend utilities
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -48,7 +48,7 @@ i18n
   });
 app.use(i18nMiddleware.handle(i18n));
 
-// user session
+// User session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -57,17 +57,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// custom routes
+// Custom routes
 app.use('/', indexRouter);
 app.use('/listas', userMiddleware.authRequired, listsRouter);
 app.use('/mi-cuenta', userMiddleware.authRequired, userRouter);
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
