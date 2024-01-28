@@ -1,0 +1,23 @@
+mixin loginForm()
+  form(action="/", method="post")
+
+    .form-floating.mb-3
+      input.form-control(type="email", name="email", required=true)
+      label(for="email") #{t('user:user.email')}:
+
+    .form-floating.mb-3
+      input.form-control(type="password", name="password", required=true)
+      label(for="password") #{t('user:user.password')}:
+
+    .d-grid.mb-4
+      button.btn.btn-secondary.text-light.text-shadow-emphasis(type="submit")= t('session.login')
+
+    .mb-3
+      small
+        a.link-dark.link-alt-hover(href="http://")= t('session.forgotPassword')
+  
+  hr.my-4
+  
+  p.mb-4
+    | #{t('session.signupInvitation')} 
+    a.link-dark.link-alt-hover(href="/registro") #{t('session.signup')} 

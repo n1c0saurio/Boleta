@@ -1,0 +1,114 @@
+mixin addItem(list, listCurrency, user)
+  form.dashboard__add-item.accordion.accordion-flush(id=list.id + "_form", action="/listas", onsubmit="submitCleannig(this)", method="post")
+    .accordion-item
+
+      //- Header / Toggle button
+      h5.accordion-header(id=list.id + "_form-toggle")
+        button.accordion-button.collapsed.px-2.py-1.rounded-pill.mt-2.mb-3(type="button", data-bs-toggle="collapse", data-bs-target="#" + list.id + "_form-content", aria-expanded="false", aria-controls=list.id + "_form-content")= t('dashboard:myList.addItemForm', { lng: user.preferredLocale })
+      
+      //- Form body
+      .accordion-collapse.collapse(id=list.id + "_form-content" aria-labelledby=list.id + "_form-toggle" data-bs-parent="#" + list.id +  + "_form")
+        .accordion-body.p-0
+
+          .input-group.mt-2
+            //- Item name
+            input.dashboard__add-item-name.form-control(type="text", name="itemName", placeholder=t('dashboard:item.name', { lng: user.preferredLocale }), value="", required=true)
+            label.visually-hidden(for="itemName")= t('dashboard:item.name', { lng: user.preferredLocale })
+            //- Separator
+            span.input-group-text ×
+            //- Item quantity
+            label.visually-hidden(for="itemQuantity") = t('dashboard:item.quantity', { lng: user.preferredLocale })
+            input.dashboard__add-item-quantity.form-control(type="number", name="itemQuantity", min="1", value="1", required=true)
+
+          .input-group.mt-2
+            //- Item price
+            input.dashboard__add-item-price.form-control(type="text", name="itemPrice", onkeydown="forbiddenChars(event)", onkeyup='priceFormating(this, ' + JSON.stringify(list.getCurrencyObject(listCurrency)) + ', "' + user.preferredLocale + '")', placeholder=t('dashboard:item.price', { lng: user.preferredLocale }), value="") 
+            label.visually-hidden(for="itemPrice")= t('dashboard:item.price', { lng: user.preferredLocale })
+            span.input-group-text #{listCurrency}
+
+          //- Utility hidden inputs
+          .d-none(aria-hidden="true")
+            input(type="text", name="listCurrency", value=listCurrency, readonly=true)
+            input(type="text", name="listId", value=list.id, readonly=true)
+
+          .d-grid.my-2 
+            button.btn.btn-primary.text-light.text-shadow-emphasis(type="submit", name="fromForm", value="newItem")= t('dashboard:myList.addItemButton', { lng: user.preferredLocale })
+
+
+mixin itemRender(item, currencyFormatter, user)
+  .dashboard__item.card.px-3.border-top-0.border-start-0.border-end-0.rounded-0(id=item.id)
+
+    //- Item Header
+    .card-header.d-flex.px-0.pb-0.border-bottom-0
+      //- Item menu
+      .dropdown
+        button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
+        ul.dropdown-menu
+          li
+            a.dropdown-item(href="/listas/item/" + item.id)= t('dashboard:myList.deleteItem', { lng: user.preferredLocale })
+      //- Item name
+      h4.fs-6.flex-grow-1.fs-6.my-2 #{item.name}
+
+    //- Item Price
+    .card-body.d-flex.flex-wrap.justify-content-end.column-gap-3.px-0.pt-0.pb-2
+      if item.quantity > 1
+        .text-body-tertiary
+          if item.price
+            | #{item.quantity}&nbsp;×&nbsp;#{currencyFormatter.format(item.displayUnitPrice.amount)}
+          else 
+            | #{item.quantity}&nbsp;#{t('dashboard:myList.itemUnit', { count: item.quantity, lng: user.preferredLocale })}
+          | &nbsp;
+      if item.price
+        .fw-bold #{currencyFormatter.format(item.displayTotalPrice.amount)}
+      else 
+        div.text-bg-warning
+          span.fst-italic.px-2.py-1= t('dashboard:myList.itemWithoutPrice', { lng: user.preferredLocale })
+
+
+mixin listRender(list, user)
+  //- Setting up list's currency and a proper formater
+  - const listCurrency = list.currency ? list.currency : user.defaultCurrency;
+  - const currencyFormatter = Intl.NumberFormat(user.preferredLocale, { style: 'currency', currency: listCurrency });
+  
+  .dashboard__list(id=list.id)
+    .card.bg-transparent.px-3.border-0.drop-shadow
+
+      //- List Header
+      .dashboard__list-header.card-header.d-flex.align-items-center.border-top-0.border-start-0.border-end-0
+        //- List menu
+        .dropdown
+            button.btn.btn-link.bi.bi-three-dots-vertical.dropdown-toggle.ps-0.pe-1(type="button", data-bs-toggle="dropdown", aria-expanded="false")
+            ul.dropdown-menu
+              li
+                a.dropdown-item(href="/listas/" + list.id)= t('dashboard:myList.deleteList', { lng: user.preferredLocale })
+        //- List name
+        h2.fs-5.flex-grow-1.m-0 #{list.name}
+
+      //- List Body
+      .dashboard__list-items.card-body.p-0
+        if list.Items.length > 0
+          each item in list.Items
+            +itemRender(item, currencyFormatter, user)
+        else
+          //- Empty list message
+          .text-body-tertiary.text-center.my-5
+            h4.fs-6.fst-italic.mb-4= t('dashboard:myList.emptyListMessage', { lng: user.preferredLocale })
+            h4.fs-5(aria-hidden="true") .・・.・゜・。.*҉ 
+
+      //- List Footer
+      .dashboard__list-footer.card-footer.border-start-0.border-end-0.border-bottom-0
+
+        //- Add item form
+        +addItem(list, listCurrency, user)
+
+        //- Total of the list
+        if list.Items.length > 0
+          h3.dashboard__list-total.fs-6.fw-bold.text-end.py-3.mt-3.mb-1
+            if !list.total
+              span.bg-warning.px-2.py-2= t('dashboard:myList.listWithoutTotal', { lng: user.preferredLocale })
+            else if list.partialSum
+              span.bg-warning.px-2.py-1  #{t('dashboard:myList.listSubtotal', { lng: user.preferredLocale })}&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
+            else
+              span.py-1 #{t('dashboard:myList.listTotal', { lng: user.preferredLocale })}&ensp;#{currencyFormatter.format(list.displayTotal.amount)}
+
+      .border-serrated

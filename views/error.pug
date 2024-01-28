@@ -21,8 +21,7 @@ block sublayout
             .card-body.pt-4
               //- Extra messages
               if error.status === 401
-                //- .card.p-3.p-sm-4.p-md-5.mb-5
-                include blocks.pug 
+                include user/user-blocks.pug 
                 +loginForm()
                 a.btn.btn-primary.link-light.text-shadow-emphasis.my-5(href="/")
                   span.bi.bi-chevron-left 
