@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 
-// Views that requires an account, regardless of the role
+// Views that requires a logged in user, regardless of the role
 exports.authRequired = (req, res, next) => {
   if (req.user) {
     next();
